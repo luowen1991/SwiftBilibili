@@ -1,6 +1,0 @@
-framework module SwiftyImage {
-  umbrella header "SwiftyImage-umbrella.h"
-
-  export *
-  module * { export * }
-}

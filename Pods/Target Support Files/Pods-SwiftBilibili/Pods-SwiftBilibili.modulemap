@@ -1,6 +1,0 @@
-framework module Pods_SwiftBilibili {
-  umbrella header "Pods-SwiftBilibili-umbrella.h"
-
-  export *
-  module * { export * }
-}
