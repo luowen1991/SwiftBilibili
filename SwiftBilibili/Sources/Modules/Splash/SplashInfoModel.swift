@@ -10,11 +10,11 @@ import ObjectMapper
 
 import RealmSwift
 
-enum SplashShowRule: String, Codable {
+enum SplashShowRule: String {
     case orderRule = "order"
 }
 
-class SplashInfoModel: Codable, Mappable {
+class SplashInfoModel: Mappable {
 
     var pullInterval: Int = 1800
     var list: [SplashItemModel] = []
@@ -33,7 +33,7 @@ class SplashInfoModel: Codable, Mappable {
     }
 }
 
-class SplashItemModel: Codable, Mappable {
+class SplashItemModel: Mappable {
     var id: Int = 0
     var thumb: String = ""
     var logoUrl: String = ""
@@ -50,7 +50,7 @@ class SplashItemModel: Codable, Mappable {
 
 }
 
-class SplashShowModel: Codable, Mappable {
+class SplashShowModel: Mappable {
     var id: Int = 0
     var beginTime: Int = 0
     var endTime: Int = 0

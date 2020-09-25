@@ -21,7 +21,7 @@ final class BBTabBarController: UITabBarController {
 
         tabBar.theme.barTintColor = themed { $0.mainColorModel.ga0S }
 
-        addChildController(HomeViewController(), "首页", Image.TabBar.homeNormal, Image.TabBar.homeSelected)
+        addChildController(HomeMainViewController(), "首页", Image.TabBar.homeNormal, Image.TabBar.homeSelected)
         addChildController(ChannelViewController(), "频道", Image.TabBar.channelNormal, Image.TabBar.channelSelected)
         addChildController(DynamicViewController(), "动态", Image.TabBar.dynamicNormal, Image.TabBar.dynamicSelected)
         addChildController(MemberViewController(), "会员购", Image.TabBar.memberNormal, Image.TabBar.memberSelected)

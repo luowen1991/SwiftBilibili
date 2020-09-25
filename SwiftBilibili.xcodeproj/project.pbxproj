@@ -21,7 +21,7 @@
 		65007BD425022578009FCF1E /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65007BCD25022578009FCF1E /* HelperFunctions.swift */; };
 		65007BD525022578009FCF1E /* CALayer+ManualLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65007BCE25022578009FCF1E /* CALayer+ManualLayout.swift */; };
 		65007BD82502267E009FCF1E /* CGFloatLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65007BD72502267E009FCF1E /* CGFloatLiteral.swift */; };
-		65007BDD250227C2009FCF1E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65007BDC250227C2009FCF1E /* HomeViewController.swift */; };
+		65007BDD250227C2009FCF1E /* HomeMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65007BDC250227C2009FCF1E /* HomeMainViewController.swift */; };
 		65007BDF250227E7009FCF1E /* ChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65007BDE250227E7009FCF1E /* ChannelViewController.swift */; };
 		65007BE12502284A009FCF1E /* DynamicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65007BE02502284A009FCF1E /* DynamicViewController.swift */; };
 		65007BE325022857009FCF1E /* MemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65007BE225022857009FCF1E /* MemberViewController.swift */; };
@@ -57,7 +57,6 @@
 		654917AB2519EE6000F05B0F /* LoadingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654917AA2519EE6000F05B0F /* LoadingManager.swift */; };
 		654917B22519F91200F05B0F /* PrivacyPolicyAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654917B12519F91200F05B0F /* PrivacyPolicyAlertView.swift */; };
 		654917B62519FAF500F05B0F /* BBWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654917B52519FAF500F05B0F /* BBWebViewController.swift */; };
-		654917BE251A051100F05B0F /* PrivacyPolicyAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654917BD251A051100F05B0F /* PrivacyPolicyAlertManager.swift */; };
 		654A7498250B22E900B3F91A /* SplashCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654A7497250B22E900B3F91A /* SplashCacheManager.swift */; };
 		654A749A250B443D00B3F91A /* UIImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654A7499250B443D00B3F91A /* UIImageView+Kingfisher.swift */; };
 		654BDD372514A9810063F987 /* MapperParameterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654BDD362514A9810063F987 /* MapperParameterType.swift */; };
@@ -102,7 +101,7 @@
 		65007BCD25022578009FCF1E /* HelperFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		65007BCE25022578009FCF1E /* CALayer+ManualLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+ManualLayout.swift"; sourceTree = "<group>"; };
 		65007BD72502267E009FCF1E /* CGFloatLiteral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatLiteral.swift; sourceTree = "<group>"; };
-		65007BDC250227C2009FCF1E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		65007BDC250227C2009FCF1E /* HomeMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMainViewController.swift; sourceTree = "<group>"; };
 		65007BDE250227E7009FCF1E /* ChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewController.swift; sourceTree = "<group>"; };
 		65007BE02502284A009FCF1E /* DynamicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicViewController.swift; sourceTree = "<group>"; };
 		65007BE225022857009FCF1E /* MemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberViewController.swift; sourceTree = "<group>"; };
@@ -138,7 +137,6 @@
 		654917AA2519EE6000F05B0F /* LoadingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingManager.swift; sourceTree = "<group>"; };
 		654917B12519F91200F05B0F /* PrivacyPolicyAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyAlertView.swift; sourceTree = "<group>"; };
 		654917B52519FAF500F05B0F /* BBWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBWebViewController.swift; sourceTree = "<group>"; };
-		654917BD251A051100F05B0F /* PrivacyPolicyAlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyAlertManager.swift; sourceTree = "<group>"; };
 		654A7497250B22E900B3F91A /* SplashCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCacheManager.swift; sourceTree = "<group>"; };
 		654A7499250B443D00B3F91A /* UIImageView+Kingfisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Kingfisher.swift"; sourceTree = "<group>"; };
 		654BDD362514A9810063F987 /* MapperParameterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapperParameterType.swift; sourceTree = "<group>"; };
@@ -212,7 +210,6 @@
 		65007BAE25021F4C009FCF1E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				654917BC251A04E800F05B0F /* PopupManager */,
 				65459CE72511F0C600A62E8D /* NetRequestManager */,
 				654A7496250B22C200B3F91A /* CacheManager */,
 				659CFD0625065E9B00787D3A /* NetStatusManager */,
@@ -503,14 +500,6 @@
 			path = PrivacyPolicyAlert;
 			sourceTree = "<group>";
 		};
-		654917BC251A04E800F05B0F /* PopupManager */ = {
-			isa = PBXGroup;
-			children = (
-				654917BD251A051100F05B0F /* PrivacyPolicyAlertManager.swift */,
-			);
-			path = PopupManager;
-			sourceTree = "<group>";
-		};
 		654A7496250B22C200B3F91A /* CacheManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -635,7 +624,7 @@
 		E0848C04250281AF004F1E64 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				65007BDC250227C2009FCF1E /* HomeViewController.swift */,
+				65007BDC250227C2009FCF1E /* HomeMainViewController.swift */,
 				E0848C052502838C004F1E64 /* HomeRecommendViewController.swift */,
 			);
 			path = Controllers;
@@ -790,7 +779,6 @@
 				654BDD372514A9810063F987 /* MapperParameterType.swift in Sources */,
 				65007BDF250227E7009FCF1E /* ChannelViewController.swift in Sources */,
 				65A3F95D250F518600E77B8A /* RealmManager.swift in Sources */,
-				654917BE251A051100F05B0F /* PrivacyPolicyAlertManager.swift in Sources */,
 				65007BE325022857009FCF1E /* MemberViewController.swift in Sources */,
 				E0AD61952503A3830099F00D /* ConfigAPI.swift in Sources */,
 				65007BE525022864009FCF1E /* MineViewController.swift in Sources */,
@@ -844,7 +832,7 @@
 				65007BE925022930009FCF1E /* Image.swift in Sources */,
 				65007BC225022367009FCF1E /* BaseViewController.swift in Sources */,
 				65007BD82502267E009FCF1E /* CGFloatLiteral.swift in Sources */,
-				65007BDD250227C2009FCF1E /* HomeViewController.swift in Sources */,
+				65007BDD250227C2009FCF1E /* HomeMainViewController.swift in Sources */,
 				654A7498250B22E900B3F91A /* SplashCacheManager.swift in Sources */,
 				65007BD425022578009FCF1E /* HelperFunctions.swift in Sources */,
 				65007BD325022578009FCF1E /* UIScrollView+ManualLayout.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  HomeMainViewController.swift
 //  SwiftBilibili
 //
 //  Created by luowen on 2020/9/4.
@@ -11,12 +11,20 @@ import UIKit
 import JXSegmentedView
 
 /// 首页主控制器
-final class HomeViewController: BaseViewController {
+final class HomeMainViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         refresh()
+
+        ConfigAPI.adList.request()
+            .mapObject(AdInfoModel.self)
+            .subscribe { (adInfo) in
+
+            }
+            .disposed(by: disposeBag)
+
     }
 
     // MARK: Private Method
@@ -74,6 +82,6 @@ final class HomeViewController: BaseViewController {
 
 // MARK: Delegate
 // MARK: JXSegmentedViewDelegate
-extension HomeViewController: JXSegmentedViewDelegate {
+extension HomeMainViewController: JXSegmentedViewDelegate {
 
 }

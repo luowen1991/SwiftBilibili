@@ -56,6 +56,7 @@ target ‘SwiftBilibili’ do
   pod 'SwiftyUserDefaults', '~> 5.0.0'
   pod 'Dollar', '~> 9.0.0'              #数组和字典的处理
   pod 'BonMot', '~> 5.5.1'              #attributedString的简化
+  #pod 'R.swift'
 
   # Lint
   pod 'SwiftLint', '~> 0.40.3'

@@ -16,10 +16,22 @@ import RxSwift
 struct SplashCacheManager {
 
     func saveSplashData(_ splashInfo: SplashInfoModel) {
-        for showInfo in splashInfo.show {
-            if let itemInfo = splashInfo.list.first(where: { $0.id == showInfo.id }) {
-                downloadImage(itemInfo)
-                saveData(showInfo, itemInfo)
+
+        // 如果新的数据和数据库的数据不一样，就清空数据库
+        let items = RealmManager.default.selectByAll(SplashShowRealmModel.self)
+        if !items.isEmpty,
+           !splashInfo.show.contains(where: {$0.id == items.first?.id}) {
+            RealmManager.default.deleteAll()
+            items.forEach{ ImageCache.default.removeImage(forKey: $0.thumb) }
+        }
+
+        // 没有缓存数据时 缓存数据
+        if items.isEmpty {
+            for showInfo in splashInfo.show {
+                if let itemInfo = splashInfo.list.first(where: { $0.id == showInfo.id }) {
+                    downloadImage(itemInfo)
+                    saveData(showInfo, itemInfo)
+                }
             }
         }
     }

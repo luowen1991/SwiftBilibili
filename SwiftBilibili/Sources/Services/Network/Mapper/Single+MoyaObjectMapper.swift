@@ -17,11 +17,13 @@ public extension PrimitiveSequence where Trait == SingleTrait, Element == Respon
         return flatMap { response -> Single<T> in
             return Single.just(try response.mapObject(type, context: context))
         }
+
     }
 
     func mapArray<T: BaseMappable>(_ type: T.Type, context: MapContext? = nil) -> Single<[T]> {
         return flatMap { response -> Single<[T]> in
             return Single.just(try response.mapArray(type, context: context))
         }
+
     }
 }

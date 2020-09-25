@@ -133,10 +133,13 @@ final class RealmManager {
         }
     }
     /// 删除所有数据。注意，Realm 文件的大小不会被改变，因为它会保留空间以供日后快速存储数据
-    func deleteAll() throws {
-        try realm.write {
-            realm.deleteAll()
-        }
+    func deleteAll() {
+        do {
+            try realm.write {
+                realm.deleteAll()
+            }
+        } catch {}
+        
     }
     /// 根据条件查询数据
     func selectByNSPredicate<T: Object>(_: T.Type , predicate: NSPredicate) -> Results<T> {

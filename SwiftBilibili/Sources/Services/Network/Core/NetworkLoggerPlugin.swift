@@ -18,19 +18,19 @@ public class NetworkLoggerPlugin: PluginType {
         let netRequest = request.request
 
         if let url = netRequest?.description {
-            log.info(url)
+            log.debug(url)
         }
 
         if let httpMethod = netRequest?.httpMethod {
-            log.info("METHOD:\(httpMethod)")
+            log.debug("METHOD:\(httpMethod)")
         }
 
         if let body = netRequest?.httpBody, let output = String(data: body, encoding: .utf8) {
-            log.info("Body:\(output)")
+            log.debug("Body:\(output)")
         }
 
         if let headers = netRequest?.allHTTPHeaderFields {
-            log.info("Headers:\(headers)")
+            log.debug("Headers:\(headers)")
         }
     }
 
@@ -40,9 +40,9 @@ public class NetworkLoggerPlugin: PluginType {
 
         switch result {
         case .success(let response):
-            if let data = try? JSON(data: response.data).dictionary {
-                log.info("Return Data:")
-                log.info("\(data)")
+            if let data = try? JSON(data: response.data).dictionaryObject {
+                log.debug("Return Data:")
+                log.debug("\(data)")
             } else {
                 log.error("Can not formatter data")
             }

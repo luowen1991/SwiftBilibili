@@ -23,5 +23,6 @@ public extension ObservableType where Element == Response {
         return flatMap { response -> Observable<[T]> in
             return Observable.just(try response.mapArray(type, context: context))
         }
+
     }
 }

@@ -10,6 +10,7 @@ import UIKit
 
 import SwiftEntryKit
 import RxSwift
+import Kingfisher
 
 final class SplashViewController: BaseViewController {
 
@@ -76,17 +77,26 @@ final class SplashViewController: BaseViewController {
     private func loadOrShowContentImage() {
 
         if let showItem = splashCacheManager.getShowItem() {
-            contentImageView.setImage(with: URL(string: showItem.thumb))
-            self.hidden(Double(showItem.duration))
-        } else {
-            NetStatusManager.default.reachabilityConnection
-                .skip(1)
-                .subscribe(onNext: {[weak self] (_) in
-                    guard let self = self else { return }
-                    self.startRequest()
-                })
-                .disposed(by: disposeBag)
+            ImageCache.default.retrieveImage(forKey: showItem.thumb) {[weak self] (result) in
+                guard let self = self else { return }
+                switch result {
+                case .success(let cache):
+                    self.contentImageView.image = cache.image
+                    self.setupConstraints()
+                    self.hidden(Double(showItem.duration))
+                case .failure:
+                    log.error("获取缓存图片失败")
+                }
+            }
         }
+
+        NetStatusManager.default.reachabilityConnection
+            .skip(1)
+            .subscribe(onNext: {[weak self] (_) in
+                guard let self = self else { return }
+                self.startRequest()
+            })
+            .disposed(by: disposeBag)
     }
 
     private func startRequest() {
@@ -97,9 +107,11 @@ final class SplashViewController: BaseViewController {
             .trackError(NetErrorManager.default.errorIndictor)
             .subscribe(onSuccess: {[weak self] (splashInfo) in
                 guard let self = self else { return }
-                self.contentImageView.image = Image.Launch.content
+                if self.contentImageView.image == nil {
+                    self.contentImageView.image = Image.Launch.content
+                    self.hidden(700)
+                }
                 self.splashCacheManager.saveSplashData(splashInfo)
-                self.hidden(700)
             })
             .disposed(by: disposeBag)
     }
@@ -136,14 +148,16 @@ final class SplashViewController: BaseViewController {
             }
         }
 
-        contentImageView.snp.makeConstraints {
+        contentImageView.snp.remakeConstraints {
             $0.centerX.equalToSuperview()
-            $0.bottom.equalTo(logoImageView.snp.top)
-            if #available(iOS 11.0, *) {
-                $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            } else {
-                $0.top.equalToSuperview()
+            $0.centerY.equalToSuperview().offset(-50)
+            if let image = contentImageView.image {
+                let scale = image.size.height / image.size.width
+                let width = Screen.width * 0.9
+                let height = width * scale
+                $0.size.equalTo(CGSize(width: width, height: height))
             }
+
         }
     }
 
@@ -152,7 +166,5 @@ final class SplashViewController: BaseViewController {
         $0.contentMode = .scaleAspectFit
     }
 
-    private let contentImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
-    }
+    private let contentImageView = UIImageView()
 }
