@@ -1,0 +1,6 @@
+framework module WeakMapTable {
+  umbrella header "WeakMapTable-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module EmptyKit {
+  umbrella header "EmptyKit-umbrella.h"
+
+  export *
+  module * { export * }
+}
