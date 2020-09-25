@@ -63,6 +63,7 @@
 		654BDD372514A9810063F987 /* MapperParameterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654BDD362514A9810063F987 /* MapperParameterType.swift */; };
 		6554E9AD251C7F4200DAEB25 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6554E9AC251C7F4200DAEB25 /* BaseView.swift */; };
 		6554E9B2251C81C800DAEB25 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6554E9B1251C81C800DAEB25 /* Font.swift */; };
+		658A287C251DCDBD009D04A8 /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658A287B251DCDBD009D04A8 /* HomeAPI.swift */; };
 		659CFCF02506041100787D3A /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659CFCEF2506041100787D3A /* Logger.swift */; };
 		659CFCF4250605D100787D3A /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659CFCF3250605D100787D3A /* Screen.swift */; };
 		659CFD0825065EE700787D3A /* NetStatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659CFD0725065EE700787D3A /* NetStatusManager.swift */; };
@@ -143,6 +144,7 @@
 		654BDD362514A9810063F987 /* MapperParameterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapperParameterType.swift; sourceTree = "<group>"; };
 		6554E9AC251C7F4200DAEB25 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		6554E9B1251C81C800DAEB25 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		658A287B251DCDBD009D04A8 /* HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
 		659CFCEF2506041100787D3A /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		659CFCF3250605D100787D3A /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 		659CFD0725065EE700787D3A /* NetStatusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetStatusManager.swift; sourceTree = "<group>"; };
@@ -449,6 +451,7 @@
 			isa = PBXGroup;
 			children = (
 				E0AD61942503A3830099F00D /* ConfigAPI.swift */,
+				658A287B251DCDBD009D04A8 /* HomeAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -813,6 +816,7 @@
 				E0848C062502838C004F1E64 /* HomeRecommendViewController.swift in Sources */,
 				65459CEB251204A600A62E8D /* NoConnectionView.swift in Sources */,
 				65007BD125022578009FCF1E /* CGRect+ManualLayout.swift in Sources */,
+				658A287C251DCDBD009D04A8 /* HomeAPI.swift in Sources */,
 				65482DA92510E58D0020D18A /* Expirable.swift in Sources */,
 				65007BD525022578009FCF1E /* CALayer+ManualLayout.swift in Sources */,
 				659CFCF4250605D100787D3A /* Screen.swift in Sources */,

@@ -19,15 +19,11 @@ struct RequestParamsManager {
 //        return "\(millisecond)"
 //    }
 
-    static let build = 10270
-
     static let device = "phone"
 
     static let mobiApp = "iphone"
 
     static let platform = "ios"
-
-    static let statistics = "%7B%22appId%22%3A1%2C%22version%22%3A%226.9.1%22%2C%22abtest%22%3A%22%22%2C%22platform%22%3A1%7D"
 
     /// 当前的系统语言
     static var locale: String {
@@ -38,7 +34,7 @@ struct RequestParamsManager {
     }
 
     static func defaultParameters() -> [String : Any] {
-        let parameters: [String : Any] = ["actionKey": "appkey", "appkey": appKey, "build": build, "device": device, "mobi_app": mobiApp, "platform": platform, "s_locale": locale, "statistics": statistics]
+        let parameters: [String : Any] = ["actionKey": "appkey", "appkey": appKey,"device": device, "mobi_app": mobiApp, "platform": platform, "s_locale": locale]
         return parameters
     }
 

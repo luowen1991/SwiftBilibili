@@ -69,7 +69,7 @@ final class SplashViewController: BaseViewController {
                 SwiftEntryKit.dismiss()
                 self.startRequest()
             }
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         SwiftEntryKit.display(entry: view, using: attributes)
     }
 
@@ -85,7 +85,7 @@ final class SplashViewController: BaseViewController {
                     guard let self = self else { return }
                     self.startRequest()
                 })
-                .disposed(by: rx.disposeBag)
+                .disposed(by: disposeBag)
         }
     }
 
@@ -101,7 +101,7 @@ final class SplashViewController: BaseViewController {
                 self.splashCacheManager.saveSplashData(splashInfo)
                 self.hidden(700)
             })
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     private func retryRequest() {
@@ -109,7 +109,7 @@ final class SplashViewController: BaseViewController {
             .subscribe {[unowned self] (_) in
                 self.startRequest()
             }
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     private func hidden(_ duration: Double = Double(MAXFLOAT)) {

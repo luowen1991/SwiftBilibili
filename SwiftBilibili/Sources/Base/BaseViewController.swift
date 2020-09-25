@@ -7,10 +7,12 @@
 //
 
 import UIKit
-
+import RxSwift
 import EachNavigationBar
 
 class BaseViewController: UIViewController {
+
+    var disposeBag = DisposeBag()
 
     // MARK: Properties
     lazy private(set) var className: String = {

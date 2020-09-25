@@ -40,7 +40,7 @@ public class NetworkLoggerPlugin: PluginType {
 
         switch result {
         case .success(let response):
-            if let data = try? JSON(data: response.data).string {
+            if let data = try? JSON(data: response.data).dictionary {
                 log.info("Return Data:")
                 log.info("\(data)")
             } else {
