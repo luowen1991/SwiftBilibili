@@ -19,13 +19,11 @@ target ‘SwiftBilibili’ do
   # Model
   pod 'ObjectMapper', '~> 4.2.0'       #JSON转Model
 
-  # Persistence
-
   # Rx
   pod 'RxCocoa', '~> 5.1.1'
   pod 'RxDataSources', '~> 4.0.1'
   pod 'RxGesture', '~> 3.0.2'
-  pod 'NSObject+Rx', '~> 5.1.0'
+  #pod 'NSObject+Rx', '~> 5.1.0'
   pod 'RxOptional', '~> 4.1.0'
   pod 'RxTheme', '~> 4.1.1'
   pod 'RxReachability', '~> 1.0.0'
@@ -56,7 +54,6 @@ target ‘SwiftBilibili’ do
   pod 'SwiftyUserDefaults', '~> 5.0.0'
   pod 'Dollar', '~> 9.0.0'              #数组和字典的处理
   pod 'BonMot', '~> 5.5.1'              #attributedString的简化
-  #pod 'R.swift'
 
   # Lint
   pod 'SwiftLint', '~> 0.40.3'
@@ -65,5 +62,5 @@ target ‘SwiftBilibili’ do
   pod 'lottie-ios', '~> 3.1.8'
   pod 'SVGAPlayer', '~> 2.5.4'
   pod 'SwiftGifOrigin', '~> 1.7.0'
-  
+
 end

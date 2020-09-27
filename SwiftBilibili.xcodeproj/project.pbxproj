@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		65007BB325022019009FCF1E /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65007BB225022019009FCF1E /* CompositionRoot.swift */; };
-		65007BBC250222B3009FCF1E /* launcher_logo_2020@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65007BBA250222B3009FCF1E /* launcher_logo_2020@3x.png */; };
-		65007BBD250222B3009FCF1E /* launcher_logo_2020@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65007BBB250222B3009FCF1E /* launcher_logo_2020@2x.png */; };
 		65007BC025022348009FCF1E /* BBTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65007BBF25022348009FCF1E /* BBTabBarController.swift */; };
 		65007BC225022367009FCF1E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65007BC125022367009FCF1E /* BaseViewController.swift */; };
 		65007BC42502245F009FCF1E /* BBNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65007BC32502245F009FCF1E /* BBNavigationController.swift */; };
@@ -57,6 +55,8 @@
 		654917AB2519EE6000F05B0F /* LoadingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654917AA2519EE6000F05B0F /* LoadingManager.swift */; };
 		654917B22519F91200F05B0F /* PrivacyPolicyAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654917B12519F91200F05B0F /* PrivacyPolicyAlertView.swift */; };
 		654917B62519FAF500F05B0F /* BBWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654917B52519FAF500F05B0F /* BBWebViewController.swift */; };
+		6549257B252064BD004262D9 /* launcher_logo_2020@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65492579252064BD004262D9 /* launcher_logo_2020@2x.png */; };
+		6549257C252064BD004262D9 /* launcher_logo_2020@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6549257A252064BD004262D9 /* launcher_logo_2020@3x.png */; };
 		654A7498250B22E900B3F91A /* SplashCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654A7497250B22E900B3F91A /* SplashCacheManager.swift */; };
 		654A749A250B443D00B3F91A /* UIImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654A7499250B443D00B3F91A /* UIImageView+Kingfisher.swift */; };
 		654BDD372514A9810063F987 /* MapperParameterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654BDD362514A9810063F987 /* MapperParameterType.swift */; };
@@ -88,8 +88,6 @@
 /* Begin PBXFileReference section */
 		372EC8BF2DBBACAD60C6940B /* Pods-SwiftBilibili.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftBilibili.release.xcconfig"; path = "Target Support Files/Pods-SwiftBilibili/Pods-SwiftBilibili.release.xcconfig"; sourceTree = "<group>"; };
 		65007BB225022019009FCF1E /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
-		65007BBA250222B3009FCF1E /* launcher_logo_2020@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launcher_logo_2020@3x.png"; sourceTree = "<group>"; };
-		65007BBB250222B3009FCF1E /* launcher_logo_2020@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launcher_logo_2020@2x.png"; sourceTree = "<group>"; };
 		65007BBF25022348009FCF1E /* BBTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBTabBarController.swift; sourceTree = "<group>"; };
 		65007BC125022367009FCF1E /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		65007BC32502245F009FCF1E /* BBNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBNavigationController.swift; sourceTree = "<group>"; };
@@ -137,6 +135,8 @@
 		654917AA2519EE6000F05B0F /* LoadingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingManager.swift; sourceTree = "<group>"; };
 		654917B12519F91200F05B0F /* PrivacyPolicyAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyAlertView.swift; sourceTree = "<group>"; };
 		654917B52519FAF500F05B0F /* BBWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBWebViewController.swift; sourceTree = "<group>"; };
+		65492579252064BD004262D9 /* launcher_logo_2020@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launcher_logo_2020@2x.png"; sourceTree = "<group>"; };
+		6549257A252064BD004262D9 /* launcher_logo_2020@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launcher_logo_2020@3x.png"; sourceTree = "<group>"; };
 		654A7497250B22E900B3F91A /* SplashCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCacheManager.swift; sourceTree = "<group>"; };
 		654A7499250B443D00B3F91A /* UIImageView+Kingfisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Kingfisher.swift"; sourceTree = "<group>"; };
 		654BDD362514A9810063F987 /* MapperParameterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapperParameterType.swift; sourceTree = "<group>"; };
@@ -233,9 +233,9 @@
 		65007BB025021F74009FCF1E /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				65492579252064BD004262D9 /* launcher_logo_2020@2x.png */,
+				6549257A252064BD004262D9 /* launcher_logo_2020@3x.png */,
 				65007BF825024632009FCF1E /* MainStyle.json */,
-				65007BBB250222B3009FCF1E /* launcher_logo_2020@2x.png */,
-				65007BBA250222B3009FCF1E /* launcher_logo_2020@3x.png */,
 				65F6024F24FF3F2D00D889BC /* Assets.xcassets */,
 				65F6025124FF3F2D00D889BC /* LaunchScreen.storyboard */,
 			);
@@ -562,7 +562,9 @@
 		65F6023A24FF3F2B00D889BC = {
 			isa = PBXGroup;
 			children = (
-				65F6024524FF3F2B00D889BC /* SwiftBilibili */,
+				65007BAD25021F16009FCF1E /* Sources */,
+				65007BB125021F8A009FCF1E /* Supporting Files */,
+				65007BB025021F74009FCF1E /* Resource */,
 				65F6024424FF3F2B00D889BC /* Products */,
 				49D6515931F9FB241B8E3F43 /* Pods */,
 				832FE350DA11C9153EAA54A9 /* Frameworks */,
@@ -575,16 +577,6 @@
 				65F6024324FF3F2B00D889BC /* SwiftBilibili.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		65F6024524FF3F2B00D889BC /* SwiftBilibili */ = {
-			isa = PBXGroup;
-			children = (
-				65007BAD25021F16009FCF1E /* Sources */,
-				65007BB125021F8A009FCF1E /* Supporting Files */,
-				65007BB025021F74009FCF1E /* Resource */,
-			);
-			path = SwiftBilibili;
 			sourceTree = "<group>";
 		};
 		832FE350DA11C9153EAA54A9 /* Frameworks */ = {
@@ -658,10 +650,11 @@
 			buildConfigurationList = 65F6025724FF3F2D00D889BC /* Build configuration list for PBXNativeTarget "SwiftBilibili" */;
 			buildPhases = (
 				31AE1FDE2129C95F1F45BC27 /* [CP] Check Pods Manifest.lock */,
+				654924D725205F9C004262D9 /* ShellScript */,
 				65F6023F24FF3F2B00D889BC /* Sources */,
 				65F6024024FF3F2B00D889BC /* Frameworks */,
 				65F6024124FF3F2B00D889BC /* Resources */,
-				0F56E0F2251F0BA364246896 /* [CP] Embed Pods Frameworks */,
+				E7A5995BDD6B1636EE229DDC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -712,32 +705,15 @@
 			files = (
 				65F6025324FF3F2D00D889BC /* LaunchScreen.storyboard in Resources */,
 				65F6025024FF3F2D00D889BC /* Assets.xcassets in Resources */,
-				65007BBC250222B3009FCF1E /* launcher_logo_2020@3x.png in Resources */,
-				65007BBD250222B3009FCF1E /* launcher_logo_2020@2x.png in Resources */,
 				65007BF925024632009FCF1E /* MainStyle.json in Resources */,
+				6549257C252064BD004262D9 /* launcher_logo_2020@3x.png in Resources */,
+				6549257B252064BD004262D9 /* launcher_logo_2020@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0F56E0F2251F0BA364246896 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SwiftBilibili/Pods-SwiftBilibili-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SwiftBilibili/Pods-SwiftBilibili-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SwiftBilibili/Pods-SwiftBilibili-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		31AE1FDE2129C95F1F45BC27 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -758,6 +734,42 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		654924D725205F9C004262D9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
+		E7A5995BDD6B1636EE229DDC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SwiftBilibili/Pods-SwiftBilibili-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SwiftBilibili/Pods-SwiftBilibili-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SwiftBilibili/Pods-SwiftBilibili-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -975,7 +987,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6T74XGPCUP;
-				INFOPLIST_FILE = "SwiftBilibili/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -996,7 +1008,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6T74XGPCUP;
-				INFOPLIST_FILE = "SwiftBilibili/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
