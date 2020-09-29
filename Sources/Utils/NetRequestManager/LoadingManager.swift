@@ -17,10 +17,5 @@ class LoadingMnager: NSObject {
     override init() {
         super.init()
 
-        loadingIndictor.asObservable()
-            .subscribe { (isLoading) in
-                debugPrint("加载状态: \(isLoading)")
-            }
-            .disposed(by: rx.disposeBag)
     }
 }

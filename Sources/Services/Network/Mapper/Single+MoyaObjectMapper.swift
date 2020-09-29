@@ -16,6 +16,11 @@ public extension PrimitiveSequence where Trait == SingleTrait, Element == Respon
     func mapObject<T: BaseMappable>(_ type: T.Type, context: MapContext? = nil) -> Single<T> {
         return flatMap { response -> Single<T> in
             return Single.just(try response.mapObject(type, context: context))
+        }.do { (error) in
+            if error is MapError {
+                // swiftlint:disable force_cast
+                log.error((error as! MapError).description)
+            }
         }
 
     }

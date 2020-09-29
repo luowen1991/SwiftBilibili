@@ -10,7 +10,6 @@ import UIKit
 import SwiftyUserDefaults
 import Then
 import ObjectMapper
-import NSObject_Rx
 import SnapKit
 import Toast_Swift
 import Moya
@@ -91,6 +90,5 @@ final class CompositionRoot {
         // 设置全局toast的样式
 
         // 设置时区
-
     }
 }

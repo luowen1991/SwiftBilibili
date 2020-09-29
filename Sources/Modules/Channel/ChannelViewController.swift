@@ -17,7 +17,7 @@ final class ChannelViewController: BaseViewController {
             .subscribe(onNext: { (style) in
                 print(style.rawValue)
             })
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     override func setupUI() {

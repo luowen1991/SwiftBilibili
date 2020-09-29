@@ -15,8 +15,9 @@ import RxSwift
 
 struct SplashCacheManager {
 
-    func saveSplashData(_ splashInfo: SplashInfoModel) {
+    static let `default` = SplashCacheManager()
 
+    func storeSplashData(_ splashInfo: SplashInfoModel) {
         // 如果新的数据和数据库的数据不一样，就清空数据库
         let items = RealmManager.default.selectByAll(SplashShowRealmModel.self)
         if !items.isEmpty,
@@ -30,13 +31,13 @@ struct SplashCacheManager {
             for showInfo in splashInfo.show {
                 if let itemInfo = splashInfo.list.first(where: { $0.id == showInfo.id }) {
                     downloadImage(itemInfo)
-                    saveData(showInfo, itemInfo)
+                    storeData(showInfo, itemInfo)
                 }
             }
         }
     }
 
-    func getShowItem() -> SplashShowRealmModel? {
+    func cachedShowItem() -> SplashShowRealmModel? {
         let items = RealmManager.default.selectByAll(SplashShowRealmModel.self)
         if items.isEmpty { return nil }
         let now = Int(Date().timeIntervalSince1970)
@@ -67,6 +68,7 @@ struct SplashCacheManager {
                 switch result {
                 case .success(let loadResult):
                     ImageCache.default.store(loadResult.image, forKey: itemInfo.thumb)
+                    log.info("开屏图下载成功: \(ImageCache.default.cachePath(forKey: itemInfo.thumb))")
                 case .failure(let error):
                     log.error(error.errorDescription ?? "开屏图加载失败")
                 }
@@ -75,8 +77,8 @@ struct SplashCacheManager {
     }
 
     // 保存数据
-    private func saveData(_ showInfo: SplashShowModel,
-                          _ itemInfo: SplashItemModel) {
+    private func storeData(_ showInfo: SplashShowModel,
+                           _ itemInfo: SplashItemModel) {
         let showItem = SplashShowRealmModel()
         showItem.beginTime = showInfo.beginTime
         showItem.endTime = showInfo.endTime

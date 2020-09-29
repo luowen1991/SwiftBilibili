@@ -13,18 +13,17 @@ import JXSegmentedView
 /// 首页主控制器
 final class HomeMainViewController: BaseViewController {
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        LaunchAdManager.default.display()
+
         refresh()
-
-        ConfigAPI.adList.request()
-            .mapObject(AdInfoModel.self)
-            .subscribe { (_) in
-
-            }
-            .disposed(by: disposeBag)
-
     }
 
     // MARK: Private Method
@@ -41,7 +40,7 @@ final class HomeMainViewController: BaseViewController {
                 self.segmentedDataSource.titleNormalColor = theme.mainColorModel.ba0
                 self.segmentedDataSource.titleSelectedColor = theme.mainColorModel.pi5
             })
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     override func setupUI() {
@@ -83,5 +82,14 @@ final class HomeMainViewController: BaseViewController {
 // MARK: Delegate
 // MARK: JXSegmentedViewDelegate
 extension HomeMainViewController: JXSegmentedViewDelegate {
+
+}
+
+extension HomeMainViewController: LaunchAdDelegate {
+
+    func launchAd(_ launchAd: LaunchAd, display imageView: UIImageView, forUrl url: String) {
+
+        imageView.setImage(with: URL(string: url))
+    }
 
 }

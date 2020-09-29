@@ -33,8 +33,6 @@ final class SplashViewController: BaseViewController {
 
     private let presentMainScreen: () -> Void
 
-    private let splashCacheManager = SplashCacheManager()
-
     init(presentMainScreen: @escaping () -> Void) {
         self.presentMainScreen = presentMainScreen
         super.init()
@@ -76,14 +74,16 @@ final class SplashViewController: BaseViewController {
 
     private func loadOrShowContentImage() {
 
-        if let showItem = splashCacheManager.getShowItem() {
-            ImageCache.default.retrieveImage(forKey: showItem.thumb) {[weak self] (result) in
+        let showItem = SplashCacheManager.default.cachedShowItem()
+
+        if showItem != nil {
+            ImageCache.default.retrieveImage(forKey: showItem!.thumb) {[weak self] (result) in
                 guard let self = self else { return }
                 switch result {
                 case .success(let cache):
                     self.contentImageView.image = cache.image
                     self.setupConstraints()
-                    self.hidden(Double(showItem.duration))
+                    self.hidden(Double(showItem!.duration))
                 case .failure:
                     log.error("获取缓存图片失败")
                 }
@@ -92,8 +92,9 @@ final class SplashViewController: BaseViewController {
 
         NetStatusManager.default.reachabilityConnection
             .skip(1)
-            .subscribe(onNext: {[weak self] (_) in
+            .subscribe(onNext: {[weak self] (connection) in
                 guard let self = self else { return }
+                if connection == .none && showItem != nil { return }
                 self.startRequest()
             })
             .disposed(by: disposeBag)
@@ -101,19 +102,26 @@ final class SplashViewController: BaseViewController {
 
     private func startRequest() {
 
-        ConfigAPI.splashList
-            .request()
-            .mapObject(SplashInfoModel.self)
-            .trackError(NetErrorManager.default.errorIndictor)
-            .subscribe(onSuccess: {[weak self] (splashInfo) in
-                guard let self = self else { return }
-                if self.contentImageView.image == nil {
-                    self.contentImageView.image = Image.Launch.content
-                    self.hidden(700)
-                }
-                self.splashCacheManager.saveSplashData(splashInfo)
-            })
-            .disposed(by: disposeBag)
+        let loadTime = UserDefaultsManager.app.splashLoadTime
+        let pullInterval = UserDefaultsManager.app.splashPullInterval
+
+        if Utils.currentAppTime() - loadTime >= pullInterval {
+            ConfigAPI.splashList
+                .request()
+                .mapObject(SplashInfoModel.self)
+                .trackError(NetErrorManager.default.errorIndictor)
+                .subscribe(onSuccess: {[weak self] (splashInfo) in
+                    guard let self = self else { return }
+                    UserDefaultsManager.app.splashLoadTime = Utils.currentAppTime()
+                    UserDefaultsManager.app.splashPullInterval = splashInfo.pullInterval
+                    if self.contentImageView.image == nil {
+                        self.contentImageView.image = Image.Launch.content
+                        self.hidden(700)
+                    }
+                    SplashCacheManager.default.storeSplashData(splashInfo)
+                })
+                .disposed(by: disposeBag)
+        }
     }
 
     private func retryRequest() {
@@ -140,7 +148,7 @@ final class SplashViewController: BaseViewController {
 
         logoImageView.snp.makeConstraints {
             $0.left.right.equalToSuperview()
-            $0.height.equalTo(50)
+            $0.height.equalTo(60)
             if #available(iOS 11.0, *) {
                 $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
             } else {

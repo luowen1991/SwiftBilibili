@@ -30,9 +30,9 @@ final class MineViewController: BaseViewController {
 
     override func bindEvent() {
 
-        button1.rx.tap.map {[unowned self] in self.button1.title(for: .normal) }.bind(to: tapSubject).disposed(by: rx.disposeBag)
-        button2.rx.tap.map {[unowned self] in self.button2.title(for: .normal) }.bind(to: tapSubject).disposed(by: rx.disposeBag)
-        button3.rx.tap.map {[unowned self] in self.button3.title(for: .normal) }.bind(to: tapSubject).disposed(by: rx.disposeBag)
+        button1.rx.tap.map {[unowned self] in self.button1.title(for: .normal) }.bind(to: tapSubject).disposed(by: disposeBag)
+        button2.rx.tap.map {[unowned self] in self.button2.title(for: .normal) }.bind(to: tapSubject).disposed(by: disposeBag)
+        button3.rx.tap.map {[unowned self] in self.button3.title(for: .normal) }.bind(to: tapSubject).disposed(by: disposeBag)
 
         tapSubject.subscribe(onNext: {[weak self] (styleName) in
             if UserDefaultsManager.theme.style.rawValue == styleName { return }
@@ -45,13 +45,13 @@ final class MineViewController: BaseViewController {
             UserDefaultsManager.theme.style = style
             self?.setNeedsStatusBarAppearanceUpdate()
             ToastManager.show("换主题成功")
-        }).disposed(by: rx.disposeBag)
+        }).disposed(by: disposeBag)
 
         themeService.typeStream.subscribe(onNext: {[weak self] (style) in
             self?.button1.isSelected = style.rawValue == self?.button1.title(for: .normal)
             self?.button2.isSelected = style.rawValue == self?.button2.title(for: .normal)
             self?.button3.isSelected = style.rawValue == self?.button3.title(for: .normal)
-        }).disposed(by: rx.disposeBag)
+        }).disposed(by: disposeBag)
 
     }
 

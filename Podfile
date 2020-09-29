@@ -23,7 +23,6 @@ target ‘SwiftBilibili’ do
   pod 'RxCocoa', '~> 5.1.1'
   pod 'RxDataSources', '~> 4.0.1'
   pod 'RxGesture', '~> 3.0.2'
-  #pod 'NSObject+Rx', '~> 5.1.0'
   pod 'RxOptional', '~> 4.1.0'
   pod 'RxTheme', '~> 4.1.1'
   pod 'RxReachability', '~> 1.0.0'
@@ -54,6 +53,7 @@ target ‘SwiftBilibili’ do
   pod 'SwiftyUserDefaults', '~> 5.0.0'
   pod 'Dollar', '~> 9.0.0'              #数组和字典的处理
   pod 'BonMot', '~> 5.5.1'              #attributedString的简化
+  pod 'Tiercel', '~> 3.2.0'             #下载
 
   # Lint
   pod 'SwiftLint', '~> 0.40.3'

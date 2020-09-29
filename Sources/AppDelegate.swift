@@ -7,11 +7,18 @@
 //
 
 import UIKit
-
-import Reachability
+import Tiercel
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    lazy var adSessionManager: SessionManager = {
+        var configuration = SessionConfiguration()
+        let path = Cache.defaultDiskCachePathClosure("ad")
+        let cache = Cache("LaunchAdCacheManager", downloadPath: path)
+        let manager = SessionManager("LaunchAdCacheManager", configuration: configuration, cache: cache, operationQueue: DispatchQueue(label: "com.Bilibili.SessionManager.operationQueue"))
+        return manager
+    }()
 
     var window: UIWindow?
     var dependency: AppDependency!
@@ -26,6 +33,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.dependency.setupAppConfig()
 
         return true
+    }
+
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        LaunchAdManager.default.display()
+        LaunchAdManager.default.loadSplashInfo()
     }
 
 }

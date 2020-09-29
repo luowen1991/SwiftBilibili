@@ -8,17 +8,20 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
 struct AdInfoModel: ImmutableMappable {
 
     let minInterval: Int
+    let pullInterval: Int
     let list: [AdItemModel]
-    let show: [AdShowModel]
+    let show: [AdShowModel]?
 
     init(map: Map) throws {
+        pullInterval = try map.value("pull_interval")
         minInterval = try map.value("min_interval")
         list = try map.value("list")
-        show = try map.value("show")
+        show = try? map.value("show")
     }
 }
 
@@ -70,5 +73,22 @@ struct AdShowModel: ImmutableMappable {
         id = try map.value("id")
         stime = try map.value("stime")
         etime = try map.value("etime")
+    }
+}
+
+class AdShowRealmModel: Object {
+    @objc dynamic var id: Int = 0
+    @objc dynamic var beginTime: Int = 0
+    @objc dynamic var endTime: Int = 0
+    @objc dynamic var thumb: String = ""
+    @objc dynamic var skip: Bool = true
+    @objc dynamic var isAd: Bool = true
+    @objc dynamic var uri: String = ""
+    @objc dynamic var uriTitle: String = ""
+    @objc dynamic var videoUrl: String?
+    @objc dynamic var duration: Int = 5
+
+    override class func primaryKey() -> String? {
+        return "id"
     }
 }

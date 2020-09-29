@@ -21,8 +21,6 @@ PODS:
   - Moya/RxSwift (14.0.0):
     - Moya/Core
     - RxSwift (~> 5.0)
-  - "NSObject+Rx (5.1.0)":
-    - RxSwift (~> 5.1)
   - ObjectMapper (4.2.0)
   - Protobuf (3.13.0)
   - QuickLayout (3.0.0)
@@ -80,6 +78,7 @@ PODS:
   - SwiftyJSON (5.0.0)
   - SwiftyUserDefaults (5.0.0)
   - Then (2.7.0)
+  - Tiercel (3.2.0)
   - Toast-Swift (5.0.1)
   - URLNavigator (2.3.0)
   - WeakMapTable (1.1.0)
@@ -97,7 +96,6 @@ DEPENDENCIES:
   - Kingfisher (~> 5.15.3)
   - lottie-ios (~> 3.1.8)
   - Moya/RxSwift (~> 14.0.0)
-  - "NSObject+Rx (~> 5.1.0)"
   - ObjectMapper (~> 4.2.0)
   - ReactorKit (~> 2.1.0)
   - RxCocoa (~> 5.1.1)
@@ -117,6 +115,7 @@ DEPENDENCIES:
   - SwiftyJSON (~> 5.0)
   - SwiftyUserDefaults (~> 5.0.0)
   - Then (~> 2.7.0)
+  - Tiercel (~> 3.2.0)
   - Toast-Swift (~> 5.0.1)
   - URLNavigator (~> 2.3.0)
 
@@ -136,7 +135,6 @@ SPEC REPOS:
     - Kingfisher
     - lottie-ios
     - Moya
-    - "NSObject+Rx"
     - ObjectMapper
     - Protobuf
     - QuickLayout
@@ -164,6 +162,7 @@ SPEC REPOS:
     - SwiftyJSON
     - SwiftyUserDefaults
     - Then
+    - Tiercel
     - Toast-Swift
     - URLNavigator
     - WeakMapTable
@@ -183,7 +182,6 @@ SPEC CHECKSUMS:
   Kingfisher: 2fef2f4d9e809285aff7f6195b5290520904f3fa
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
-  "NSObject+Rx": fa6bbcc1ab1faa06b01466bc09b1e0692bbc5946
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
@@ -211,10 +209,11 @@ SPEC CHECKSUMS:
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   SwiftyUserDefaults: 33fcb42bd1feb53a37d873feb62c82967db5f7f6
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
+  Tiercel: 37c00d3d309657951d00ae68dcb6ce8c7dccf584
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
   URLNavigator: 2593c0e2d293732ec5c44503cf54dceba1a68085
   WeakMapTable: d0327eda092be6a8f7c532942ae98dc7948f5d32
 
-PODFILE CHECKSUM: 5f02435fa80ce615536a84ef856a77bb11b5b604
+PODFILE CHECKSUM: 5ea8e2ad3e9c49bb72c5575889df4137bb1b4724
 
 COCOAPODS: 1.9.1

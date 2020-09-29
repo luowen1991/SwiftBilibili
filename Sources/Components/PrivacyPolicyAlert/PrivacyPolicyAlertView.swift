@@ -10,7 +10,9 @@ import UIKit
 import ActiveLabel
 import RxSwift
 
-final class PrivacyPolicyAlertView: BaseView {
+final class PrivacyPolicyAlertView: UIView {
+
+    private var disposeBag = DisposeBag()
 
     let agreeSubject = PublishSubject<Void>()
 
@@ -18,6 +20,8 @@ final class PrivacyPolicyAlertView: BaseView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupViews()
+        setupEvents()
         setupActiveLabel()
     }
 
@@ -25,7 +29,7 @@ final class PrivacyPolicyAlertView: BaseView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func setupViews() {
+    func setupViews() {
         addSubview(titleLabel)
         addSubview(scrollView)
         addSubview(tipLabel)
@@ -54,7 +58,7 @@ final class PrivacyPolicyAlertView: BaseView {
         }
     }
 
-    override func setupEvents() {
+    func setupEvents() {
 
         unAgreeButton.rx.tap
             .subscribe {[weak self] (_) in

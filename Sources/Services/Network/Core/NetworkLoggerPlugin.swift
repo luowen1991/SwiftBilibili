@@ -17,20 +17,22 @@ public class NetworkLoggerPlugin: PluginType {
 
         let netRequest = request.request
 
+        print("************************ NetRequestStart ************************")
+
         if let url = netRequest?.description {
-            log.debug(url)
+            print("url   :  \(url)")
         }
 
         if let httpMethod = netRequest?.httpMethod {
-            log.debug("METHOD:\(httpMethod)")
+            print("METHOD   :  \(httpMethod)")
         }
 
         if let body = netRequest?.httpBody, let output = String(data: body, encoding: .utf8) {
-            log.debug("Body:\(output)")
+            print("Body   :  \(output)")
         }
 
         if let headers = netRequest?.allHTTPHeaderFields {
-            log.debug("Headers:\(headers)")
+            print("Headers   :  \(headers)\n")
         }
     }
 
@@ -38,16 +40,17 @@ public class NetworkLoggerPlugin: PluginType {
 
         guard Network.Configuration.default.logEnable else { return }
 
+        print("************************ NetRequestEnd ************************")
+
         switch result {
         case .success(let response):
             if let data = try? JSON(data: response.data).dictionaryObject {
-                log.debug("Return Data:")
-                log.debug("\(data)")
+                print("Data   :  \(data)\n")
             } else {
-                log.error("Can not formatter data")
+                print("Error  :  Can not formatter data\n")
             }
         case .failure(let error):
-            log.error("\(error.errorDescription ?? "无错误描述")")
+            print("Error   :  \(error.errorDescription ?? "无错误描述")\n")
         }
 
     }

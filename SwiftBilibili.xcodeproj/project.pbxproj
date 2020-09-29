@@ -34,6 +34,10 @@
 		65007C0025024ECF009FCF1E /* DefaultsKeys+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65007BFF25024ECF009FCF1E /* DefaultsKeys+UserDefaults.swift */; };
 		65007C0225025188009FCF1E /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65007C0125025188009FCF1E /* UIColor+Hex.swift */; };
 		65007C0525025493009FCF1E /* HexColorTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65007C0425025493009FCF1E /* HexColorTransform.swift */; };
+		65207AB325207F41000E05A3 /* Auto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65207AB225207F41000E05A3 /* Auto.swift */; };
+		65207AB625207F77000E05A3 /* Inch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65207AB525207F77000E05A3 /* Inch.swift */; };
+		65207AB925208864000E05A3 /* LaunchAdBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65207AB825208864000E05A3 /* LaunchAdBackgroundView.swift */; };
+		65207ABC252099D6000E05A3 /* LaunchAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65207ABB252099D6000E05A3 /* LaunchAd.swift */; };
 		65459CDE2511B2B000A62E8D /* Observable+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65459CDD2511B2B000A62E8D /* Observable+Cache.swift */; };
 		65459CE02511B38500A62E8D /* Network+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65459CDF2511B38500A62E8D /* Network+Cache.swift */; };
 		65459CE22511B51A00A62E8D /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65459CE12511B51A00A62E8D /* NetworkError.swift */; };
@@ -62,7 +66,14 @@
 		654BDD372514A9810063F987 /* MapperParameterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654BDD362514A9810063F987 /* MapperParameterType.swift */; };
 		6554E9AD251C7F4200DAEB25 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6554E9AC251C7F4200DAEB25 /* BaseView.swift */; };
 		6554E9B2251C81C800DAEB25 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6554E9B1251C81C800DAEB25 /* Font.swift */; };
+		6568BE6C2521AEA90093EF03 /* LaunchAdSkipButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6568BE6B2521AEA90093EF03 /* LaunchAdSkipButton.swift */; };
+		6568BE702521B4730093EF03 /* AdCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6568BE6F2521B4730093EF03 /* AdCacheManager.swift */; };
+		6568BE742521E3A30093EF03 /* LaunchAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6568BE732521E3A30093EF03 /* LaunchAdManager.swift */; };
+		6571E5BE25209B50005123AD /* LaunchAdConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6571E5BD25209B50005123AD /* LaunchAdConfig.swift */; };
+		6571E5C12520A4CF005123AD /* LaunchAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6571E5C02520A4CF005123AD /* LaunchAdViewController.swift */; };
+		6571E5C42520A528005123AD /* LaunchAdVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6571E5C32520A528005123AD /* LaunchAdVideoView.swift */; };
 		658A287C251DCDBD009D04A8 /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658A287B251DCDBD009D04A8 /* HomeAPI.swift */; };
+		65918A6C25233879007A0433 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65918A6B25233879007A0433 /* Utils.swift */; };
 		659CFCF02506041100787D3A /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659CFCEF2506041100787D3A /* Logger.swift */; };
 		659CFCF4250605D100787D3A /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659CFCF3250605D100787D3A /* Screen.swift */; };
 		659CFD0825065EE700787D3A /* NetStatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659CFD0725065EE700787D3A /* NetStatusManager.swift */; };
@@ -114,6 +125,10 @@
 		65007BFF25024ECF009FCF1E /* DefaultsKeys+UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DefaultsKeys+UserDefaults.swift"; sourceTree = "<group>"; };
 		65007C0125025188009FCF1E /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		65007C0425025493009FCF1E /* HexColorTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColorTransform.swift; sourceTree = "<group>"; };
+		65207AB225207F41000E05A3 /* Auto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auto.swift; sourceTree = "<group>"; };
+		65207AB525207F77000E05A3 /* Inch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inch.swift; sourceTree = "<group>"; };
+		65207AB825208864000E05A3 /* LaunchAdBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAdBackgroundView.swift; sourceTree = "<group>"; };
+		65207ABB252099D6000E05A3 /* LaunchAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAd.swift; sourceTree = "<group>"; };
 		65459CDD2511B2B000A62E8D /* Observable+Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Cache.swift"; sourceTree = "<group>"; };
 		65459CDF2511B38500A62E8D /* Network+Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+Cache.swift"; sourceTree = "<group>"; };
 		65459CE12511B51A00A62E8D /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -142,7 +157,14 @@
 		654BDD362514A9810063F987 /* MapperParameterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapperParameterType.swift; sourceTree = "<group>"; };
 		6554E9AC251C7F4200DAEB25 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		6554E9B1251C81C800DAEB25 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		6568BE6B2521AEA90093EF03 /* LaunchAdSkipButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAdSkipButton.swift; sourceTree = "<group>"; };
+		6568BE6F2521B4730093EF03 /* AdCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdCacheManager.swift; sourceTree = "<group>"; };
+		6568BE732521E3A30093EF03 /* LaunchAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAdManager.swift; sourceTree = "<group>"; };
+		6571E5BD25209B50005123AD /* LaunchAdConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAdConfig.swift; sourceTree = "<group>"; };
+		6571E5C02520A4CF005123AD /* LaunchAdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAdViewController.swift; sourceTree = "<group>"; };
+		6571E5C32520A528005123AD /* LaunchAdVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAdVideoView.swift; sourceTree = "<group>"; };
 		658A287B251DCDBD009D04A8 /* HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
+		65918A6B25233879007A0433 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		659CFCEF2506041100787D3A /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		659CFCF3250605D100787D3A /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 		659CFD0725065EE700787D3A /* NetStatusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetStatusManager.swift; sourceTree = "<group>"; };
@@ -210,6 +232,8 @@
 		65007BAE25021F4C009FCF1E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				65918A6B25233879007A0433 /* Utils.swift */,
+				6568BE6E2521B44F0093EF03 /* LaunchAdManager */,
 				65459CE72511F0C600A62E8D /* NetRequestManager */,
 				654A7496250B22C200B3F91A /* CacheManager */,
 				659CFD0625065E9B00787D3A /* NetStatusManager */,
@@ -327,6 +351,7 @@
 		65007BC6250224E8009FCF1E /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				6549261E25207EA0004262D9 /* AutoInch */,
 				65007C0325025475009FCF1E /* ObjectMapperTransform */,
 				65007BF3250242D6009FCF1E /* Theme */,
 				65007BD62502263A009FCF1E /* CGFloatLiteral */,
@@ -500,11 +525,21 @@
 			path = PrivacyPolicyAlert;
 			sourceTree = "<group>";
 		};
+		6549261E25207EA0004262D9 /* AutoInch */ = {
+			isa = PBXGroup;
+			children = (
+				65207AB225207F41000E05A3 /* Auto.swift */,
+				65207AB525207F77000E05A3 /* Inch.swift */,
+			);
+			path = AutoInch;
+			sourceTree = "<group>";
+		};
 		654A7496250B22C200B3F91A /* CacheManager */ = {
 			isa = PBXGroup;
 			children = (
 				65A3F95C250F518600E77B8A /* RealmManager.swift */,
 				654A7497250B22E900B3F91A /* SplashCacheManager.swift */,
+				6568BE6F2521B4730093EF03 /* AdCacheManager.swift */,
 			);
 			path = CacheManager;
 			sourceTree = "<group>";
@@ -515,6 +550,15 @@
 				6554E9B1251C81C800DAEB25 /* Font.swift */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		6568BE6E2521B44F0093EF03 /* LaunchAdManager */ = {
+			isa = PBXGroup;
+			children = (
+				65A3F95F250F9FB700E77B8A /* AdInfoModel.swift */,
+				6568BE732521E3A30093EF03 /* LaunchAdManager.swift */,
+			);
+			path = LaunchAdManager;
 			sourceTree = "<group>";
 		};
 		659CFCEE250603C100787D3A /* Logger */ = {
@@ -544,7 +588,12 @@
 		65A3F95E250F9F9200E77B8A /* LaunchAd */ = {
 			isa = PBXGroup;
 			children = (
-				65A3F95F250F9FB700E77B8A /* AdInfoModel.swift */,
+				65207AB825208864000E05A3 /* LaunchAdBackgroundView.swift */,
+				6571E5C32520A528005123AD /* LaunchAdVideoView.swift */,
+				65207ABB252099D6000E05A3 /* LaunchAd.swift */,
+				6571E5BD25209B50005123AD /* LaunchAdConfig.swift */,
+				6571E5C02520A4CF005123AD /* LaunchAdViewController.swift */,
+				6568BE6B2521AEA90093EF03 /* LaunchAdSkipButton.swift */,
 			);
 			path = LaunchAd;
 			sourceTree = "<group>";
@@ -654,7 +703,7 @@
 				65F6023F24FF3F2B00D889BC /* Sources */,
 				65F6024024FF3F2B00D889BC /* Frameworks */,
 				65F6024124FF3F2B00D889BC /* Resources */,
-				E7A5995BDD6B1636EE229DDC /* [CP] Embed Pods Frameworks */,
+				5574B0D43655AA5B3621D9F3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -736,6 +785,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		5574B0D43655AA5B3621D9F3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SwiftBilibili/Pods-SwiftBilibili-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SwiftBilibili/Pods-SwiftBilibili-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SwiftBilibili/Pods-SwiftBilibili-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		654924D725205F9C004262D9 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -755,23 +821,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
-		E7A5995BDD6B1636EE229DDC /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SwiftBilibili/Pods-SwiftBilibili-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SwiftBilibili/Pods-SwiftBilibili-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SwiftBilibili/Pods-SwiftBilibili-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -790,12 +839,14 @@
 				65482DB72510EA8A0020D18A /* OnCache.swift in Sources */,
 				654BDD372514A9810063F987 /* MapperParameterType.swift in Sources */,
 				65007BDF250227E7009FCF1E /* ChannelViewController.swift in Sources */,
+				65207ABC252099D6000E05A3 /* LaunchAd.swift in Sources */,
 				65A3F95D250F518600E77B8A /* RealmManager.swift in Sources */,
 				65007BE325022857009FCF1E /* MemberViewController.swift in Sources */,
 				E0AD61952503A3830099F00D /* ConfigAPI.swift in Sources */,
 				65007BE525022864009FCF1E /* MineViewController.swift in Sources */,
 				65482DAD2510E5EC0020D18A /* StoringKey.swift in Sources */,
 				65007BD225022578009FCF1E /* SmartAssign.swift in Sources */,
+				6568BE6C2521AEA90093EF03 /* LaunchAdSkipButton.swift in Sources */,
 				65482D9A251082E50020D18A /* Configuration.swift in Sources */,
 				65007BEB25022DB8009FCF1E /* SplashViewController.swift in Sources */,
 				654A749A250B443D00B3F91A /* UIImageView+Kingfisher.swift in Sources */,
@@ -807,17 +858,21 @@
 				65007C0225025188009FCF1E /* UIColor+Hex.swift in Sources */,
 				E000E8772504D850004EA1DA /* RequestParamsManager.swift in Sources */,
 				65D399A625186F7700B1C12E /* Observable+ObjectMapper.swift in Sources */,
+				6571E5BE25209B50005123AD /* LaunchAdConfig.swift in Sources */,
 				65482DA22510B7750020D18A /* ActivityIndicator.swift in Sources */,
 				65007BC42502245F009FCF1E /* BBNavigationController.swift in Sources */,
 				65007BB325022019009FCF1E /* CompositionRoot.swift in Sources */,
 				65D39A10251897B900B1C12E /* TargetType+Rx.swift in Sources */,
 				65459CE62511E1CD00A62E8D /* MapAt.swift in Sources */,
 				654917B22519F91200F05B0F /* PrivacyPolicyAlertView.swift in Sources */,
+				65918A6C25233879007A0433 /* Utils.swift in Sources */,
 				E0848C062502838C004F1E64 /* HomeRecommendViewController.swift in Sources */,
 				65459CEB251204A600A62E8D /* NoConnectionView.swift in Sources */,
+				65207AB925208864000E05A3 /* LaunchAdBackgroundView.swift in Sources */,
 				65007BD125022578009FCF1E /* CGRect+ManualLayout.swift in Sources */,
 				658A287C251DCDBD009D04A8 /* HomeAPI.swift in Sources */,
 				65482DA92510E58D0020D18A /* Expirable.swift in Sources */,
+				65207AB625207F77000E05A3 /* Inch.swift in Sources */,
 				65007BD525022578009FCF1E /* CALayer+ManualLayout.swift in Sources */,
 				659CFCF4250605D100787D3A /* Screen.swift in Sources */,
 				65482DB32510E72F0020D18A /* Single+Cache.swift in Sources */,
@@ -833,18 +888,23 @@
 				65D399AD251875F600B1C12E /* ObserverType+ObjectMapper.swift in Sources */,
 				659CFD0825065EE700787D3A /* NetStatusManager.swift in Sources */,
 				6549179D2519D1D900F05B0F /* UIView+Extension.swift in Sources */,
+				6568BE742521E3A30093EF03 /* LaunchAdManager.swift in Sources */,
 				65459CE22511B51A00A62E8D /* NetworkError.swift in Sources */,
 				65D399AA2518759700B1C12E /* Single+MoyaObjectMapper.swift in Sources */,
+				65207AB325207F41000E05A3 /* Auto.swift in Sources */,
 				65459CDE2511B2B000A62E8D /* Observable+Cache.swift in Sources */,
 				65A3F960250F9FB700E77B8A /* AdInfoModel.swift in Sources */,
 				65007BC025022348009FCF1E /* BBTabBarController.swift in Sources */,
 				659CFCF02506041100787D3A /* Logger.swift in Sources */,
 				65007BF72502431F009FCF1E /* Theme.swift in Sources */,
+				6571E5C12520A4CF005123AD /* LaunchAdViewController.swift in Sources */,
 				E0848C0925029443004F1E64 /* ToastManager.swift in Sources */,
 				65007BE925022930009FCF1E /* Image.swift in Sources */,
+				6568BE702521B4730093EF03 /* AdCacheManager.swift in Sources */,
 				65007BC225022367009FCF1E /* BaseViewController.swift in Sources */,
 				65007BD82502267E009FCF1E /* CGFloatLiteral.swift in Sources */,
 				65007BDD250227C2009FCF1E /* HomeMainViewController.swift in Sources */,
+				6571E5C42520A528005123AD /* LaunchAdVideoView.swift in Sources */,
 				654A7498250B22E900B3F91A /* SplashCacheManager.swift in Sources */,
 				65007BD425022578009FCF1E /* HelperFunctions.swift in Sources */,
 				65007BD325022578009FCF1E /* UIScrollView+ManualLayout.swift in Sources */,

@@ -15,7 +15,7 @@ enum NoConnectShowType {
 }
 
 /// 无网显示的视图
-final class NoConnectionView: UIView {
+final class NoConnectionView: BaseView {
 
     let retrySubject = PublishSubject<Void>()
 
@@ -42,17 +42,17 @@ final class NoConnectionView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func setupViews() {
+    override func setupViews() {
 
         addSubview(imageView)
         addSubview(tipLabel)
         addSubview(retryButton)
     }
 
-    private func setupEvents() {
+    override func setupEvents() {
         retryButton.rx.tap
             .bind(to: retrySubject)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     private func updateUI() {

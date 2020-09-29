@@ -10,16 +10,17 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-class NetErrorManager: NSObject {
+class NetErrorManager {
 
     static var `default` = NetErrorManager()
+
+    var disposeBag = DisposeBag()
 
     let errorIndictor = ErrorTracker()
 
     let retrySubject = PublishSubject<Void>()
 
-    override init() {
-        super.init()
+    init() {
 
         errorIndictor.asObservable()
             .subscribe(onNext: {[weak self] (error) in
@@ -38,7 +39,7 @@ class NetErrorManager: NSObject {
                     log.error(error.errorDescription ?? "没有错误描述")
                 }
             })
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     private func showNoConnectionView() {
@@ -59,7 +60,7 @@ class NetErrorManager: NSObject {
                 return .just(())
             })
             .bind(to: retrySubject)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
     }
 
 }
