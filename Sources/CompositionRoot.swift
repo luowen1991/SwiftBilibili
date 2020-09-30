@@ -90,5 +90,7 @@ final class CompositionRoot {
         // 设置全局toast的样式
 
         // 设置时区
+        let china = Region(calendar: Calendars.chinese, zone: Zones.asiaShanghai, locale: Locales.chinese)
+        SwiftDate.defaultRegion = china
     }
 }

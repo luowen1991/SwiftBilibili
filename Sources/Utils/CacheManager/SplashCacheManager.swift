@@ -13,6 +13,11 @@ import RealmSwift
 import RxRealm
 import RxSwift
 
+enum CacheImageType {
+    case logo
+    case content
+}
+
 struct SplashCacheManager {
 
     static let `default` = SplashCacheManager()
@@ -40,7 +45,7 @@ struct SplashCacheManager {
     func cachedShowItem() -> SplashShowRealmModel? {
         let items = RealmManager.default.selectByAll(SplashShowRealmModel.self)
         if items.isEmpty { return nil }
-        let now = Int(Date().timeIntervalSince1970)
+        let now = Utils.currentAppTime(.millsecond)
         var showItem = items.filter { $0.beginTime < now && $0.endTime > now && !$0.isShow }.first
         if showItem != nil {
             RealmManager.default.addCanUpdate { () -> (SplashShowRealmModel) in
@@ -61,6 +66,33 @@ struct SplashCacheManager {
         return showItem
     }
 
+    func cachedImage(_ type: CacheImageType, completionHandler: ((UIImage?,Double) -> Void)?) {
+        if let cachedShowItem = self.cachedShowItem() {
+            switch type {
+            case .content:
+                ImageCache.default.retrieveImage(forKey: cachedShowItem.thumb) { (result) in
+                    switch result {
+                    case .success(let cache):
+                        completionHandler?(cache.image, Double(cachedShowItem.duration))
+                    case .failure:
+                        completionHandler?(nil, Double(cachedShowItem.duration))
+                    }
+                }
+            case .logo:
+                ImageCache.default.retrieveImage(forKey: cachedShowItem.logoUrl) { (result) in
+                    switch result {
+                    case .success(let cache):
+                        completionHandler?(cache.image, Double(cachedShowItem.duration))
+                    case .failure:
+                        completionHandler?(nil, Double(cachedShowItem.duration))
+                    }
+                }
+            }
+        } else {
+            completionHandler?(nil, 0)
+        }
+    }
+
     // 下载图片
     private func downloadImage(_ itemInfo: SplashItemModel) {
         if !ImageCache.default.isCached(forKey: itemInfo.thumb) {
@@ -71,6 +103,17 @@ struct SplashCacheManager {
                     log.info("开屏图下载成功: \(ImageCache.default.cachePath(forKey: itemInfo.thumb))")
                 case .failure(let error):
                     log.error(error.errorDescription ?? "开屏图加载失败")
+                }
+            })
+        }
+        if !ImageCache.default.isCached(forKey: itemInfo.logoUrl) {
+            ImageDownloader.default.downloadImage(with: URL(string: itemInfo.logoUrl)!, completionHandler: { (result) in
+                switch result {
+                case .success(let loadResult):
+                    ImageCache.default.store(loadResult.image, forKey: itemInfo.logoUrl)
+                    log.info("开屏logo图下载成功: \(ImageCache.default.cachePath(forKey: itemInfo.logoUrl))")
+                case .failure(let error):
+                    log.error(error.errorDescription ?? "开屏logo图下载成功")
                 }
             })
         }

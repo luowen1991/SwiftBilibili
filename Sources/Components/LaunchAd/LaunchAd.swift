@@ -7,14 +7,10 @@
 //
 
 import UIKit
-import Tiercel
-import Kingfisher
 
 public protocol LaunchAdDelegate: class {
     /// 跳过按钮点击(自定义跳过按钮 此方法不执行)
     func launchAd(_ launchAd: LaunchAd, didSelect skipButton: LaunchAdSkipButton)
-    /// 显示广告图片
-    func launchAd(_ launchAd: LaunchAd, display imageView: UIImageView, forUrl url: String)
     /// 将要显示
     func launchAdWillDisplay(_ launchAd: LaunchAd)
     /// 已经消失
@@ -91,10 +87,10 @@ public class LaunchAd {
         adImageView.contentMode = config.contentMode
         // 网络图片
         if isNetUrl(imageNameOrURLString) {
-            adImageView.setImage(with: URL(string: imageNameOrURLString))
-        }
-        // 本地图片
-        else {
+            AdCacheManager.default.cachedImage(url: imageNameOrURLString) {[unowned self] (image) in
+                self.adImageView.image = image
+            }
+        } else {
             adImageView.image = UIImage(named: imageNameOrURLString)
         }
         addSkipButton()
@@ -114,13 +110,11 @@ public class LaunchAd {
         window.addSubview(adVideoView)
         adVideoView.frame = config.adFrame
         adVideoView.videoGravity = config.videoGravity
+        adVideoView.isMuted = config.isMuted
         if isNetUrl(videoNameOrURLString) {
-            let sessionManager = AdCacheManager.default.appDelegate.adSessionManager
-            if sessionManager.cache.fileExists(url: videoNameOrURLString),
-               let task = sessionManager.fetchTask(videoNameOrURLString) {
-                adVideoView.isMuted = config.isMuted
-                adVideoView.videoURL = URL(fileURLWithPath: task.filePath)
-            }
+            adVideoView.videoURL = AdCacheManager.default.cachedFileURL(url: videoNameOrURLString)
+        } else {
+            adVideoView.videoURL = URL(string: videoNameOrURLString)
         }
         addSkipButton()
         startCountDown()
@@ -170,7 +164,7 @@ public class LaunchAd {
     private func dismissAnimate() {
         switch config.animationType {
         case .none:
-            self.remove()
+            remove()
         case .fadeIn:
             UIView.transition(with: window!, duration: TimeInterval(duration), options: .transitionCrossDissolve) {
                 self.window?.alpha = 0

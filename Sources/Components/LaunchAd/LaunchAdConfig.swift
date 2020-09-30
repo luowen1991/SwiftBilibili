@@ -71,34 +71,34 @@ public class LaunchAdConfig {
     public var isMuted: Bool = false
 
     /// frame
-    public var skipButtonframe = CGRect(x: UIScreen.main.bounds.width - 70,y: UIScreen.main.bounds.height - 49, width: 60,height: 30)
+    public var skipButtonframe = CGRect(x: UIScreen.main.bounds.width - 70,y: UIScreen.main.bounds.height - 60, width: 60,height: 30)
 
-    /// 背景颜色
-    public var backgroundColor = UIColor.black.withAlphaComponent(0.4)
+    /// 背景颜色 (跳过按钮)
+    public var backgroundColor = UIColor.white
 
     /// 文字
     public var text: String = "跳过"
 
     /// 字体大小
-    public var textFont = UIFont.systemFont(ofSize: 14)
+    public var textFont = UIFont.systemFont(ofSize: 15)
 
     /// 字体颜色
-    public var textColor = UIColor.white
+    public var textColor = UIColor.lightGray
 
     /// 数字大小
     public var timeFont = UIFont.systemFont(ofSize: 15)
 
     /// 数字颜色
-    public var timeColor = UIColor.red
+    public var timeColor = UIColor.lightGray
 
     /// 跳过按钮类型
     public var skipBtnType: LaunchAdSkipButtonType = .textLeftTimerRight
 
     /// 圆角
-    public var cornerRadius: CGFloat = 5
+    public var cornerRadius: CGFloat = 15
 
     /// 边框颜色
-    public var borderColor: UIColor = UIColor.clear
+    public var borderColor: UIColor = UIColor.lightGray
 
     /// 边框宽度
     public var borderWidth: CGFloat = 1

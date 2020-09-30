@@ -22,23 +22,23 @@ struct UserDefaultsManager {
         var agreePolicy: Bool
         /// 广告加载的时差 s作为单位
         @SwiftyUserDefault(keyPath: \.adPullInterval)
-        var adPullInterval: Int
+        var adPullInterval: Double
         /// 广告显示的时差 s作为单位
         @SwiftyUserDefault(keyPath: \.adMinInterval)
-        var adMinInterval: Int
+        var adMinInterval: Double
         /// 广告加载的时间 s作为单位
         @SwiftyUserDefault(keyPath: \.adLoadTime)
-        var adLoadTime: Int
+        var adLoadTime: Double
         /// 广告展示的时间 s作为单位
         @SwiftyUserDefault(keyPath: \.adShowTime)
-        var adShowTime: Int
+        var adShowTime: Double
 
         /// 开屏加载的时差 s作为单位
         @SwiftyUserDefault(keyPath: \.splashPullInterval)
-        var splashPullInterval: Int
+        var splashPullInterval: Double
         /// 开屏加载的时间 s作为单位
         @SwiftyUserDefault(keyPath: \.splashLoadTime)
-        var splashLoadTime: Int
+        var splashLoadTime: Double
     }
 
     static var theme = Theme()

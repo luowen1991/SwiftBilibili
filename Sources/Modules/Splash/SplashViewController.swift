@@ -74,30 +74,24 @@ final class SplashViewController: BaseViewController {
 
     private func loadOrShowContentImage() {
 
-        let showItem = SplashCacheManager.default.cachedShowItem()
-
-        if showItem != nil {
-            ImageCache.default.retrieveImage(forKey: showItem!.thumb) {[weak self] (result) in
-                guard let self = self else { return }
-                switch result {
-                case .success(let cache):
-                    self.contentImageView.image = cache.image
-                    self.setupConstraints()
-                    self.hidden(Double(showItem!.duration))
-                case .failure:
-                    log.error("获取缓存图片失败")
-                }
+        SplashCacheManager.default.cachedImage(.content) {[weak self] (image, duration) in
+            guard let self = self else { return }
+            if let image = image {
+                self.contentImageView.image = image
+                self.setupConstraints()
+                self.hidden(duration)
             }
         }
 
         NetStatusManager.default.reachabilityConnection
             .skip(1)
             .subscribe(onNext: {[weak self] (connection) in
-                guard let self = self else { return }
-                if connection == .none && showItem != nil { return }
+                guard let self = self,
+                      connection != .none
+                else { return }
                 self.startRequest()
             })
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
     }
 
     private func startRequest() {
@@ -140,8 +134,8 @@ final class SplashViewController: BaseViewController {
     }
 
     override func setupUI() {
-        view.addSubview(logoImageView)
         view.addSubview(contentImageView)
+        view.addSubview(logoImageView)
     }
 
     override func setupConstraints() {
@@ -165,7 +159,6 @@ final class SplashViewController: BaseViewController {
                 let height = width * scale
                 $0.size.equalTo(CGSize(width: width, height: height))
             }
-
         }
     }
 

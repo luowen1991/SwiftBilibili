@@ -10,12 +10,9 @@ import Foundation
 import Kingfisher
 import Tiercel
 
-struct AdCacheManager {
+class AdCacheManager {
 
     static let `default` = AdCacheManager()
-
-    // swiftlint:disable force_cast weak_delegate
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
     func storeAdData(_ adInfo: AdInfoModel) {
         guard let showList = adInfo.show else {
@@ -27,15 +24,15 @@ struct AdCacheManager {
         if !items.isEmpty,
            !showList.contains(where: {$0.id == items.first?.id}) {
             RealmManager.default.deleteAll()
-            appDelegate.adSessionManager.totalRemove()
+            adSessionManager.totalRemove()
             items.filter { $0.videoUrl == nil }.forEach { ImageCache.default.removeImage(forKey: $0.thumb) }
         }
         // 没有缓存数据时 缓存数据
         if items.isEmpty {
             for showInfo in showList {
                 if let itemInfo = adInfo.list.first(where: { $0.id == showInfo.id }) {
-                    let cacheItem = storeData(itemInfo, showInfo)
-                    downloadResource(itemInfo, cacheItem)
+                    storeData(itemInfo, showInfo)
+                    downloadResource(itemInfo)
                 }
             }
         }
@@ -44,28 +41,46 @@ struct AdCacheManager {
     func cachedShowItem() -> AdShowRealmModel? {
         let items = RealmManager.default.selectByAll(AdShowRealmModel.self)
         if items.isEmpty { return nil }
-        let now = Int(Date().timeIntervalSince1970)
+        let now = Utils.currentAppTime(.millsecond)
         let showItem = items.filter { $0.beginTime < now && $0.endTime > now }.first
         return showItem
     }
 
-    private func downloadResource(_ itemInfo: AdItemModel, _ cacheItem: AdShowRealmModel) {
+    func cachedImage(url: String, completionHandler: ((UIImage?) -> Void)?) {
+        ImageCache.default.retrieveImage(forKey: url) { (result) in
+            switch result {
+            case .success(let cache):
+                completionHandler?(cache.image)
+            case .failure:
+                completionHandler?(nil)
+            }
+        }
+    }
+
+    func cachedFileURL(url: String) -> URL? {
+        guard let filePath = adSessionManager.cache.filePath(url: url)else {
+            return nil
+        }
+        return URL(fileURLWithPath: filePath)
+    }
+
+    private func downloadResource(_ itemInfo: AdItemModel) {
         if itemInfo.videoUrl != nil {
-           downloadVideo(itemInfo, cacheItem)
+           downloadVideo(itemInfo)
         } else {
            downloadImage(itemInfo)
         }
     }
 
-    private func downloadVideo(_ itemInfo: AdItemModel, _ cacheItem: AdShowRealmModel) {
+    private func downloadVideo(_ itemInfo: AdItemModel) {
         guard let videoUrl = itemInfo.videoUrl else { return }
-        let task = appDelegate.adSessionManager.download(videoUrl)
-        task?.success(handler: { (downloadTask) in
-            log.info("广告视频下载成功: \(downloadTask.filePath)")
-        })
-        task?.failure(handler: { (downloadTask) in
-            log.error("广告视频下载失败: \(downloadTask.filePath)")
-        })
+        adSessionManager.download(videoUrl)?
+            .success(handler: { (downloadTask) in
+                log.info("广告视频下载成功: \(downloadTask.filePath)")
+            })
+            .failure(handler: { (downloadTask) in
+                log.error("广告视频下载失败: \(downloadTask.filePath)")
+            })
     }
 
     private func downloadImage(_ itemInfo: AdItemModel) {
@@ -84,8 +99,7 @@ struct AdCacheManager {
 
     // 保存数据
     private func storeData(_ itemInfo: AdItemModel,
-                           _ showInfo: AdShowModel)
-    -> AdShowRealmModel {
+                           _ showInfo: AdShowModel) {
         let showItem = AdShowRealmModel()
         showItem.beginTime = showInfo.stime
         showItem.endTime = showInfo.etime
@@ -98,7 +112,13 @@ struct AdCacheManager {
         showItem.isAd = itemInfo.isAd
         showItem.videoUrl = itemInfo.videoUrl
         RealmManager.default.add(showItem)
-        return showItem
     }
 
+    private lazy var adSessionManager: SessionManager = {
+        var configuration = SessionConfiguration()
+        let path = Cache.defaultDiskCachePathClosure("ad")
+        let cache = Cache("LaunchAdCacheManager", downloadPath: path)
+        let manager = SessionManager("LaunchAdCacheManager", configuration: configuration, cache: cache, operationQueue: DispatchQueue(label: "com.Bilibili.SessionManager.operationQueue"))
+        return manager
+    }()
 }

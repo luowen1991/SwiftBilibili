@@ -12,8 +12,8 @@ import RealmSwift
 
 struct AdInfoModel: ImmutableMappable {
 
-    let minInterval: Int
-    let pullInterval: Int
+    let minInterval: Double
+    let pullInterval: Double
     let list: [AdItemModel]
     let show: [AdShowModel]?
 
@@ -30,8 +30,8 @@ struct AdItemModel: ImmutableMappable {
     let id: Int
     let cardType: Int
     let duration: Int
-    let beginTime: Int
-    let endTime: Int
+    let beginTime: Double
+    let endTime: Double
     let thumb: String
     let hash: String
     let skip: Bool
@@ -66,8 +66,8 @@ struct AdItemModel: ImmutableMappable {
 
 struct AdShowModel: ImmutableMappable {
     let id: Int
-    let stime: Int
-    let etime: Int
+    let stime: Double
+    let etime: Double
 
     init(map: Map) throws {
         id = try map.value("id")
@@ -78,8 +78,8 @@ struct AdShowModel: ImmutableMappable {
 
 class AdShowRealmModel: Object {
     @objc dynamic var id: Int = 0
-    @objc dynamic var beginTime: Int = 0
-    @objc dynamic var endTime: Int = 0
+    @objc dynamic var beginTime: Double = 0
+    @objc dynamic var endTime: Double = 0
     @objc dynamic var thumb: String = ""
     @objc dynamic var skip: Bool = true
     @objc dynamic var isAd: Bool = true
