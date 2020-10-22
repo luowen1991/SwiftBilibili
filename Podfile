@@ -54,6 +54,7 @@ target ‘SwiftBilibili’ do
   pod 'Dollar', '~> 9.0.0'              #数组和字典的处理
   pod 'BonMot', '~> 5.5.1'              #attributedString的简化
   pod 'Tiercel', '~> 3.2.0'             #下载
+  pod 'dsBridge', '~> 3.0.6'            #原生与H5交互
 
   # Lint
   pod 'SwiftLint', '~> 0.40.3'

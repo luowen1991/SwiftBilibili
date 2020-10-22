@@ -31,4 +31,8 @@ struct Image {
     struct NetError {
         static let `default` = UIImage(named: "bblivebc_battle_pk_panel_load_error_184x140_")
     }
+
+    struct Common {
+        static let back = UIImage(named: "column_back_white_8x14_")
+    }
 }

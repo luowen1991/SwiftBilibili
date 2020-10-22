@@ -45,7 +45,7 @@ struct SplashCacheManager {
     func cachedShowItem() -> SplashShowRealmModel? {
         let items = RealmManager.default.selectByAll(SplashShowRealmModel.self)
         if items.isEmpty { return nil }
-        let now = Utils.currentAppTime(.millsecond)
+        let now = Utils.currentAppTime()
         var showItem = items.filter { $0.beginTime < now && $0.endTime > now && !$0.isShow }.first
         if showItem != nil {
             RealmManager.default.addCanUpdate { () -> (SplashShowRealmModel) in

@@ -57,6 +57,8 @@ final class SplashViewController: BaseViewController {
         UserDefaultsManager.app.agreePolicy ?
             loadOrShowContentImage() :
             presentPrivacyAlert()
+
+        bindRetryRequest()
     }
 
     private func presentPrivacyAlert() {
@@ -98,8 +100,9 @@ final class SplashViewController: BaseViewController {
 
         let loadTime = UserDefaultsManager.app.splashLoadTime
         let pullInterval = UserDefaultsManager.app.splashPullInterval
+        let currentTime = Utils.currentAppTime()
 
-        if Utils.currentAppTime() - loadTime >= pullInterval {
+        if currentTime - loadTime >= pullInterval {
             ConfigAPI.splashList
                 .request()
                 .mapObject(SplashInfoModel.self)
@@ -118,7 +121,7 @@ final class SplashViewController: BaseViewController {
         }
     }
 
-    private func retryRequest() {
+    private func bindRetryRequest() {
         NetErrorManager.default.retrySubject
             .subscribe {[unowned self] (_) in
                 self.startRequest()
@@ -130,6 +133,8 @@ final class SplashViewController: BaseViewController {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+duration/1000) {[weak self] in
             guard let self = self else { return }
             self.presentMainScreen()
+            // 显示广告
+            LaunchAdManager.default.display()
         }
     }
 

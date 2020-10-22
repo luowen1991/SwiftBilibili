@@ -26,7 +26,7 @@ final class NoConnectionView: BaseView {
     }
 
     deinit {
-        debugPrint("NoConnectionView销毁了")
+        log.info("NoConnectionView deinit")
     }
 
     init(showType: NoConnectShowType = .default) {

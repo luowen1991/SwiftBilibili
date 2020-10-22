@@ -15,6 +15,19 @@ class LaunchAdManager {
 
     var disposeBag = DisposeBag()
 
+    var enterForegroundProtocol: NSObjectProtocol?
+
+    init() {
+        enterForegroundProtocol = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { (_) in
+            LaunchAdManager.default.display()
+            LaunchAdManager.default.loadSplashInfo()
+        }
+    }
+
+    deinit {
+        enterForegroundProtocol = nil
+    }
+
     func display() {
         // 显示广告
         let showTime = UserDefaultsManager.app.adShowTime
@@ -32,7 +45,8 @@ class LaunchAdManager {
         // 加载广告
         let loadTime = UserDefaultsManager.app.adLoadTime
         let pullInterval = UserDefaultsManager.app.adPullInterval
-        if Utils.currentAppTime() - loadTime >= pullInterval {
+        let currentNetStatue = NetStatusManager.default.reachabilityConnection.value
+        if Utils.currentAppTime() - loadTime >= pullInterval && currentNetStatue == .wifi {
             ConfigAPI.adList.request()
                 .mapObject(AdInfoModel.self)
                 .subscribe(onSuccess: { (adInfo) in
@@ -54,7 +68,6 @@ class LaunchAdManager {
             ConfigAPI.splashList
                 .request()
                 .mapObject(SplashInfoModel.self)
-                .trackError(NetErrorManager.default.errorIndictor)
                 .subscribe(onSuccess: { (splashInfo) in
                     UserDefaultsManager.app.splashLoadTime = Utils.currentAppTime()
                     UserDefaultsManager.app.splashPullInterval = splashInfo.pullInterval
@@ -66,9 +79,5 @@ class LaunchAdManager {
 }
 
 extension LaunchAdManager: LaunchAdDelegate {
-
-    func launchAd(_ launchAd: LaunchAd, display imageView: UIImageView, forUrl url: String) {
-
-    }
 
 }

@@ -22,7 +22,7 @@ class BBNavigationController: UINavigationController {
 
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
 
-        if children.count > 1 {
+        if children.count >= 1 {
             viewController.hidesBottomBarWhenPushed = true
         }
         super.pushViewController(viewController, animated: animated)
@@ -30,11 +30,6 @@ class BBNavigationController: UINavigationController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        if #available(iOS 11.0, *) {
-//            self.tabBar.height = Metric.tabBarHeight + self.view.safeAreaInsets.bottom
-//        } else {
-//            self.tabBar.height = Metric.tabBarHeight
-//        }
-//        self.tabBar.bottom = self.view.height
+
     }
 }

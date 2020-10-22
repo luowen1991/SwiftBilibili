@@ -7,14 +7,15 @@ PODS:
     - CocoaLumberjack/Core
   - Differentiator (4.0.1)
   - Dollar (9.0.0)
+  - dsBridge (3.0.6)
   - EachNavigationBar (1.14.4)
   - EmptyKit (4.2.0)
   - ESPullToRefresh (2.9.3)
   - FSPagerView (0.8.3)
   - JXSegmentedView (1.2.7)
-  - Kingfisher (5.15.3):
-    - Kingfisher/Core (= 5.15.3)
-  - Kingfisher/Core (5.15.3)
+  - Kingfisher (5.15.6):
+    - Kingfisher/Core (= 5.15.6)
+  - Kingfisher/Core (5.15.6)
   - lottie-ios (3.1.8)
   - Moya/Core (14.0.0):
     - Alamofire (~> 5.0)
@@ -28,11 +29,11 @@ PODS:
   - ReactorKit (2.1.0):
     - RxSwift (~> 5.0)
     - WeakMapTable (~> 1.1)
-  - Realm (5.4.3):
-    - Realm/Headers (= 5.4.3)
-  - Realm/Headers (5.4.3)
-  - RealmSwift (5.4.3):
-    - Realm (= 5.4.3)
+  - Realm (5.4.8):
+    - Realm/Headers (= 5.4.8)
+  - Realm/Headers (5.4.8)
+  - RealmSwift (5.4.8):
+    - Realm (= 5.4.8)
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
@@ -81,13 +82,14 @@ PODS:
   - Tiercel (3.2.0)
   - Toast-Swift (5.0.1)
   - URLNavigator (2.3.0)
-  - WeakMapTable (1.1.0)
+  - WeakMapTable (1.2.0)
 
 DEPENDENCIES:
   - ActiveLabel (~> 1.1.0)
   - BonMot (~> 5.5.1)
   - CocoaLumberjack/Swift (~> 3.6.2)
   - Dollar (~> 9.0.0)
+  - dsBridge (~> 3.0.6)
   - EachNavigationBar (~> 1.14.4)
   - EmptyKit (~> 4.2.0)
   - ESPullToRefresh (~> 2.9.3)
@@ -127,6 +129,7 @@ SPEC REPOS:
     - CocoaLumberjack
     - Differentiator
     - Dollar
+    - dsBridge
     - EachNavigationBar
     - EmptyKit
     - ESPullToRefresh
@@ -174,12 +177,13 @@ SPEC CHECKSUMS:
   CocoaLumberjack: bd155f2dd06c0e0b03f876f7a3ee55693122ec94
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   Dollar: 2fc9bdeeb2d3ae1f251461803240d5c93829ee0c
+  dsBridge: 48b62ee8a411ad601a88d6f6c8cf6cb634b206b7
   EachNavigationBar: 9000bc381312c65a86ab1f6c31b526ea675411f6
   EmptyKit: 95d75cad79476379124e929488116e409043c1d5
   ESPullToRefresh: 0d68daa602b343c81753a1b95e09fd0bfcddfd40
   FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
   JXSegmentedView: eb1cad21f57c2543c00c3e08b8fd3c7ca54f5acd
-  Kingfisher: 2fef2f4d9e809285aff7f6195b5290520904f3fa
+  Kingfisher: b3554e7bf6106115b44e8795300bad580ef2fdc7
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
@@ -187,8 +191,8 @@ SPEC CHECKSUMS:
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
   ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
   ReactorKit: 12a93358c554bb3f167b16b14c40374fa9cd5acd
-  Realm: e3d5fcc50fd79ddf87a2d86301f6edbf57531f84
-  RealmSwift: db608068eccc54bce47928e8118bde13c120c307
+  Realm: 042bbb59227a0159eda397b8a5a49fbd67495ce7
+  RealmSwift: 15ddd6b3398ebfc99810811c44f095df1313adb3
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
   RxGesture: d6bd7447ca3a596c7a9702a6a2b6a2bb5d8bae54
@@ -212,8 +216,8 @@ SPEC CHECKSUMS:
   Tiercel: 37c00d3d309657951d00ae68dcb6ce8c7dccf584
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
   URLNavigator: 2593c0e2d293732ec5c44503cf54dceba1a68085
-  WeakMapTable: d0327eda092be6a8f7c532942ae98dc7948f5d32
+  WeakMapTable: 05c694ce8439a7a9ebabb56187287a63c57673d6
 
-PODFILE CHECKSUM: 5ea8e2ad3e9c49bb72c5575889df4137bb1b4724
+PODFILE CHECKSUM: bf7ef83f4e9512172f83e20ec7fbc1bd8d815401
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.9.3

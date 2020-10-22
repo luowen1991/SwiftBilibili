@@ -42,6 +42,8 @@ final class CompositionRoot {
 
     static func loadLocalResource() {
 
+        print("沙盒地址: \(NSHomeDirectory())")
+
         let path = Bundle.main.path(forResource: "MainStyle", ofType: "json")
         let url = URL(fileURLWithPath: path!)
         let data = try! Data(contentsOf: url)
@@ -56,6 +58,7 @@ final class CompositionRoot {
 
     static func startNetworkStatusNotifier() {
         NetStatusManager.default.startNetworkStatusNotifier()
+
     }
 
     static func setupRootViewController(_ window: UIWindow) {
@@ -86,7 +89,6 @@ final class CompositionRoot {
                 return target.task
             }
         }
-
         // 设置全局toast的样式
 
         // 设置时区

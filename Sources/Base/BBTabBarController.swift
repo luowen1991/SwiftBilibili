@@ -57,6 +57,11 @@ final class BBTabBarController: UITabBarController {
         let navController = BBNavigationController(rootViewController: child)
         navController.navigation.configuration.isEnabled = true
         navController.navigation.configuration.isShadowHidden = true
+        _ = themeService.attrsStream
+            .subscribe(onNext: { (theme) in
+                navController.navigation.configuration.titleTextAttributes = [.foregroundColor: theme.mainColorModel.wh0]
+                navController.navigation.configuration.tintColor = theme.mainColorModel.wh0
+            })
         addChild(navController)
     }
 

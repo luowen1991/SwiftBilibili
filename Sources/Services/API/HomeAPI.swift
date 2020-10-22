@@ -10,7 +10,6 @@
 
 import Moya
 
-/// app中的一些配置API 比如广告 开屏 上传
 enum HomeAPI {
     /// 首页展示数据列表
     case feedList

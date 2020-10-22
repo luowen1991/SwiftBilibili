@@ -41,7 +41,7 @@ class AdCacheManager {
     func cachedShowItem() -> AdShowRealmModel? {
         let items = RealmManager.default.selectByAll(AdShowRealmModel.self)
         if items.isEmpty { return nil }
-        let now = Utils.currentAppTime(.millsecond)
+        let now = Utils.currentAppTime()
         let showItem = items.filter { $0.beginTime < now && $0.endTime > now }.first
         return showItem
     }
@@ -58,7 +58,7 @@ class AdCacheManager {
     }
 
     func cachedFileURL(url: String) -> URL? {
-        guard let filePath = adSessionManager.cache.filePath(url: url)else {
+        guard let filePath = adSessionManager.cache.filePath(url: url) else {
             return nil
         }
         return URL(fileURLWithPath: filePath)
@@ -73,13 +73,15 @@ class AdCacheManager {
     }
 
     private func downloadVideo(_ itemInfo: AdItemModel) {
-        guard let videoUrl = itemInfo.videoUrl else { return }
+        guard let videoUrl = itemInfo.videoUrl,
+              adSessionManager.cache.filePath(url: videoUrl) == nil
+        else { return }
         adSessionManager.download(videoUrl)?
             .success(handler: { (downloadTask) in
                 log.info("广告视频下载成功: \(downloadTask.filePath)")
             })
             .failure(handler: { (downloadTask) in
-                log.error("广告视频下载失败: \(downloadTask.filePath)")
+                log.error("广告视频下载失败: \(downloadTask.error?.localizedDescription ?? "")")
             })
     }
 

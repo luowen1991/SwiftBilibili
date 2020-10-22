@@ -37,9 +37,6 @@ public class LaunchAdConfig {
     /// 设置开屏广告的frame
     public var adFrame: CGRect = .init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 100)
 
-    /// 程序从后台恢复时,是否需要展示广告
-    public var showEnterForeground: Bool = true
-
     /// 点击打开页面参数
     public var openModel: Any?
 
@@ -65,13 +62,13 @@ public class LaunchAdConfig {
     public var videoGravity: AVLayerVideoGravity = .resizeAspectFill
 
     /// 设置视频是否只循环播放一次
-    public var videoCycleOnce: Bool = false
+    public var videoCycleOnce: Bool = true
 
     /// 是否静音
-    public var isMuted: Bool = false
+    public var isMuted: Bool = true
 
     /// frame
-    public var skipButtonframe = CGRect(x: UIScreen.main.bounds.width - 70,y: UIScreen.main.bounds.height - 60, width: 60,height: 30)
+    public var skipButtonframe = CGRect(x: UIScreen.main.bounds.width - 70,y: UIScreen.main.bounds.height - 50, width: 60,height: 30)
 
     /// 背景颜色 (跳过按钮)
     public var backgroundColor = UIColor.white

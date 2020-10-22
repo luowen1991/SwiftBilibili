@@ -7,11 +7,13 @@
 //
 
 import UIKit
-
 import JXSegmentedView
 
 /// 首页主控制器
 final class HomeMainViewController: BaseViewController {
+
+    private var tabItems: [HomeTabItemModel] = []
+    private var selecteExtension: Bool = false
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -20,15 +22,34 @@ final class HomeMainViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        LaunchAdManager.default.display()
-
-        refresh()
+        // 加载tab
+        loadData()
     }
 
     // MARK: Private Method
-    private func refresh() {
-        segmentedDataSource.titles = ["猴哥", "青蛙王子", "旺财","猴哥", "青蛙王子", "旺财","猴哥", "青蛙王子", "旺财"]
+    private func loadData() {
+        ConfigAPI.tabList.request()
+            .mapObject(HomeTabInfoModel.self)
+            .subscribe(onSuccess: {[weak self] (info) in
+                guard let self = self else { return }
+                let sortedItems = info.tab.sorted { (pre, next) -> Bool in
+                    pre.pos > next.pos
+                }
+                self.tabItems = sortedItems
+                let defaultSelectedIndex = sortedItems.compactMap { $0.defaultSelected }.first ?? 1
+                self.segmentedDataSource.showImageInfos = sortedItems.map { $0.extension?.activeIcon }
+                self.segmentedDataSource.loadImageClosure = { (imageView, imageUrl) in
+                    imageView.setImage(with: URL(string: imageUrl))
+                }
+                self.segmentedDataSource.titles = sortedItems.map { $0.name }
+                self.segmentedDataSource.reloadData(selectedIndex: defaultSelectedIndex)
+                self.segmentedView.defaultSelectedIndex = defaultSelectedIndex
+                self.segmentedView.reloadData()
+                self.listContainerView.defaultSelectedIndex = defaultSelectedIndex
+                self.listContainerView.reloadData()
+                self.segmentedView.selectItemAt(index: defaultSelectedIndex)
+            })
+            .disposed(by: disposeBag)
     }
 
     // MARK: Super Method
@@ -45,51 +66,86 @@ final class HomeMainViewController: BaseViewController {
 
     override func setupUI() {
         view.addSubview(segmentedView)
-
+        view.addSubview(listContainerView)
     }
 
     override func setupConstraints() {
         segmentedView.snp.makeConstraints {
             $0.left.right.equalToSuperview()
-            $0.top.equalTo(88)
-            $0.height.equalTo(36)
+            $0.top.equalTo(Screen.navigationBarHeight)
+            $0.height.equalTo(40)
+        }
+
+        listContainerView.snp.makeConstraints {
+            $0.left.right.bottom.equalToSuperview()
+            $0.top.equalTo(segmentedView.snp.bottom)
         }
     }
 
     // MARK: Lazy Load
-    lazy var segmentedView = JXSegmentedView().then {
+    private lazy var segmentedView = JXSegmentedView().then {
         $0.delegate = self
         $0.dataSource = segmentedDataSource
         $0.indicators = [indicator]
+        $0.contentScrollView = listContainerView.scrollView
+        $0.contentEdgeInsetLeft = 20
+        $0.contentEdgeInsetRight = 20
     }
 
-    lazy var indicator = JXSegmentedIndicatorLineView().then {
+    private lazy var indicator = JXSegmentedIndicatorLineView().then {
         $0.isIndicatorWidthSameAsItemContent = true
         $0.indicatorWidthIncrement = 4
     }
 
-    lazy var segmentedDataSource: JXSegmentedTitleDataSource = {
-        let segmentedDataSource = JXSegmentedTitleDataSource()
+    private lazy var segmentedDataSource: BBSegmentedTitleOrImageDataSource = {
+        let segmentedDataSource = BBSegmentedTitleOrImageDataSource()
         segmentedDataSource.isItemSpacingAverageEnabled = false
-        segmentedDataSource.itemSpacing = 30
-        segmentedDataSource.titleNormalFont = UIFont.systemFont(ofSize: 14)
-        segmentedDataSource.titleSelectedFont = UIFont.systemFont(ofSize: 15)
+        segmentedDataSource.itemSpacing = 36
+        segmentedDataSource.titleNormalFont = Font.appFont(ofSize: 15)
+        segmentedDataSource.titleSelectedFont = Font.appFont(ofSize: 17)
         return segmentedDataSource
     }()
 
+    private lazy var listContainerView: JXSegmentedListContainerView = {
+        JXSegmentedListContainerView(dataSource: self)
+    }()
 }
 
 // MARK: Delegate
+
 // MARK: JXSegmentedViewDelegate
 extension HomeMainViewController: JXSegmentedViewDelegate {
 
+    func segmentedView(_ segmentedView: JXSegmentedView, didSelectedItemAt index: Int) {
+        listContainerView.didClickSelectedItem(at: index)
+
+        guard let showImageInfos = segmentedDataSource.showImageInfos,
+              !showImageInfos.filter({ $0 != nil }).isEmpty
+        else { return }
+
+        if tabItems[index].extension != nil, !selecteExtension {
+           selecteExtension = true
+        } else {
+            if selecteExtension {
+                var temp: [String?] = []
+                for _ in tabItems {
+                    temp.append(nil)
+                }
+                segmentedDataSource.showImageInfos = temp
+                segmentedView.reloadData()
+            }
+        }
+    }
 }
 
-extension HomeMainViewController: LaunchAdDelegate {
+// MARK: JXSegmentedListContainerViewDataSource
+extension HomeMainViewController: JXSegmentedListContainerViewDataSource {
 
-    func launchAd(_ launchAd: LaunchAd, display imageView: UIImageView, forUrl url: String) {
-
-        imageView.setImage(with: URL(string: url))
+    func numberOfLists(in listContainerView: JXSegmentedListContainerView) -> Int {
+        return segmentedDataSource.titles.count
     }
 
+    func listContainerView(_ listContainerView: JXSegmentedListContainerView, initListAt index: Int) -> JXSegmentedListContainerViewListDelegate {
+        return HomeRecommendViewController()
+    }
 }
