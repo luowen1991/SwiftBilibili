@@ -33,7 +33,7 @@ final class HomeMainViewController: BaseViewController {
             .subscribe(onSuccess: {[weak self] (info) in
                 guard let self = self else { return }
                 let sortedItems = info.tab.sorted { (pre, next) -> Bool in
-                    pre.pos > next.pos
+                    pre.pos < next.pos
                 }
                 self.tabItems = sortedItems
                 let defaultSelectedIndex = sortedItems.compactMap { $0.defaultSelected }.first ?? 1
