@@ -34,9 +34,6 @@ public class LaunchAdConfig {
     /// 完成动画时间
     public var animationDuration: CGFloat = 0.8
 
-    /// 设置开屏广告的frame
-    public var adFrame: CGRect = .init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 100)
-
     /// 点击打开页面参数
     public var openModel: Any?
 
@@ -66,12 +63,6 @@ public class LaunchAdConfig {
 
     /// 是否静音
     public var isMuted: Bool = true
-
-    /// frame
-    public var skipButtonframe = CGRect(x: UIScreen.main.bounds.width - 70,y: UIScreen.main.bounds.height - 50, width: 60,height: 30)
-
-    /// 背景颜色 (跳过按钮)
-    public var backgroundColor = UIColor.white
 
     /// 文字
     public var text: String = "跳过"

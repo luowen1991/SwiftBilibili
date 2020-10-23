@@ -4,16 +4,14 @@
 //
 //  Created by luowen on 2020/9/4.
 //  Copyright © 2020 luowen. All rights reserved.
-//
+//  首页主控制器
 
 import UIKit
 import JXSegmentedView
 
-/// 首页主控制器
 final class HomeMainViewController: BaseViewController {
 
     private var tabItems: [HomeTabItemModel] = []
-    private var selecteExtension: Bool = false
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -22,24 +20,40 @@ final class HomeMainViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // 加载tab
+        LaunchAdManager.default.display()
         loadData()
+        retryRequest()
     }
 
     // MARK: Private Method
     private func loadData() {
-        ConfigAPI.tabList.request()
+
+//        ConfigAPI.tabList
+//            .onCacheObject(HomeTabInfoModel.self) { (_) in
+//
+//            }
+//            .requestObject()
+//            .subscribe { (info) in
+//
+//            }
+//            .disposed(by: disposeBag)
+
+        ConfigAPI.tabList
+            .cache
+            .request()
+            .trackError(NetErrorManager.default.errorIndictor)
             .mapObject(HomeTabInfoModel.self)
-            .subscribe(onSuccess: {[weak self] (info) in
+            .subscribe(onNext: { [weak self] (info) in
                 guard let self = self else { return }
-                let sortedItems = info.tab.sorted { (pre, next) -> Bool in
-                    pre.pos < next.pos
-                }
+                let sortedItems = info.tab.sorted { $0.pos < $1.pos }
                 self.tabItems = sortedItems
                 let defaultSelectedIndex = sortedItems.compactMap { $0.defaultSelected }.first ?? 1
-                self.segmentedDataSource.showImageInfos = sortedItems.map { $0.extension?.activeIcon }
-                self.segmentedDataSource.loadImageClosure = { (imageView, imageUrl) in
-                    imageView.setImage(with: URL(string: imageUrl))
+                if !UserDefaultsManager.app.activityTabIsClicked {
+                    UserDefaultsManager.activity.activityTabId = sortedItems.filter { $0.extension != nil }.first?.tabId ?? ""
+                    self.segmentedDataSource.showImageInfos = sortedItems.map { $0.extension?.activeIcon }
+                    self.segmentedDataSource.loadImageClosure = { (imageView, imageUrl) in
+                        imageView.setImage(with: URL(string: imageUrl))
+                    }
                 }
                 self.segmentedDataSource.titles = sortedItems.map { $0.name }
                 self.segmentedDataSource.reloadData(selectedIndex: defaultSelectedIndex)
@@ -47,8 +61,16 @@ final class HomeMainViewController: BaseViewController {
                 self.segmentedView.reloadData()
                 self.listContainerView.defaultSelectedIndex = defaultSelectedIndex
                 self.listContainerView.reloadData()
-                self.segmentedView.selectItemAt(index: defaultSelectedIndex)
             })
+            .disposed(by: disposeBag)
+    }
+
+    private func retryRequest() {
+        NetErrorManager.default.retrySubject
+            .subscribe {[weak self] (_) in
+                guard let self = self else { return }
+                self.loadData()
+            }
             .disposed(by: disposeBag)
     }
 
@@ -123,14 +145,12 @@ extension HomeMainViewController: JXSegmentedViewDelegate {
               !showImageInfos.filter({ $0 != nil }).isEmpty
         else { return }
 
-        if tabItems[index].extension != nil, !selecteExtension {
-           selecteExtension = true
+        if tabItems[index].extension != nil, !UserDefaultsManager.app.activityTabIsClicked {
+            UserDefaultsManager.app.activityTabIsClicked = true
         } else {
-            if selecteExtension {
+            if UserDefaultsManager.app.activityTabIsClicked {
                 var temp: [String?] = []
-                for _ in tabItems {
-                    temp.append(nil)
-                }
+                tabItems.forEach { _ in temp.append(nil) }
                 segmentedDataSource.showImageInfos = temp
                 segmentedView.reloadData()
             }
@@ -146,6 +166,22 @@ extension HomeMainViewController: JXSegmentedListContainerViewDataSource {
     }
 
     func listContainerView(_ listContainerView: JXSegmentedListContainerView, initListAt index: Int) -> JXSegmentedListContainerViewListDelegate {
-        return HomeRecommendViewController()
+
+        switch index {
+        case 0:
+            return HomeLiveViewController()
+        case 1:
+            return HomePromoViewController()
+        case 2:
+            return HomeHotViewController()
+        case 3:
+            return HomeBangumiViewController()
+        case 4:
+            return HomeActivityViewController()
+        case 5:
+            return HomeCinemaViewController()
+        default:
+            return HomeOptionalViewController()
+        }
     }
 }

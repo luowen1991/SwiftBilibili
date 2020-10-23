@@ -37,22 +37,22 @@ public class LaunchAd {
     private var window: UIWindow?
     private var config: LaunchAdConfig! {
         didSet {
-            switch config.adType {
-            case .image:
-                setupImageAd()
-            case .video:
-                setupVideoAd()
-            }
+            setupAd()
         }
     }
 
     @discardableResult
     public static func display(with config: LaunchAdConfig = LaunchAdConfig(),
-                               delegate: LaunchAdDelegate) -> LaunchAd {
+                               delegate: LaunchAdDelegate? = nil) -> LaunchAd {
         let launchAd = LaunchAd.default
-        launchAd.delegate = delegate
+        if launchAd.window == nil {
+            launchAd.setupLaunchAd()
+        }
         launchAd.config = config
-        delegate.launchAdWillDisplay(launchAd)
+        if let delegate = delegate {
+            launchAd.delegate = delegate
+            delegate.launchAdWillDisplay(launchAd)
+        }
         return launchAd
     }
 
@@ -61,15 +61,26 @@ public class LaunchAd {
     }
 
     private func setupLaunchAd() {
+        removeSubviews()
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = LaunchAdViewController()
-        window.rootViewController?.view.backgroundColor = .clear
+        window.rootViewController?.view.backgroundColor = .white
         window.rootViewController?.view.isUserInteractionEnabled = false
         window.windowLevel = .statusBar + 1
         window.isHidden = false
         window.alpha = 1
-        window.addSubview(LaunchAdBackgroundView())
+        window.addSubview(adBottomView)
+        adBottomView.frame = CGRect(x: 0, y: Screen.height-100-Screen.bottomSafeHeight, width: Screen.width, height: 100)
         self.window = window
+    }
+
+    private func setupAd() {
+        switch config.adType {
+        case .image:
+            setupImageAd()
+        case .video:
+            setupVideoAd()
+        }
     }
 
     /// 图片
@@ -81,9 +92,8 @@ public class LaunchAd {
             log.error("imageNameOrURLString or window miss")
             return
         }
-        removeSubviews()
         window.addSubview(adImageView)
-        adImageView.frame = config.adFrame
+        adImageView.frame = CGRect(x: 0, y: 0, width: Screen.width, height: adBottomView.frame.minY)
         adImageView.contentMode = config.contentMode
         // 网络图片
         if isNetUrl(imageNameOrURLString) {
@@ -106,9 +116,8 @@ public class LaunchAd {
             log.error("videoNameOrURLString or window miss")
             return
         }
-        removeSubviews()
         window.addSubview(adVideoView)
-        adVideoView.frame = config.adFrame
+        adVideoView.frame = CGRect(x: 0, y: 0, width: Screen.width, height: adBottomView.frame.minY)
         adVideoView.videoGravity = config.videoGravity
         adVideoView.isMuted = config.isMuted
         if isNetUrl(videoNameOrURLString) {
@@ -121,7 +130,7 @@ public class LaunchAd {
     }
 
     private func removeSubviews() {
-        window?.subviews.filter { !($0 is LaunchAdBackgroundView) }.forEach {
+        window?.subviews.forEach {
             $0.removeFromSuperview()
         }
     }
@@ -131,22 +140,25 @@ public class LaunchAd {
         if let customSkipView = config.customSkipView {
             window?.addSubview(customSkipView)
         } else {
-            if skipButton == nil {
-                skipButton = LaunchAdSkipButton(config: config)
-                skipButton?.addTarget(self, action: #selector(skipButtonClick), for: .touchUpInside)
+            duration = config.duration
+            skipButton.updateRemainTime(duration)
+            window?.addSubview(skipButton)
+            skipButton.snp.makeConstraints {
+                $0.centerY.equalTo(adBottomView)
+                $0.width.equalTo(64)
+                $0.height.equalTo(30)
+                $0.right.equalTo(-20)
             }
-            window?.addSubview(skipButton!)
         }
     }
 
     private func startCountDown() {
-        duration = config.duration
         if timer == nil {
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {[weak self] (_) in
                 guard let self = self else { return }
                 self.duration -= 1
                 if self.config.customSkipView == nil {
-                    self.skipButton?.updateRemainTime(self.duration)
+                    self.skipButton.updateRemainTime(self.duration)
                 }
                 if self.duration == 0 {
                     self.clearTimer()
@@ -181,8 +193,6 @@ public class LaunchAd {
     }
 
     private func remove() {
-        skipButton?.removeFromSuperview()
-        skipButton = nil
         if config.adType == .video {
             adVideoView.stop()
         }
@@ -193,14 +203,12 @@ public class LaunchAd {
     }
 
     @objc private func skipButtonClick() {
-        delegate?.launchAd(self, didSelect: skipButton!)
+        delegate?.launchAd(self, didSelect: skipButton)
     }
 
     private func isNetUrl(_ url: String) -> Bool {
        return url.hasPrefix("http") || url.hasPrefix("https")
     }
-
-    private var skipButton: LaunchAdSkipButton?
 
     private lazy var adImageView: UIImageView = {
         let adImageView = UIImageView()
@@ -211,4 +219,15 @@ public class LaunchAd {
     private lazy var adVideoView: LaunchAdVideoView = {
         LaunchAdVideoView()
     }()
+
+    private lazy var adBottomView: LaunchAdBottomView = {
+        LaunchAdBottomView()
+    }()
+
+    private lazy var skipButton: LaunchAdSkipButton = {
+        let skipButton = LaunchAdSkipButton(config: config)
+        skipButton.addTarget(self, action: #selector(skipButtonClick), for: .touchUpInside)
+        return skipButton
+    }()
+
 }

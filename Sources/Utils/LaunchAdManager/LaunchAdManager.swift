@@ -30,11 +30,11 @@ class LaunchAdManager {
 
     func display() {
         // 显示广告
-        let showTime = UserDefaultsManager.app.adShowTime
-        let minInterval = UserDefaultsManager.app.adMinInterval
+        let showTime = UserDefaultsManager.splash.adShowTime
+        let minInterval = UserDefaultsManager.splash.adMinInterval
         if let cacheAdItem = AdCacheManager.default.cachedShowItem(),
            Utils.currentAppTime() - showTime >= minInterval {
-            UserDefaultsManager.app.adShowTime = Utils.currentAppTime()
+            UserDefaultsManager.splash.adShowTime = Utils.currentAppTime()
             let config = LaunchAdConfig()
             config.duration = cacheAdItem.duration
             config.adType = cacheAdItem.videoUrl == nil ? .image : .video
@@ -43,16 +43,15 @@ class LaunchAdManager {
             LaunchAd.display(with: config, delegate: self)
         }
         // 加载广告
-        let loadTime = UserDefaultsManager.app.adLoadTime
-        let pullInterval = UserDefaultsManager.app.adPullInterval
-        let currentNetStatue = NetStatusManager.default.reachabilityConnection.value
-        if Utils.currentAppTime() - loadTime >= pullInterval && currentNetStatue == .wifi {
+        let loadTime = UserDefaultsManager.splash.adLoadTime
+        let pullInterval = UserDefaultsManager.splash.adPullInterval
+        if Utils.currentAppTime() - loadTime >= pullInterval {
             ConfigAPI.adList.request()
                 .mapObject(AdInfoModel.self)
                 .subscribe(onSuccess: { (adInfo) in
-                    UserDefaultsManager.app.adPullInterval = adInfo.pullInterval
-                    UserDefaultsManager.app.adMinInterval = adInfo.minInterval
-                    UserDefaultsManager.app.adLoadTime = Utils.currentAppTime()
+                    UserDefaultsManager.splash.adPullInterval = adInfo.pullInterval
+                    UserDefaultsManager.splash.adMinInterval = adInfo.minInterval
+                    UserDefaultsManager.splash.adLoadTime = Utils.currentAppTime()
                     AdCacheManager.default.storeAdData(adInfo)
                 })
                 .disposed(by: disposeBag)
@@ -61,16 +60,16 @@ class LaunchAdManager {
 
     func loadSplashInfo() {
 
-        let loadTime = UserDefaultsManager.app.splashLoadTime
-        let pullInterval = UserDefaultsManager.app.splashPullInterval
+        let loadTime = UserDefaultsManager.splash.splashLoadTime
+        let pullInterval = UserDefaultsManager.splash.splashPullInterval
 
         if Utils.currentAppTime() - loadTime >= pullInterval {
             ConfigAPI.splashList
                 .request()
                 .mapObject(SplashInfoModel.self)
                 .subscribe(onSuccess: { (splashInfo) in
-                    UserDefaultsManager.app.splashLoadTime = Utils.currentAppTime()
-                    UserDefaultsManager.app.splashPullInterval = splashInfo.pullInterval
+                    UserDefaultsManager.splash.splashLoadTime = Utils.currentAppTime()
+                    UserDefaultsManager.splash.splashPullInterval = splashInfo.pullInterval
                     SplashCacheManager.default.storeSplashData(splashInfo)
                 })
                 .disposed(by: disposeBag)

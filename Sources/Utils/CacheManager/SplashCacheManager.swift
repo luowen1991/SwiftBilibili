@@ -129,6 +129,7 @@ struct SplashCacheManager {
         showItem.logoUrl = itemInfo.logoUrl
         showItem.thumb = itemInfo.thumb
         showItem.duration = showInfo.duration
+        showItem.mode = itemInfo.mode.rawValue
         RealmManager.default.add(showItem)
     }
 }

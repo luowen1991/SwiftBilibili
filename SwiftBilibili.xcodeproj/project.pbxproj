@@ -36,7 +36,7 @@
 		65007C0525025493009FCF1E /* HexColorTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65007C0425025493009FCF1E /* HexColorTransform.swift */; };
 		65207AB325207F41000E05A3 /* Auto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65207AB225207F41000E05A3 /* Auto.swift */; };
 		65207AB625207F77000E05A3 /* Inch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65207AB525207F77000E05A3 /* Inch.swift */; };
-		65207AB925208864000E05A3 /* LaunchAdBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65207AB825208864000E05A3 /* LaunchAdBackgroundView.swift */; };
+		65207AB925208864000E05A3 /* LaunchAdBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65207AB825208864000E05A3 /* LaunchAdBottomView.swift */; };
 		65207ABC252099D6000E05A3 /* LaunchAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65207ABB252099D6000E05A3 /* LaunchAd.swift */; };
 		6544A1BE253DA13800EB7664 /* BBSegmentedTitleOrImageDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6544A1BD253DA13800EB7664 /* BBSegmentedTitleOrImageDataSource.swift */; };
 		6544A1C1253DA1B300EB7664 /* BBSegmentedTitleIOrImagetemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6544A1C0253DA1B300EB7664 /* BBSegmentedTitleIOrImagetemModel.swift */; };
@@ -75,6 +75,11 @@
 		6571E5BE25209B50005123AD /* LaunchAdConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6571E5BD25209B50005123AD /* LaunchAdConfig.swift */; };
 		6571E5C12520A4CF005123AD /* LaunchAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6571E5C02520A4CF005123AD /* LaunchAdViewController.swift */; };
 		6571E5C42520A528005123AD /* LaunchAdVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6571E5C32520A528005123AD /* LaunchAdVideoView.swift */; };
+		65860B8B2541211100195A3B /* HomeActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65860B8A2541211100195A3B /* HomeActivityViewController.swift */; };
+		65860B8E254122E800195A3B /* HomeHotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65860B8D254122E800195A3B /* HomeHotViewController.swift */; };
+		65860B912541230F00195A3B /* HomeOptionalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65860B902541230F00195A3B /* HomeOptionalViewController.swift */; };
+		65860B942541242F00195A3B /* HomeCinemaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65860B932541242F00195A3B /* HomeCinemaViewController.swift */; };
+		65860B982541281900195A3B /* DefaultLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65860B972541281900195A3B /* DefaultLoadingView.swift */; };
 		658A287C251DCDBD009D04A8 /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658A287B251DCDBD009D04A8 /* HomeAPI.swift */; };
 		658D285B2536A63500C9FD69 /* HomeLiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D285A2536A63500C9FD69 /* HomeLiveViewController.swift */; };
 		658D285E2536A77C00C9FD69 /* HomeBangumiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D285D2536A77C00C9FD69 /* HomeBangumiViewController.swift */; };
@@ -96,7 +101,7 @@
 		E000E8722504D054004EA1DA /* SplashInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E000E8712504D054004EA1DA /* SplashInfoModel.swift */; };
 		E000E8742504D6EB004EA1DA /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = E000E8732504D6EB004EA1DA /* Network.swift */; };
 		E000E8772504D850004EA1DA /* RequestParamsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E000E8762504D850004EA1DA /* RequestParamsManager.swift */; };
-		E0848C062502838C004F1E64 /* HomeRecommendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0848C052502838C004F1E64 /* HomeRecommendViewController.swift */; };
+		E0848C062502838C004F1E64 /* HomePromoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0848C052502838C004F1E64 /* HomePromoViewController.swift */; };
 		E0848C0925029443004F1E64 /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0848C0825029443004F1E64 /* ToastManager.swift */; };
 		E0AD61952503A3830099F00D /* ConfigAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AD61942503A3830099F00D /* ConfigAPI.swift */; };
 		F4681A59F420D4535A1E433C /* Pods_SwiftBilibili.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E0B08C7672E20DC98C42FE9 /* Pods_SwiftBilibili.framework */; };
@@ -133,7 +138,7 @@
 		65007C0425025493009FCF1E /* HexColorTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColorTransform.swift; sourceTree = "<group>"; };
 		65207AB225207F41000E05A3 /* Auto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auto.swift; sourceTree = "<group>"; };
 		65207AB525207F77000E05A3 /* Inch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inch.swift; sourceTree = "<group>"; };
-		65207AB825208864000E05A3 /* LaunchAdBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAdBackgroundView.swift; sourceTree = "<group>"; };
+		65207AB825208864000E05A3 /* LaunchAdBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAdBottomView.swift; sourceTree = "<group>"; };
 		65207ABB252099D6000E05A3 /* LaunchAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAd.swift; sourceTree = "<group>"; };
 		6544A1BD253DA13800EB7664 /* BBSegmentedTitleOrImageDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBSegmentedTitleOrImageDataSource.swift; sourceTree = "<group>"; };
 		6544A1C0253DA1B300EB7664 /* BBSegmentedTitleIOrImagetemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBSegmentedTitleIOrImagetemModel.swift; sourceTree = "<group>"; };
@@ -172,6 +177,11 @@
 		6571E5BD25209B50005123AD /* LaunchAdConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAdConfig.swift; sourceTree = "<group>"; };
 		6571E5C02520A4CF005123AD /* LaunchAdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAdViewController.swift; sourceTree = "<group>"; };
 		6571E5C32520A528005123AD /* LaunchAdVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAdVideoView.swift; sourceTree = "<group>"; };
+		65860B8A2541211100195A3B /* HomeActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeActivityViewController.swift; sourceTree = "<group>"; };
+		65860B8D254122E800195A3B /* HomeHotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHotViewController.swift; sourceTree = "<group>"; };
+		65860B902541230F00195A3B /* HomeOptionalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOptionalViewController.swift; sourceTree = "<group>"; };
+		65860B932541242F00195A3B /* HomeCinemaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCinemaViewController.swift; sourceTree = "<group>"; };
+		65860B972541281900195A3B /* DefaultLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLoadingView.swift; sourceTree = "<group>"; };
 		658A287B251DCDBD009D04A8 /* HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
 		658D285A2536A63500C9FD69 /* HomeLiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeLiveViewController.swift; sourceTree = "<group>"; };
 		658D285D2536A77C00C9FD69 /* HomeBangumiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBangumiViewController.swift; sourceTree = "<group>"; };
@@ -197,7 +207,7 @@
 		E000E8712504D054004EA1DA /* SplashInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashInfoModel.swift; sourceTree = "<group>"; };
 		E000E8732504D6EB004EA1DA /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		E000E8762504D850004EA1DA /* RequestParamsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestParamsManager.swift; sourceTree = "<group>"; };
-		E0848C052502838C004F1E64 /* HomeRecommendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRecommendViewController.swift; sourceTree = "<group>"; };
+		E0848C052502838C004F1E64 /* HomePromoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePromoViewController.swift; sourceTree = "<group>"; };
 		E0848C0825029443004F1E64 /* ToastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastManager.swift; sourceTree = "<group>"; };
 		E0AD61942503A3830099F00D /* ConfigAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -228,7 +238,6 @@
 			children = (
 				65F6024624FF3F2B00D889BC /* AppDelegate.swift */,
 				65007BB225022019009FCF1E /* CompositionRoot.swift */,
-				658D289A2536D18600C9FD69 /* Web */,
 				659CFCEE250603C100787D3A /* Logger */,
 				E000E87A2504ED00004EA1DA /* Services */,
 				65007BE62502290D009FCF1E /* Const */,
@@ -260,6 +269,7 @@
 		65007BAF25021F55009FCF1E /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				65860B96254127DA00195A3B /* LoadingView */,
 				654917B02519F8AF00F05B0F /* PrivacyPolicyAlert */,
 				65459CE32511DFBA00A62E8D /* NoConnectionView */,
 				65A3F95E250F9F9200E77B8A /* LaunchAd */,
@@ -345,6 +355,7 @@
 		65007BBE25022309009FCF1E /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				654917B52519FAF500F05B0F /* BBWebViewController.swift */,
 				65007BBF25022348009FCF1E /* BBTabBarController.swift */,
 				65007BC32502245F009FCF1E /* BBNavigationController.swift */,
 				65007BC125022367009FCF1E /* BaseViewController.swift */,
@@ -593,20 +604,20 @@
 			path = LaunchAdManager;
 			sourceTree = "<group>";
 		};
+		65860B96254127DA00195A3B /* LoadingView */ = {
+			isa = PBXGroup;
+			children = (
+				65860B972541281900195A3B /* DefaultLoadingView.swift */,
+			);
+			path = LoadingView;
+			sourceTree = "<group>";
+		};
 		658D28602536AA4900C9FD69 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				658D28612536AA7400C9FD69 /* HomeTabModel.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		658D289A2536D18600C9FD69 /* Web */ = {
-			isa = PBXGroup;
-			children = (
-				654917B52519FAF500F05B0F /* BBWebViewController.swift */,
-			);
-			path = Web;
 			sourceTree = "<group>";
 		};
 		659CFCEE250603C100787D3A /* Logger */ = {
@@ -636,7 +647,7 @@
 		65A3F95E250F9F9200E77B8A /* LaunchAd */ = {
 			isa = PBXGroup;
 			children = (
-				65207AB825208864000E05A3 /* LaunchAdBackgroundView.swift */,
+				65207AB825208864000E05A3 /* LaunchAdBottomView.swift */,
 				6571E5C32520A528005123AD /* LaunchAdVideoView.swift */,
 				65207ABB252099D6000E05A3 /* LaunchAd.swift */,
 				6571E5BD25209B50005123AD /* LaunchAdConfig.swift */,
@@ -714,9 +725,13 @@
 			isa = PBXGroup;
 			children = (
 				65007BDC250227C2009FCF1E /* HomeMainViewController.swift */,
-				E0848C052502838C004F1E64 /* HomeRecommendViewController.swift */,
+				E0848C052502838C004F1E64 /* HomePromoViewController.swift */,
 				658D285A2536A63500C9FD69 /* HomeLiveViewController.swift */,
 				658D285D2536A77C00C9FD69 /* HomeBangumiViewController.swift */,
+				65860B8A2541211100195A3B /* HomeActivityViewController.swift */,
+				65860B8D254122E800195A3B /* HomeHotViewController.swift */,
+				65860B902541230F00195A3B /* HomeOptionalViewController.swift */,
+				65860B932541242F00195A3B /* HomeCinemaViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -878,6 +893,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65860B912541230F00195A3B /* HomeOptionalViewController.swift in Sources */,
 				65007BFB2502499B009FCF1E /* ThemeManager.swift in Sources */,
 				65007BF5250242EB009FCF1E /* ThemeModel.swift in Sources */,
 				6554E9B2251C81C800DAEB25 /* Font.swift in Sources */,
@@ -902,14 +918,17 @@
 				6568BE6C2521AEA90093EF03 /* LaunchAdSkipButton.swift in Sources */,
 				65482D9A251082E50020D18A /* Configuration.swift in Sources */,
 				65007BEB25022DB8009FCF1E /* SplashViewController.swift in Sources */,
+				65860B8B2541211100195A3B /* HomeActivityViewController.swift in Sources */,
 				654A749A250B443D00B3F91A /* UIImageView+Kingfisher.swift in Sources */,
 				65D39A232518D40D00B1C12E /* NetworkLoggerPlugin.swift in Sources */,
 				65482DAF2510E6050020D18A /* Storable.swift in Sources */,
+				65860B982541281900195A3B /* DefaultLoadingView.swift in Sources */,
 				65007BCF25022578009FCF1E /* UIViewController+ManualLayout.swift in Sources */,
 				65482DB12510E6700020D18A /* CachingKey+Moya.swift in Sources */,
 				65459CE02511B38500A62E8D /* Network+Cache.swift in Sources */,
 				65007C0225025188009FCF1E /* UIColor+Hex.swift in Sources */,
 				E000E8772504D850004EA1DA /* RequestParamsManager.swift in Sources */,
+				65860B942541242F00195A3B /* HomeCinemaViewController.swift in Sources */,
 				65D399A625186F7700B1C12E /* Observable+ObjectMapper.swift in Sources */,
 				6571E5BE25209B50005123AD /* LaunchAdConfig.swift in Sources */,
 				658D285B2536A63500C9FD69 /* HomeLiveViewController.swift in Sources */,
@@ -920,10 +939,10 @@
 				65459CE62511E1CD00A62E8D /* MapAt.swift in Sources */,
 				654917B22519F91200F05B0F /* PrivacyPolicyAlertView.swift in Sources */,
 				65918A6C25233879007A0433 /* Utils.swift in Sources */,
-				E0848C062502838C004F1E64 /* HomeRecommendViewController.swift in Sources */,
+				E0848C062502838C004F1E64 /* HomePromoViewController.swift in Sources */,
 				65459CEB251204A600A62E8D /* NoConnectionView.swift in Sources */,
 				658D28622536AA7400C9FD69 /* HomeTabModel.swift in Sources */,
-				65207AB925208864000E05A3 /* LaunchAdBackgroundView.swift in Sources */,
+				65207AB925208864000E05A3 /* LaunchAdBottomView.swift in Sources */,
 				65007BD125022578009FCF1E /* CGRect+ManualLayout.swift in Sources */,
 				658A287C251DCDBD009D04A8 /* HomeAPI.swift in Sources */,
 				65482DA92510E58D0020D18A /* Expirable.swift in Sources */,
@@ -950,6 +969,7 @@
 				65207AB325207F41000E05A3 /* Auto.swift in Sources */,
 				65459CDE2511B2B000A62E8D /* Observable+Cache.swift in Sources */,
 				65A3F960250F9FB700E77B8A /* AdInfoModel.swift in Sources */,
+				65860B8E254122E800195A3B /* HomeHotViewController.swift in Sources */,
 				65007BC025022348009FCF1E /* BBTabBarController.swift in Sources */,
 				659CFCF02506041100787D3A /* Logger.swift in Sources */,
 				65007BF72502431F009FCF1E /* Theme.swift in Sources */,

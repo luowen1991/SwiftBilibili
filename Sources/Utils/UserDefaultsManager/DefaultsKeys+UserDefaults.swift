@@ -13,7 +13,7 @@ extension DefaultsKeys {
     var themeStyle: DefaultsKey<ThemeStyle> { .init("themeStyle", defaultValue: .pink) }
 }
 
-// MARK: App
+// MARK: Splash
 extension DefaultsKeys {
     var agreePolicy: DefaultsKey<Bool> { .init("agreePolicy", defaultValue: false) }
 
@@ -24,4 +24,10 @@ extension DefaultsKeys {
     var adLoadTime: DefaultsKey<Double> { .init("adLoadTime", defaultValue: 0) }
     var adPullInterval: DefaultsKey<Double> { .init("adPullInterval", defaultValue: 0) }
     var adMinInterval: DefaultsKey<Double> { .init("adMinInterval", defaultValue: 0) }
+}
+
+// MARK: - App
+extension DefaultsKeys {
+    var activityTabId: DefaultsKey<String> { .init("activityTabId", defaultValue: "") }
+    var activityTabIsClicked: DefaultsKey<Bool> { .init(UserDefaultsManager.activity.activityTabId, defaultValue: false) }
 }

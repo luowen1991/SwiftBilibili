@@ -58,7 +58,6 @@ final class CompositionRoot {
 
     static func startNetworkStatusNotifier() {
         NetStatusManager.default.startNetworkStatusNotifier()
-
     }
 
     static func setupRootViewController(_ window: UIWindow) {
@@ -77,7 +76,7 @@ final class CompositionRoot {
 
     static func setupAppConfig() {
 
-        // 设置网络偏好设置
+        // 网络偏好设置
         // 添加全局默认参数
         Network.Configuration.default.replacingTask = { target in
             switch target.task {

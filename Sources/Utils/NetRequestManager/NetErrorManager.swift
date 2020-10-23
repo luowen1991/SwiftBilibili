@@ -14,11 +14,11 @@ class NetErrorManager {
 
     static var `default` = NetErrorManager()
 
-    var disposeBag = DisposeBag()
-
     let errorIndictor = ErrorTracker()
 
     let retrySubject = PublishSubject<Void>()
+
+    private var disposeBag = DisposeBag()
 
     init() {
 
@@ -34,7 +34,7 @@ class NetErrorManager {
                     }
                 case .responseException(.unacceptableStatusCode(let code)):
                     // 在这里处理401等错误 code == 401
-                    debugPrint(code)
+                    log.debug(code)
                 default:
                     log.error(error.errorDescription ?? "没有错误描述")
                 }
@@ -55,10 +55,6 @@ class NetErrorManager {
         }
 
         view.retrySubject
-            .flatMapLatest({ (_) -> Observable<Void> in
-                view.removeFromSuperview()
-                return .just(())
-            })
             .bind(to: retrySubject)
             .disposed(by: disposeBag)
     }

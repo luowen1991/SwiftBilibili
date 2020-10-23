@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,18 +18,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launcher_logo_2020" translatesAutoresizingMaskIntoConstraints="NO" id="hbO-v2-A1V">
-                                <rect key="frame" x="0.0" y="802" width="414" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="KTR-Wi-sqV"/>
-                                </constraints>
+                                <rect key="frame" x="147" y="782" width="120" height="60"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="hbO-v2-A1V" secondAttribute="trailing" id="M16-DH-gEX"/>
-                            <constraint firstAttribute="bottom" secondItem="hbO-v2-A1V" secondAttribute="bottom" constant="34" id="RkB-Wd-IYC"/>
-                            <constraint firstItem="hbO-v2-A1V" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="chu-nW-pdc"/>
+                            <constraint firstItem="hbO-v2-A1V" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="PUk-ux-4XA"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="hbO-v2-A1V" secondAttribute="bottom" constant="20" id="RkB-Wd-IYC"/>
                         </constraints>
                     </view>
                 </viewController>

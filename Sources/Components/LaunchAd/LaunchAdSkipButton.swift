@@ -15,9 +15,9 @@ public class LaunchAdSkipButton: UIButton {
     init(config: LaunchAdConfig = LaunchAdConfig()) {
 
         self.config = config
-        super.init(frame: config.skipButtonframe)
+        super.init(frame: .zero)
 
-        backgroundColor = config.backgroundColor
+        backgroundColor = .clear
         updateRemainTime(config.duration)
     }
 

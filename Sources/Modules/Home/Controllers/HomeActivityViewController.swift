@@ -1,27 +1,25 @@
 //
-//  HomeLiveViewController.swift
+//  HomeActivityViewController.swift
 //  SwiftBilibili
 //
-//  Created by luowen on 2020/10/14.
+//  Created by luowen on 2020/10/22.
 //  Copyright © 2020 luowen. All rights reserved.
-//  直播控制器
+//  活动控制器
 
 import UIKit
 import JXSegmentedView
 
-final class HomeLiveViewController: BaseViewController {
+final class HomeActivityViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.blue
     }
 
     override func setupUI() {}
 }
 
-extension HomeLiveViewController: JXSegmentedListContainerViewListDelegate {
-
+extension HomeActivityViewController: JXSegmentedListContainerViewListDelegate {
     func listView() -> UIView {
         return self.view
     }

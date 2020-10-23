@@ -22,7 +22,7 @@ struct NetStatusManager {
         Reachability()
     }()
 
-    let reachabilityConnection = BehaviorRelay(value: Reachability.Connection.cellular)
+    let reachabilityConnection = BehaviorRelay(value: Reachability.Connection.none)
 
     func startNetworkStatusNotifier() {
 

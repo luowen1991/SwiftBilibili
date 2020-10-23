@@ -74,7 +74,7 @@ class AdCacheManager {
 
     private func downloadVideo(_ itemInfo: AdItemModel) {
         guard let videoUrl = itemInfo.videoUrl,
-              adSessionManager.cache.filePath(url: videoUrl) == nil
+              cachedFileURL(url: videoUrl) == nil
         else { return }
         adSessionManager.download(videoUrl)?
             .success(handler: { (downloadTask) in

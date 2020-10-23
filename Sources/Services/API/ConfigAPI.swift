@@ -20,7 +20,7 @@ enum ConfigAPI {
     case tabList
 }
 
-extension ConfigAPI: TargetType {
+extension ConfigAPI: TargetType, Cacheable {
 
     var baseURL: URL {
         return URL(string: "http://app.bilibili.com")!

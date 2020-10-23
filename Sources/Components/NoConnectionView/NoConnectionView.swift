@@ -51,6 +51,7 @@ final class NoConnectionView: BaseView {
 
     override func setupEvents() {
         retryButton.rx.tap
+            .map {[unowned self] _ in self.removeFromSuperview()}
             .bind(to: retrySubject)
             .disposed(by: disposeBag)
     }

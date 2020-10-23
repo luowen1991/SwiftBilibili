@@ -48,6 +48,12 @@ public class ErrorTracker: SharedSequenceConvertibleType {
 }
 
 extension ObservableConvertibleType {
+    public func trackError(_ errorTracker: ErrorTracker) -> Observable<Element> {
+        return errorTracker.trackError(from: self)
+    }
+}
+
+extension PrimitiveSequence {
     public func trackError(_ errorTracker: ErrorTracker) -> Single<Element> {
         return errorTracker.trackError(from: self).asSingle()
     }

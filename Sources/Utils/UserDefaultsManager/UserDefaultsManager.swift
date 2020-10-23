@@ -16,7 +16,7 @@ struct UserDefaultsManager {
         var style: ThemeStyle
     }
 
-    struct App {
+    struct Splash {
         /// 是否同意隐私协议
         @SwiftyUserDefault(keyPath: \.agreePolicy)
         var agreePolicy: Bool
@@ -39,8 +39,23 @@ struct UserDefaultsManager {
         /// 开屏加载的时间 s作为单位
         @SwiftyUserDefault(keyPath: \.splashLoadTime)
         var splashLoadTime: Double
+
+    }
+
+    struct Activity {
+        /// 首页活动标签Id
+        @SwiftyUserDefault(keyPath: \.activityTabId)
+        var activityTabId: String
+    }
+
+    struct App {
+        /// 首页活动标签是否点击
+        @SwiftyUserDefault(keyPath: \.activityTabIsClicked)
+        var activityTabIsClicked: Bool
     }
 
     static var theme = Theme()
+    static var splash = Splash()
+    static var activity = Activity()
     static var app = App()
 }

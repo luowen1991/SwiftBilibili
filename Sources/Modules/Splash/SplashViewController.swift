@@ -47,14 +47,10 @@ final class SplashViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        UserDefaultsManager.app.agreePolicy ?
+        UserDefaultsManager.splash.agreePolicy ?
             loadOrShowContentImage() :
             presentPrivacyAlert()
 
@@ -66,7 +62,7 @@ final class SplashViewController: BaseViewController {
         let view = PrivacyPolicyAlertView()
         view.agreeSubject
             .subscribe {[unowned self] (_) in
-                UserDefaultsManager.app.agreePolicy = true
+                UserDefaultsManager.splash.agreePolicy = true
                 SwiftEntryKit.dismiss()
                 self.startRequest()
             }
@@ -78,15 +74,12 @@ final class SplashViewController: BaseViewController {
 
         SplashCacheManager.default.cachedImage(.content) {[weak self] (image, duration) in
             guard let self = self else { return }
-            if let image = image {
-                self.contentImageView.image = image
-                self.setupConstraints()
-                self.hidden(duration)
-            }
+            self.contentImageView.image = image ?? Image.Launch.content
+            self.setupConstraints()
+            self.hidden(duration)
         }
 
         NetStatusManager.default.reachabilityConnection
-            .skip(1)
             .subscribe(onNext: {[weak self] (connection) in
                 guard let self = self,
                       connection != .none
@@ -98,8 +91,8 @@ final class SplashViewController: BaseViewController {
 
     private func startRequest() {
 
-        let loadTime = UserDefaultsManager.app.splashLoadTime
-        let pullInterval = UserDefaultsManager.app.splashPullInterval
+        let loadTime = UserDefaultsManager.splash.splashLoadTime
+        let pullInterval = UserDefaultsManager.splash.splashPullInterval
         let currentTime = Utils.currentAppTime()
 
         if currentTime - loadTime >= pullInterval {
@@ -109,8 +102,8 @@ final class SplashViewController: BaseViewController {
                 .trackError(NetErrorManager.default.errorIndictor)
                 .subscribe(onSuccess: {[weak self] (splashInfo) in
                     guard let self = self else { return }
-                    UserDefaultsManager.app.splashLoadTime = Utils.currentAppTime()
-                    UserDefaultsManager.app.splashPullInterval = splashInfo.pullInterval
+                    UserDefaultsManager.splash.splashLoadTime = Utils.currentAppTime()
+                    UserDefaultsManager.splash.splashPullInterval = splashInfo.pullInterval
                     if self.contentImageView.image == nil {
                         self.contentImageView.image = Image.Launch.content
                         self.hidden(700)
@@ -133,8 +126,6 @@ final class SplashViewController: BaseViewController {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+duration/1000) {[weak self] in
             guard let self = self else { return }
             self.presentMainScreen()
-            // 显示广告
-            LaunchAdManager.default.display()
         }
     }
 
@@ -146,12 +137,11 @@ final class SplashViewController: BaseViewController {
     override func setupConstraints() {
 
         logoImageView.snp.makeConstraints {
-            $0.left.right.equalToSuperview()
-            $0.height.equalTo(60)
+            $0.centerX.equalToSuperview()
             if #available(iOS 11.0, *) {
-                $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+                $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
             } else {
-                $0.bottom.equalToSuperview()
+                $0.bottom.equalToSuperview().offset(-20)
             }
         }
 
