@@ -53,7 +53,7 @@ final class BBWebViewController: BaseViewController {
 
         if !self.showNavBar { return }
 
-        let backItem = UIBarButtonItem(image: Image.Common.back, style: .plain, target: nil, action: nil)
+        let backItem = UIBarButtonItem(image: Image.Common.whiteBack, style: .plain, target: nil, action: nil)
         let closeItem = UIBarButtonItem(title: "关闭", style: .plain, target: nil, action: nil)
 
         self.navigation.item.leftBarButtonItems = [backItem, closeItem]

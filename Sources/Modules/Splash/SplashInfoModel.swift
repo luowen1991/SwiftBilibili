@@ -15,6 +15,11 @@ enum SplashShowType: String {
     case full = "full"
 }
 
+enum SplashLogoPosition: String {
+    case center = "center"
+    case left = "left"
+}
+
 class SplashInfoModel: Mappable {
 
     var pullInterval: Double = 1800
@@ -56,6 +61,7 @@ class SplashShowModel: Mappable {
     var beginTime: Double = 0
     var endTime: Double = 0
     var duration: Int = 700
+    var logoPosition: SplashLogoPosition = .center
 
     required convenience init?(map: Map) {
         self.init()
@@ -66,6 +72,7 @@ class SplashShowModel: Mappable {
         beginTime <- map["begin_time"]
         endTime <- map["end_time"]
         duration <- map["duration"]
+        logoPosition <- map["logo_position"]
     }
 }
 
@@ -78,6 +85,7 @@ class SplashShowRealmModel: Object {
     @objc dynamic var isShow: Bool = false
     @objc dynamic var duration: Int = 700
     @objc dynamic var mode: String = ""
+    @objc dynamic var logoPosition: String = ""
 
     override class func primaryKey() -> String? {
         return "id"

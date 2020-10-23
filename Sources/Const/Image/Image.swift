@@ -33,6 +33,7 @@ struct Image {
     }
 
     struct Common {
-        static let back = UIImage(named: "column_back_white_8x14_")
+        static let whiteBack = UIImage(named: "column_back_white_8x14_")
+        static let whiteArrow = UIImage(named: "arrow_right_white_24x24_")
     }
 }

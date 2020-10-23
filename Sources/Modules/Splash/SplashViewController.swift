@@ -72,10 +72,27 @@ final class SplashViewController: BaseViewController {
 
     private func loadOrShowContentImage() {
 
-        SplashCacheManager.default.cachedImage(.content) {[weak self] (image, duration) in
+        SplashCacheManager.default.cachedImage(.logo) {[weak self] (image,logoPosition,_, _) in
+            guard let self = self else { return }
+            self.logoImageView.image = image ?? Image.Launch.logo
+            if logoPosition == .left {
+                self.logoImageView.snp.updateConstraints {
+                    $0.centerX.equalToSuperview().offset(-120.auto())
+                }
+            }
+        }
+        SplashCacheManager.default.cachedImage(.content) {[weak self] (image,_,showType,duration) in
             guard let self = self else { return }
             self.contentImageView.image = image ?? Image.Launch.content
-            self.setupConstraints()
+            if showType == .full {
+                self.contentImageView.snp.remakeConstraints {
+                    $0.edges.equalToSuperview()
+                }
+            } else {
+                self.contentImageView.snp.updateConstraints {
+                    $0.size.equalTo(self.contentImageSize())
+                }
+            }
             self.hidden(duration)
         }
 
@@ -106,6 +123,9 @@ final class SplashViewController: BaseViewController {
                     UserDefaultsManager.splash.splashPullInterval = splashInfo.pullInterval
                     if self.contentImageView.image == nil {
                         self.contentImageView.image = Image.Launch.content
+                        self.contentImageView.snp.updateConstraints {
+                            $0.size.equalTo(self.contentImageSize())
+                        }
                         self.hidden(700)
                     }
                     SplashCacheManager.default.storeSplashData(splashInfo)
@@ -129,6 +149,17 @@ final class SplashViewController: BaseViewController {
         }
     }
 
+    private func contentImageSize() -> CGSize {
+
+        guard let image = contentImageView.image else {
+            return .zero
+        }
+        let scale = image.size.height / image.size.width
+        let width = Screen.width
+        let height = width * scale
+        return CGSize(width: width, height: height)
+    }
+
     override func setupUI() {
         view.addSubview(contentImageView)
         view.addSubview(logoImageView)
@@ -136,8 +167,9 @@ final class SplashViewController: BaseViewController {
 
     override func setupConstraints() {
 
-        logoImageView.snp.makeConstraints {
+        logoImageView.snp.remakeConstraints {
             $0.centerX.equalToSuperview()
+            $0.size.equalTo(Const.logoSize)
             if #available(iOS 11.0, *) {
                 $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
             } else {
@@ -147,13 +179,8 @@ final class SplashViewController: BaseViewController {
 
         contentImageView.snp.remakeConstraints {
             $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().offset(-50)
-            if let image = contentImageView.image {
-                let scale = image.size.height / image.size.width
-                let width = Screen.width * 0.9
-                let height = width * scale
-                $0.size.equalTo(CGSize(width: width, height: height))
-            }
+            $0.centerY.equalToSuperview().offset(-30)
+            $0.size.equalTo(contentImageSize())
         }
     }
 

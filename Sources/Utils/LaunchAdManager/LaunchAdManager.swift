@@ -35,12 +35,7 @@ class LaunchAdManager {
         if let cacheAdItem = AdCacheManager.default.cachedShowItem(),
            Utils.currentAppTime() - showTime >= minInterval {
             UserDefaultsManager.splash.adShowTime = Utils.currentAppTime()
-            let config = LaunchAdConfig()
-            config.duration = cacheAdItem.duration
-            config.adType = cacheAdItem.videoUrl == nil ? .image : .video
-            config.videoNameOrURLString = cacheAdItem.videoUrl
-            config.imageNameOrURLString = cacheAdItem.thumb
-            LaunchAd.display(with: config, delegate: self)
+            LaunchAd.display(with: cacheAdItem, delegate: self)
         }
         // 加载广告
         let loadTime = UserDefaultsManager.splash.adLoadTime

@@ -66,30 +66,32 @@ struct SplashCacheManager {
         return showItem
     }
 
-    func cachedImage(_ type: CacheImageType, completionHandler: ((UIImage?,Double) -> Void)?) {
+    func cachedImage(_ type: CacheImageType, completionHandler: ((UIImage?,SplashLogoPosition,SplashShowType,Double) -> Void)?) {
         if let cachedShowItem = self.cachedShowItem() {
+            let logoPosition = SplashLogoPosition(rawValue: cachedShowItem.logoPosition) ?? .center
+            let showType = SplashShowType(rawValue: cachedShowItem.mode) ?? .half
             switch type {
             case .content:
                 ImageCache.default.retrieveImage(forKey: cachedShowItem.thumb) { (result) in
                     switch result {
                     case .success(let cache):
-                        completionHandler?(cache.image, Double(cachedShowItem.duration))
+                        completionHandler?(cache.image,logoPosition,showType, Double(cachedShowItem.duration))
                     case .failure:
-                        completionHandler?(nil, Double(cachedShowItem.duration))
+                        completionHandler?(nil,logoPosition,showType,Double(cachedShowItem.duration))
                     }
                 }
             case .logo:
                 ImageCache.default.retrieveImage(forKey: cachedShowItem.logoUrl) { (result) in
                     switch result {
                     case .success(let cache):
-                        completionHandler?(cache.image, Double(cachedShowItem.duration))
+                        completionHandler?(cache.image,logoPosition,showType, Double(cachedShowItem.duration))
                     case .failure:
-                        completionHandler?(nil, Double(cachedShowItem.duration))
+                        completionHandler?(nil,logoPosition,showType,Double(cachedShowItem.duration))
                     }
                 }
             }
         } else {
-            completionHandler?(nil, 0)
+            completionHandler?(nil,.center,.half,700)
         }
     }
 
@@ -130,6 +132,7 @@ struct SplashCacheManager {
         showItem.thumb = itemInfo.thumb
         showItem.duration = showInfo.duration
         showItem.mode = itemInfo.mode.rawValue
+        showItem.logoPosition = showInfo.logoPosition.rawValue
         RealmManager.default.add(showItem)
     }
 }
