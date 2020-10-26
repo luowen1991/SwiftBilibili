@@ -8,11 +8,24 @@
 
 import UIKit
 
-struct Font {
+enum FontStyle: String {
+    case system = "San Fransico"
+    case helvetica = "Helvetica"
+}
 
-    // app的默认字体
-    static func appFont(ofSize fontSize: CGFloat) -> UIFont {
-        return UIFont.systemFont(ofSize: fontSize.auto())
+struct Font {
+    // app的字体
+    static func appFont(ofSize fontSize: CGFloat,
+                        style: FontStyle = .system,
+                        weight: UIFont.Weight = .regular) -> UIFont {
+
+        switch style {
+        case .system:
+            return UIFont.systemFont(ofSize: fontSize.auto(), weight: weight)
+        case .helvetica:
+            return UIFont.monospacedDigitSystemFont(ofSize: fontSize.auto(), weight: weight)
+        }
+
     }
 
 }

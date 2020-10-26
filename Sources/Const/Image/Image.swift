@@ -24,7 +24,8 @@ struct Image {
     }
 
     struct Launch {
-        static let logo = UIImage(named: "launcher_logo_2020")
+        static let pinkLogo = UIImage(named: "launcher_logo_2020")
+        static let shadowLogo = UIImage(named: "player_shadow_logo_40x17_")
         static let content = UIImage(named: "launcher_image_2020_0709")
     }
 

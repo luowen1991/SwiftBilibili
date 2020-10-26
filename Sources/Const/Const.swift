@@ -10,6 +10,7 @@ import UIKit
 
 struct Const {
 
-    static let logoSize = CGSize(width: 120, height: 60)
+    static let splashLogoSize = CGSize(width: 120, height: 60)
+    static let shadowLogoSize = CGSize(width: 80, height: 40)
 
 }

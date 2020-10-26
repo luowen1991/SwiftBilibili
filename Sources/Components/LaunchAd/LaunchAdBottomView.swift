@@ -7,18 +7,30 @@
 //
 
 import UIKit
+import RxSwift
 
 class LaunchAdBottomView: BaseView {
 
-    var cacheAdItem: AdShowRealmModel? {
+    var countDownComplete: (() -> Void)?
+    var skipObservable: Observable<Void> {
+        return skipSubject.asObserver()
+    }
+    var cardType: AdCardType = .topImage {
         didSet {
-           updateViews()
+            updateSubviewApperance()
         }
     }
+    var duration: Int = 0 {
+        didSet {
+            updateSkipTitle(leftTimes: duration)
+            setupTimer()
+        }
+    }
+    private var countDownTimer: SwiftCountDownTimer?
+    private var skipSubject = PublishSubject<Void>()
 
-    public override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .clear
     }
 
     required init?(coder: NSCoder) {
@@ -28,32 +40,70 @@ class LaunchAdBottomView: BaseView {
     override func setupViews() {
         addSubview(logoImageView)
         addSubview(skipButton)
+
+        skipButton.rx.tap
+            .bind(to: skipSubject)
+            .disposed(by: disposeBag)
     }
 
-    func updateViews() {
-        guard let cacheAdItem = cacheAdItem else { return }
-        let title = "跳过 \(cacheAdItem.duration)"
+    private func setupTimer() {
+        countDownTimer = SwiftCountDownTimer(interval: .seconds(1), times: duration, handler: {[weak self] (_, leftTimes) in
+            guard let self = self else { return }
+            self.updateSkipTitle(leftTimes: leftTimes)
+            if leftTimes == 0 {
+                self.countDownComplete?()
+            }
+        })
+        countDownTimer?.start()
+    }
+
+    private func updateSkipTitle(leftTimes: Int) {
+        let title = "跳过 \(leftTimes)"
         skipButton.setTitle(title, for: .normal)
+    }
+
+    private func updateSubviewApperance() {
+
+        if cardType.isFull {
+            logoImageView.image = Image.Launch.shadowLogo
+            skipButton.backgroundColor = ThemeManager.shared.pinkStyleModel.colors.ga6
+            skipButton.setTitleColor(.white, for: .normal)
+        } else {
+            logoImageView.image = Image.Launch.pinkLogo
+            skipButton.bbBorderWidth = 1
+            skipButton.bbBorderColor = ThemeManager.shared.pinkStyleModel.colors.ga3
+            skipButton.setTitleColor(skipButton.bbBorderColor, for: .normal)
+        }
     }
 
     public override func layoutSubviews() {
         super.layoutSubviews()
-        logoImageView.snp.makeConstraints {
-            $0.center.equalToSuperview()
+
+        if cardType.isFull {
+            logoImageView.snp.makeConstraints {
+                $0.centerY.equalToSuperview()
+                $0.left.equalTo(20)
+                $0.size.equalTo(Const.shadowLogoSize)
+            }
+        } else {
+            logoImageView.snp.makeConstraints {
+                $0.center.equalToSuperview()
+                $0.size.equalTo(Const.splashLogoSize)
+            }
         }
         skipButton.snp.makeConstraints {
-            $0.right.equalTo(-15)
+            $0.right.equalTo(-20)
             $0.centerY.equalTo(logoImageView)
             $0.height.equalTo(40)
+            $0.width.equalTo(80)
         }
     }
 
-    private let logoImageView = UIImageView().then {
-        $0.image = Image.Launch.logo
-    }
+    private let logoImageView = UIImageView()
 
     private let skipButton = UIButton().then {
         $0.bbCornerRadius = 20
-        $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        $0.titleLabel?.font = Font.appFont(ofSize: 15, style: .helvetica)
+        $0.adjustsImageWhenHighlighted = false
     }
 }

@@ -74,7 +74,7 @@ final class SplashViewController: BaseViewController {
 
         SplashCacheManager.default.cachedImage(.logo) {[weak self] (image,logoPosition,_, _) in
             guard let self = self else { return }
-            self.logoImageView.image = image ?? Image.Launch.logo
+            self.logoImageView.image = image ?? Image.Launch.pinkLogo
             if logoPosition == .left {
                 self.logoImageView.snp.updateConstraints {
                     $0.centerX.equalToSuperview().offset(-120.auto())
@@ -169,7 +169,7 @@ final class SplashViewController: BaseViewController {
 
         logoImageView.snp.remakeConstraints {
             $0.centerX.equalToSuperview()
-            $0.size.equalTo(Const.logoSize)
+            $0.size.equalTo(Const.splashLogoSize)
             if #available(iOS 11.0, *) {
                 $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
             } else {
@@ -185,7 +185,7 @@ final class SplashViewController: BaseViewController {
     }
 
     private let logoImageView = UIImageView().then {
-        $0.image = Image.Launch.logo
+        $0.image = Image.Launch.pinkLogo
         $0.contentMode = .scaleAspectFit
     }
 

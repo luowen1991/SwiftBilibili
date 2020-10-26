@@ -27,6 +27,9 @@ final class BBTabBarController: UITabBarController {
         addChildController(MemberViewController(), "会员购", Image.TabBar.memberNormal, Image.TabBar.memberSelected)
         addChildController(MineViewController(), "我的", Image.TabBar.mineNormal, Image.TabBar.mineSelected)
 
+        // 显示广告
+        LaunchAdManager.default.display()
+
     }
 
     override func viewDidLayoutSubviews() {

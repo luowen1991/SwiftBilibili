@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 protocol LaunchAdDelegate: class {
     /// 将要显示
@@ -29,26 +30,23 @@ class LaunchAd {
 
     private static let `default` = LaunchAd()
     private weak var delegate: LaunchAdDelegate?
-    private var duration: Int = 5
-    private var timer: Timer?
     private var window: UIWindow?
-    private var cacheAdItem: AdShowRealmModel! {
-        didSet {
-            setupAd()
-        }
+    private var cacheAdItem: AdShowRealmModel!
+    private var disposeBag = DisposeBag()
+    private var cardType: AdCardType {
+        return AdCardType(rawValue: cacheAdItem.cardType) ?? .topImage
     }
-    private var isVideo: Bool = false
-
 
     @discardableResult
     static func display(with cacheAdItem: AdShowRealmModel,
-                               delegate: LaunchAdDelegate? = nil) -> LaunchAd {
+                        delegate: LaunchAdDelegate? = nil) -> LaunchAd {
+
         let launchAd = LaunchAd.default
-        if launchAd.window == nil {
-            launchAd.setupLaunchAd()
-        }
         launchAd.cacheAdItem = cacheAdItem
-        launchAd.isVideo = cacheAdItem.videoUrl != nil
+        if launchAd.window == nil {
+            launchAd.setupWindow()
+        }
+        launchAd.setupAd()
         if let delegate = delegate {
             launchAd.delegate = delegate
             delegate.launchAdWillDisplay(launchAd)
@@ -56,11 +54,7 @@ class LaunchAd {
         return launchAd
     }
 
-    init() {
-        setupLaunchAd()
-    }
-
-    private func setupLaunchAd() {
+    private func setupWindow() {
         removeSubviews()
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = LaunchAdViewController()
@@ -70,11 +64,12 @@ class LaunchAd {
         window.isHidden = false
         window.alpha = 1
         self.window = window
-        addSubviews()
     }
 
     private func setupAd() {
-        isVideo ? setupVideoAd() : setupImageAd()
+        addSubviews()
+        cardType.isVideo ? setupVideoAd() : setupImageAd()
+
     }
 
     /// 图片
@@ -85,15 +80,20 @@ class LaunchAd {
             return
         }
         window.addSubview(adImageView)
-        adImageView.snp.makeConstraints {
-            $0.left.top.right.equalToSuperview()
-            $0.bottom.equalTo(adBottomView.snp.top)
+        window.sendSubviewToBack(adImageView)
+        if cardType.isFull {
+            adImageView.snp.makeConstraints {
+                $0.edges.equalToSuperview()
+            }
+        } else {
+            adImageView.snp.makeConstraints {
+                $0.left.top.right.equalToSuperview()
+                $0.bottom.equalTo(adTitleView.snp.top)
+            }
         }
         AdCacheManager.default.cachedImage(url: cacheAdItem.thumb) {[unowned self] (image) in
             self.adImageView.image = image
         }
-        addSkipButton()
-        startCountDown()
     }
 
     /// 视频
@@ -105,12 +105,19 @@ class LaunchAd {
             return
         }
         window.addSubview(adVideoView)
-        adVideoView.frame = CGRect(x: 0, y: 0, width: Screen.width, height: adBottomView.frame.minY)
+        window.sendSubviewToBack(adVideoView)
+        if cardType.isFull {
+            adVideoView.snp.makeConstraints {
+                $0.edges.equalToSuperview()
+            }
+        } else {
+            adVideoView.snp.makeConstraints {
+                $0.left.top.right.equalToSuperview()
+                $0.bottom.equalTo(adTitleView.snp.top)
+            }
+        }
         adVideoView.isMuted = true
         adVideoView.videoURL = AdCacheManager.default.cachedFileURL(url: videoUrl)
-
-        addSkipButton()
-        startCountDown()
     }
 
     private func removeSubviews() {
@@ -120,56 +127,37 @@ class LaunchAd {
     }
 
     private func addSubviews() {
+        adBottomView.cardType = cardType
+        adBottomView.duration = cacheAdItem.duration
+        adBottomView.skipObservable
+            .subscribe {[unowned self] (_) in
+                self.dismissAnimate()
+            }
+            .disposed(by: disposeBag)
         window?.addSubview(adBottomView)
-        window?.addSubview(adTitleView)
-
         adBottomView.snp.makeConstraints {
             $0.left.right.equalToSuperview()
             $0.bottom.equalTo(-Screen.bottomSafeHeight)
             $0.height.equalTo(100)
         }
-
-        adTitleView.snp.makeConstraints {
-            $0.left.right.equalToSuperview()
-            $0.height.equalTo(50)
-            $0.bottom.equalTo(adBottomView.snp.top)
-        }
-    }
-
-    private func addSkipButton() {
-        duration = cacheAdItem.duration
-//        skipButton.updateRemainTime(duration)
-//        window?.addSubview(skipButton)
-//        skipButton.snp.makeConstraints {
-//            $0.centerY.equalTo(adBottomView)
-//            $0.width.equalTo(64)
-//            $0.height.equalTo(30)
-//            $0.right.equalTo(-20)
-//        }
-
-    }
-
-    private func startCountDown() {
-        if timer == nil {
-            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {[weak self] (_) in
-                guard let self = self else { return }
-                self.duration -= 1
-                //self.skipButton.updateRemainTime(self.duration)
-                if self.duration == 0 {
-                    self.clearTimer()
-                    self.dismissAnimate()
+        if !cacheAdItem.uriTitle.isEmpty {
+            adTitleView.title = cacheAdItem.uriTitle
+            adTitleView.tapObservable
+                .subscribe { (_) in
+                    log.debug("点击跳转")
                 }
-            })
+                .disposed(by: disposeBag)
+            window?.addSubview(adTitleView)
+            adTitleView.snp.makeConstraints {
+                $0.left.right.equalToSuperview()
+                $0.height.equalTo(44)
+                $0.bottom.equalTo(adBottomView.snp.top)
+            }
         }
-    }
-
-    private func clearTimer() {
-        timer?.invalidate()
-        timer = nil
     }
 
     private func dismissAnimate() {
-        UIView.transition(with: window!, duration: TimeInterval(duration), options: .transitionCrossDissolve) {
+        UIView.transition(with: window!, duration: TimeInterval(0.25), options: .transitionCrossDissolve) {
             self.window?.alpha = 0
         } completion: { (_) in
             self.remove()
@@ -177,25 +165,18 @@ class LaunchAd {
     }
 
     private func remove() {
-        if isVideo {
+        if cardType.isVideo {
             adVideoView.stop()
         }
-        window?.subviews.forEach { $0.removeFromSuperview() }
+        removeSubviews()
         window?.isHidden = true
         window = nil
         delegate?.launchAdDidDismiss(self)
     }
 
-    @objc private func skipButtonClick() {
-        //delegate?.launchAd(self, didSelect: skipButton)
-    }
-
-    private func isNetUrl(_ url: String) -> Bool {
-       return url.hasPrefix("http") || url.hasPrefix("https")
-    }
-
     private lazy var adImageView: UIImageView = {
         let adImageView = UIImageView()
+        adImageView.contentMode = .scaleAspectFit
         adImageView.isUserInteractionEnabled = true
         return adImageView
     }()
@@ -205,7 +186,12 @@ class LaunchAd {
     }()
 
     private lazy var adBottomView: LaunchAdBottomView = {
-        LaunchAdBottomView()
+        let adBottomView = LaunchAdBottomView()
+        adBottomView.countDownComplete = { [weak self] in
+            guard let self = self else { return }
+            self.dismissAnimate()
+        }
+        return adBottomView
     }()
 
     private lazy var adTitleView: LaunchAdTitleView = {

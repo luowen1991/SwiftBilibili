@@ -84,6 +84,8 @@
 		658D28622536AA7400C9FD69 /* HomeTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D28612536AA7400C9FD69 /* HomeTabModel.swift */; };
 		65918A6C25233879007A0433 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65918A6B25233879007A0433 /* Utils.swift */; };
 		6593C5A52542F0CD007217AC /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6593C5A42542F0CD007217AC /* Const.swift */; };
+		6593C5AB2546665B007217AC /* SwiftTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6593C5AA2546665B007217AC /* SwiftTimer.swift */; };
+		6593C5AE254669CC007217AC /* SwiftCountDownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6593C5AD254669CC007217AC /* SwiftCountDownTimer.swift */; };
 		659CFCF02506041100787D3A /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659CFCEF2506041100787D3A /* Logger.swift */; };
 		659CFCF4250605D100787D3A /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659CFCF3250605D100787D3A /* Screen.swift */; };
 		659CFD0825065EE700787D3A /* NetStatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659CFD0725065EE700787D3A /* NetStatusManager.swift */; };
@@ -186,6 +188,8 @@
 		658D28612536AA7400C9FD69 /* HomeTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabModel.swift; sourceTree = "<group>"; };
 		65918A6B25233879007A0433 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		6593C5A42542F0CD007217AC /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
+		6593C5AA2546665B007217AC /* SwiftTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftTimer.swift; sourceTree = "<group>"; };
+		6593C5AD254669CC007217AC /* SwiftCountDownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftCountDownTimer.swift; sourceTree = "<group>"; };
 		659CFCEF2506041100787D3A /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		659CFCF3250605D100787D3A /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 		659CFD0725065EE700787D3A /* NetStatusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetStatusManager.swift; sourceTree = "<group>"; };
@@ -376,6 +380,7 @@
 		65007BC6250224E8009FCF1E /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				6593C5A9254665E4007217AC /* Timer */,
 				6549261E25207EA0004262D9 /* AutoInch */,
 				65007C0325025475009FCF1E /* ObjectMapperTransform */,
 				65007BF3250242D6009FCF1E /* Theme */,
@@ -619,6 +624,15 @@
 				658D28612536AA7400C9FD69 /* HomeTabModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		6593C5A9254665E4007217AC /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				6593C5AA2546665B007217AC /* SwiftTimer.swift */,
+				6593C5AD254669CC007217AC /* SwiftCountDownTimer.swift */,
+			);
+			path = Timer;
 			sourceTree = "<group>";
 		};
 		659CFCEE250603C100787D3A /* Logger */ = {
@@ -903,6 +917,7 @@
 				654917AB2519EE6000F05B0F /* LoadingManager.swift in Sources */,
 				65482DB52510E8280020D18A /* TargetType+Cache.swift in Sources */,
 				65482DB72510EA8A0020D18A /* OnCache.swift in Sources */,
+				6593C5AB2546665B007217AC /* SwiftTimer.swift in Sources */,
 				6544A1C1253DA1B300EB7664 /* BBSegmentedTitleIOrImagetemModel.swift in Sources */,
 				654BDD372514A9810063F987 /* MapperParameterType.swift in Sources */,
 				65007BDF250227E7009FCF1E /* ChannelViewController.swift in Sources */,
@@ -919,6 +934,7 @@
 				65C0B2FD2542DEFD00985CAB /* LaunchAdTitleView.swift in Sources */,
 				65007BEB25022DB8009FCF1E /* SplashViewController.swift in Sources */,
 				65860B8B2541211100195A3B /* HomeActivityViewController.swift in Sources */,
+				6593C5AE254669CC007217AC /* SwiftCountDownTimer.swift in Sources */,
 				654A749A250B443D00B3F91A /* UIImageView+Kingfisher.swift in Sources */,
 				65D39A232518D40D00B1C12E /* NetworkLoggerPlugin.swift in Sources */,
 				65482DAF2510E6050020D18A /* Storable.swift in Sources */,

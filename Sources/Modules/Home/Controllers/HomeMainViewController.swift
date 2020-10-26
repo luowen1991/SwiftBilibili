@@ -13,6 +13,8 @@ final class HomeMainViewController: BaseViewController {
 
     private var tabItems: [HomeTabItemModel] = []
 
+    private var haveTabCache: Bool = false
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -20,52 +22,61 @@ final class HomeMainViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        LaunchAdManager.default.display()
         loadData()
-        retryRequest()
+        bindRetryRequest()
     }
 
     // MARK: Private Method
     private func loadData() {
 
+        // 缓存策略是只显示缓存 加载的数据替换缓存
+        ConfigAPI.tabList
+            .onCacheObject(HomeTabInfoModel.self) {[weak self] (info) in
+                guard let self = self else { return }
+                self.haveTabCache = true
+                self.reloadSegmentView(info)
+            }
+            .requestObject()
+            .subscribe(onSuccess: {[weak self] (info) in
+                guard let self = self,
+                      !self.haveTabCache
+                else { return }
+                self.reloadSegmentView(info)
+            })
+            .disposed(by: disposeBag)
+
+//        缓存策略是先显示缓存再显示网络数据 加载两遍
 //        ConfigAPI.tabList
-//            .onCacheObject(HomeTabInfoModel.self) { (_) in
-//
-//            }
-//            .requestObject()
-//            .subscribe { (info) in
+//            .cache
+//            .request()
+//            .mapObject(HomeTabInfoModel.self)
+//            .subscribe { (_) in
 //
 //            }
 //            .disposed(by: disposeBag)
 
-        ConfigAPI.tabList
-            .cache
-            .request()
-            .trackError(NetErrorManager.default.errorIndictor)
-            .mapObject(HomeTabInfoModel.self)
-            .subscribe(onNext: { [weak self] (info) in
-                guard let self = self else { return }
-                let sortedItems = info.tab.sorted { $0.pos < $1.pos }
-                self.tabItems = sortedItems
-                let defaultSelectedIndex = sortedItems.compactMap { $0.defaultSelected }.first ?? 1
-                if !UserDefaultsManager.app.activityTabIsClicked {
-                    UserDefaultsManager.activity.activityTabId = sortedItems.filter { $0.extension != nil }.first?.tabId ?? ""
-                    self.segmentedDataSource.showImageInfos = sortedItems.map { $0.extension?.activeIcon }
-                    self.segmentedDataSource.loadImageClosure = { (imageView, imageUrl) in
-                        imageView.setImage(with: URL(string: imageUrl))
-                    }
-                }
-                self.segmentedDataSource.titles = sortedItems.map { $0.name }
-                self.segmentedDataSource.reloadData(selectedIndex: defaultSelectedIndex)
-                self.segmentedView.defaultSelectedIndex = defaultSelectedIndex
-                self.segmentedView.reloadData()
-                self.listContainerView.defaultSelectedIndex = defaultSelectedIndex
-                self.listContainerView.reloadData()
-            })
-            .disposed(by: disposeBag)
     }
 
-    private func retryRequest() {
+    private func reloadSegmentView(_ info: HomeTabInfoModel) {
+        let sortedItems = info.tab.sorted { $0.pos < $1.pos }
+        self.tabItems = sortedItems
+        let defaultSelectedIndex = sortedItems.compactMap { $0.defaultSelected }.first ?? 1
+        if !UserDefaultsManager.app.activityTabIsClicked {
+            UserDefaultsManager.activity.activityTabId = sortedItems.filter { $0.extension != nil }.first?.tabId ?? ""
+            self.segmentedDataSource.showImageInfos = sortedItems.map { $0.extension?.activeIcon }
+            self.segmentedDataSource.loadImageClosure = { (imageView, imageUrl) in
+                imageView.setImage(with: URL(string: imageUrl))
+            }
+        }
+        self.segmentedDataSource.titles = sortedItems.map { $0.name }
+        self.segmentedDataSource.reloadData(selectedIndex: defaultSelectedIndex)
+        self.segmentedView.defaultSelectedIndex = defaultSelectedIndex
+        self.segmentedView.reloadData()
+        self.listContainerView.defaultSelectedIndex = defaultSelectedIndex
+        self.listContainerView.reloadData()
+    }
+
+    private func bindRetryRequest() {
         NetErrorManager.default.retrySubject
             .subscribe {[weak self] (_) in
                 guard let self = self else { return }
@@ -110,8 +121,8 @@ final class HomeMainViewController: BaseViewController {
         $0.dataSource = segmentedDataSource
         $0.indicators = [indicator]
         $0.contentScrollView = listContainerView.scrollView
-        $0.contentEdgeInsetLeft = 20
-        $0.contentEdgeInsetRight = 20
+        $0.contentEdgeInsetLeft = 30
+        $0.contentEdgeInsetRight = 30
     }
 
     private lazy var indicator = JXSegmentedIndicatorLineView().then {

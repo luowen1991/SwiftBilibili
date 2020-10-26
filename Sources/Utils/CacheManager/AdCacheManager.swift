@@ -113,6 +113,7 @@ class AdCacheManager {
         showItem.skip = itemInfo.skip
         showItem.isAd = itemInfo.isAd
         showItem.videoUrl = itemInfo.videoUrl
+        showItem.cardType = itemInfo.cardType.rawValue
         RealmManager.default.add(showItem)
     }
 

@@ -7,13 +7,31 @@
 //
 
 import UIKit
+import RxSwift
+import RxGesture
 
 final class LaunchAdTitleView: BaseView {
 
+    var tapObservable: Observable<Void> {
+        return tapSubject.asObserver()
+    }
+
+    var title: String = "" {
+        didSet {
+            titleLabel.text = title
+        }
+    }
+
+    private var tapSubject = PublishSubject<Void>()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-
-        backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        self.rx.tapGesture()
+            .when(.recognized)
+            .map { _ in () }
+            .bind(to: tapSubject)
+            .disposed(by: disposeBag)
     }
 
     required init?(coder: NSCoder) {

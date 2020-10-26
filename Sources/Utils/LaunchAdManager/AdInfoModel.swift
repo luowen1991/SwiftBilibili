@@ -10,6 +10,21 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
+enum AdCardType: Int {
+    case fullImage = 14
+    case topImage = 15
+    case topVideo = 16
+    case fullVideo = 39
+
+    var isVideo: Bool {
+        return self == .fullVideo || self == .topVideo
+    }
+
+    var isFull: Bool {
+        return self == .fullVideo || self == .fullImage
+    }
+}
+
 struct AdInfoModel: ImmutableMappable {
 
     let minInterval: Double
@@ -28,7 +43,6 @@ struct AdInfoModel: ImmutableMappable {
 struct AdItemModel: ImmutableMappable {
 
     let id: Int
-    let cardType: Int
     let duration: Int
     let beginTime: Double
     let endTime: Double
@@ -43,6 +57,7 @@ struct AdItemModel: ImmutableMappable {
     let videoUrl: String?
     let videoWidth: Int?
     let videoHeight: Int?
+    let cardType: AdCardType
 
     init(map: Map) throws {
         id = try map.value("id")
@@ -87,6 +102,7 @@ class AdShowRealmModel: Object {
     @objc dynamic var uriTitle: String = ""
     @objc dynamic var videoUrl: String?
     @objc dynamic var duration: Int = 5
+    @objc dynamic var cardType: Int = 15
 
     override class func primaryKey() -> String? {
         return "id"
