@@ -42,6 +42,10 @@ class LaunchAdBottomView: BaseView {
         addSubview(skipButton)
 
         skipButton.rx.tap
+            .map({[unowned self] (_) -> Void in
+                self.countDownTimer?.suspend()
+                return ()
+            })
             .bind(to: skipSubject)
             .disposed(by: disposeBag)
     }

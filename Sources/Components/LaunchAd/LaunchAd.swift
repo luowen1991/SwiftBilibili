@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import RxGesture
 
 protocol LaunchAdDelegate: class {
     /// 将要显示
@@ -67,9 +68,17 @@ class LaunchAd {
     }
 
     private func setupAd() {
-        addSubviews()
-        cardType.isVideo ? setupVideoAd() : setupImageAd()
 
+        if cardType.isFull {
+            window?.rx.tapGesture()
+                .when(.recognized)
+                .subscribe(onNext: {[unowned self] (_) in
+                    self.gotoPreview()
+                })
+                .disposed(by: disposeBag)
+        }
+        cardType.isVideo ? setupVideoAd() : setupImageAd()
+        addSubviews()
     }
 
     /// 图片
@@ -80,7 +89,6 @@ class LaunchAd {
             return
         }
         window.addSubview(adImageView)
-        window.sendSubviewToBack(adImageView)
         if cardType.isFull {
             adImageView.snp.makeConstraints {
                 $0.edges.equalToSuperview()
@@ -105,7 +113,6 @@ class LaunchAd {
             return
         }
         window.addSubview(adVideoView)
-        window.sendSubviewToBack(adVideoView)
         if cardType.isFull {
             adVideoView.snp.makeConstraints {
                 $0.edges.equalToSuperview()
@@ -143,8 +150,8 @@ class LaunchAd {
         if !cacheAdItem.uriTitle.isEmpty {
             adTitleView.title = cacheAdItem.uriTitle
             adTitleView.tapObservable
-                .subscribe { (_) in
-                    log.debug("点击跳转")
+                .subscribe {[unowned self] (_) in
+                    self.gotoPreview()
                 }
                 .disposed(by: disposeBag)
             window?.addSubview(adTitleView)
@@ -156,12 +163,20 @@ class LaunchAd {
         }
     }
 
-    private func dismissAnimate() {
-        UIView.transition(with: window!, duration: TimeInterval(0.25), options: .transitionCrossDissolve) {
+    private func dismissAnimate(duration: TimeInterval = 0.25) {
+        guard let window = window else {
+            return
+        }
+        UIView.transition(with: window, duration: duration, options: .transitionCrossDissolve) {
             self.window?.alpha = 0
         } completion: { (_) in
             self.remove()
         }
+    }
+
+    private func gotoPreview() {
+        dismissAnimate(duration: 0)
+        log.debug("点击跳转")
     }
 
     private func remove() {
