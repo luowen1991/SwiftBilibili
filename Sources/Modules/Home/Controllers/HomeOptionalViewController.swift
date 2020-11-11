@@ -11,6 +11,18 @@ import JXSegmentedView
 
 final class HomeOptionalViewController: BaseViewController {
 
+    private let id: Int
+
+    init(id: Int) {
+        self.id = id
+        super.init()
+        log.debug("当前的id:\(id)")
+    }
+
+    required convenience init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -42,6 +42,9 @@ public class NetworkLoggerPlugin: PluginType {
 
         print("************************ NetRequestEnd ************************")
 
+        let url = target.baseURL.absoluteString + target.path
+        print("url   :  \(url)")
+
         switch result {
         case .success(let response):
             if let data = try? JSON(data: response.data).dictionaryObject {

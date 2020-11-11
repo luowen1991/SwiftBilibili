@@ -1,5 +1,5 @@
 //
-//  BBTabBarController.swift
+//  BaseTabBarController.swift
 //  SwiftBilibili
 //
 //  Created by luowen on 2020/9/4.
@@ -8,9 +8,7 @@
 
 import UIKit
 
-import EachNavigationBar
-
-final class BBTabBarController: UITabBarController {
+final class BaseTabBarController: UITabBarController {
 
     fileprivate struct Metric {
         static let tabBarHeight = 49.f
@@ -52,19 +50,11 @@ final class BBTabBarController: UITabBarController {
         } else {
             child.tabBarItem.setTitleTextAttributes([.foregroundColor : ThemeManager.shared.pinkStyleModel.colors.pi5], for: .selected)
         }
-
         child.tabBarItem.title = title
         child.tabBarItem.image = normalImage?.withRenderingMode(.alwaysOriginal)
         child.tabBarItem.selectedImage = selectedImage?.withRenderingMode(.alwaysOriginal)
 
-        let navController = BBNavigationController(rootViewController: child)
-        navController.navigation.configuration.isEnabled = true
-        navController.navigation.configuration.isShadowHidden = true
-        _ = themeService.attrsStream
-            .subscribe(onNext: { (theme) in
-                navController.navigation.configuration.titleTextAttributes = [.foregroundColor: theme.mainColorModel.wh0]
-                navController.navigation.configuration.tintColor = theme.mainColorModel.wh0
-            })
+        let navController = BaseNavigationController(rootViewController: child)
         addChild(navController)
     }
 

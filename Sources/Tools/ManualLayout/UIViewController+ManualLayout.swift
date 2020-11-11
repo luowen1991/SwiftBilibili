@@ -45,7 +45,7 @@ public extension UIViewController {
     // MARK: - Edges
 
     var top: CGFloat {
-        return topLayoutGuide.length
+        return 0
     }
 
     var right: CGFloat {
@@ -53,7 +53,7 @@ public extension UIViewController {
     }
 
     var bottom: CGFloat {
-        return view.height - bottomLayoutGuide.length
+        return view.height
     }
 
     var left: CGFloat {

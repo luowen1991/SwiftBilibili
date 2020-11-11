@@ -20,9 +20,9 @@ public protocol MapperKeyValueType {
     var modelKey: String { get set }
 }
 
-struct DefaultMapperKeyValue: MapperKeyValueType {
-    var successValue: String = "0"
-    var statusCodeKey: String = "code"
-    var msgStrKey: String = "message"
-    var modelKey: String = "data"
+public struct DefaultMapperKeyValue: MapperKeyValueType {
+    public var successValue: String = "0"
+    public var statusCodeKey: String = "code"
+    public var msgStrKey: String = "message"
+    public var modelKey: String = "data"
 }

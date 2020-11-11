@@ -13,7 +13,7 @@ final class HomePromoViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        navigationBar.isHidden = true
     }
 
     override func setupUI() {

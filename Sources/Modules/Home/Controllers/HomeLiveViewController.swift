@@ -14,7 +14,6 @@ final class HomeLiveViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.blue
     }
 
     override func setupUI() {}

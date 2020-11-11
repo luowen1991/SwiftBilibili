@@ -1,23 +1,19 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, ‘10.0’
+platform :ios, '11.0'
 inhibit_all_warnings!
 
 use_frameworks!
 
 target ‘SwiftBilibili’ do
 
+  #pod 'BBNetworking', :path => './LocalLib/BBNetworking'
+
   # Architecture
   pod 'ReactorKit', '~> 2.1.0'
 
-  # Networking
-  pod 'Moya/RxSwift', '~> 14.0.0'
-
   #imageLoad
   pod 'Kingfisher', '~> 5.15.3'
-
-  # Model
-  pod 'ObjectMapper', '~> 4.2.0'       #JSON转Model
 
   # Rx
   pod 'RxCocoa', '~> 5.1.1'
@@ -37,13 +33,13 @@ target ‘SwiftBilibili’ do
   pod 'FSPagerView', '~> 0.8.3'         #轮播图
   pod 'Toast-Swift', '~> 5.0.1'
   pod 'SwiftEntryKit', '~> 1.2.5'       #弹出视图
-  pod 'EachNavigationBar', '~> 1.14.4'
+  #pod 'EachNavigationBar', '~> 1.14.4'
+  pod 'HZNavigationBar', '~> 1.3.0'
 
   # Logging
   pod 'CocoaLumberjack/Swift', '~> 3.6.2'
 
   # Misc.
-  pod 'SwiftyJSON', '~> 5.0'
   pod 'EmptyKit', '~> 4.2.0'            #无数据的占位图
   pod 'ESPullToRefresh', '~> 2.9.3'     #刷新
   pod 'Then', '~> 2.7.0'                #语法糖
@@ -55,6 +51,9 @@ target ‘SwiftBilibili’ do
   pod 'BonMot', '~> 5.5.1'              #attributedString的简化
   pod 'Tiercel', '~> 3.2.0'             #下载
   pod 'dsBridge', '~> 3.0.6'            #原生与H5交互
+  pod 'ObjectMapper', '~> 4.2.0'
+  pod 'Moya/RxSwift', '~> 14.0.0'
+  pod 'SwiftyJSON', '~> 5.0'
 
   # Lint
   pod 'SwiftLint', '~> 0.40.3'

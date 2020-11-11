@@ -70,12 +70,12 @@ class LaunchAdBottomView: BaseView {
 
         if cardType.isFull {
             logoImageView.image = Image.Launch.shadowLogo
-            skipButton.backgroundColor = ThemeManager.shared.pinkStyleModel.colors.ga6
+            skipButton.backgroundColor = ThemeManager.shared.pinkStyleModel.colors.ga5
             skipButton.setTitleColor(.white, for: .normal)
         } else {
             logoImageView.image = Image.Launch.pinkLogo
             skipButton.bbBorderWidth = 1
-            skipButton.bbBorderColor = ThemeManager.shared.pinkStyleModel.colors.ga3
+            skipButton.bbBorderColor = ThemeManager.shared.pinkStyleModel.colors.ga5
             skipButton.setTitleColor(skipButton.bbBorderColor, for: .normal)
         }
     }

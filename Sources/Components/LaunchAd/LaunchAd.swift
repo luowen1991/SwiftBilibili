@@ -68,7 +68,7 @@ class LaunchAd {
     }
 
     private func setupAd() {
-
+        addSubviews()
         if cardType.isFull {
             window?.rx.tapGesture()
                 .when(.recognized)
@@ -78,17 +78,11 @@ class LaunchAd {
                 .disposed(by: disposeBag)
         }
         cardType.isVideo ? setupVideoAd() : setupImageAd()
-        addSubviews()
+
     }
 
     /// 图片
     private func setupImageAd() {
-        guard let window = self.window
-        else {
-            log.error("window miss")
-            return
-        }
-        window.addSubview(adImageView)
         if cardType.isFull {
             adImageView.snp.makeConstraints {
                 $0.edges.equalToSuperview()
@@ -96,7 +90,7 @@ class LaunchAd {
         } else {
             adImageView.snp.makeConstraints {
                 $0.left.top.right.equalToSuperview()
-                $0.bottom.equalTo(adTitleView.snp.top)
+                $0.bottom.equalTo(adBottomView.snp.top)
             }
         }
         AdCacheManager.default.cachedImage(url: cacheAdItem.thumb) {[unowned self] (image) in
@@ -106,13 +100,8 @@ class LaunchAd {
 
     /// 视频
     private func setupVideoAd() {
-        guard let window = self.window,
-              let videoUrl = cacheAdItem.videoUrl
-        else {
-            log.error("videoUrl or window miss")
-            return
-        }
-        window.addSubview(adVideoView)
+        guard let videoUrl = cacheAdItem.videoUrl
+        else { return }
         if cardType.isFull {
             adVideoView.snp.makeConstraints {
                 $0.edges.equalToSuperview()
@@ -120,7 +109,7 @@ class LaunchAd {
         } else {
             adVideoView.snp.makeConstraints {
                 $0.left.top.right.equalToSuperview()
-                $0.bottom.equalTo(adTitleView.snp.top)
+                $0.bottom.equalTo(adBottomView.snp.top)
             }
         }
         adVideoView.isMuted = true
@@ -141,6 +130,7 @@ class LaunchAd {
                 self.dismissAnimate()
             }
             .disposed(by: disposeBag)
+        cardType.isVideo ? window?.addSubview(adVideoView) : window?.addSubview(adImageView)
         window?.addSubview(adBottomView)
         adBottomView.snp.makeConstraints {
             $0.left.right.equalToSuperview()
@@ -209,7 +199,7 @@ class LaunchAd {
         return adBottomView
     }()
 
-    private lazy var adTitleView: LaunchAdTitleView = {
+    private var adTitleView: LaunchAdTitleView = {
         LaunchAdTitleView()
     }()
 }

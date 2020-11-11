@@ -15,11 +15,12 @@ extension UIImageView {
     @discardableResult
     func setImage(
         with resource: URL?,
-        placeholder: UIImage? = nil
+        placeholder: UIImage? = nil,
+        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil
     ) -> DownloadTask? {
 
-        let options: KingfisherOptionsInfo = [.transition(.fade(0.2)),.cacheOriginalImage,.scaleFactor(UIScreen.main.scale)]
-        return self.kf.setImage(with: resource, placeholder: placeholder, options: options)
+        let options: KingfisherOptionsInfo = [.transition(.fade(0.2)),.scaleFactor(UIScreen.main.scale)]
+        return self.kf.setImage(with: resource, placeholder: placeholder, options: options, completionHandler: completionHandler)
     }
 }
 

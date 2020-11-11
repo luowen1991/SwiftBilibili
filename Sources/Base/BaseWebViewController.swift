@@ -1,5 +1,5 @@
 //
-//  BBWebViewController.swift
+//  BaseWebViewController.swift
 //  SwiftBilibili
 //
 //  Created by luowen on 2020/9/22.
@@ -9,7 +9,7 @@
 import UIKit
 import dsBridge
 
-final class BBWebViewController: BaseViewController {
+final class BaseWebViewController: BaseViewController {
 
     private let url: String
     private let webTitle: String?
@@ -28,8 +28,6 @@ final class BBWebViewController: BaseViewController {
         self.showProgress = showProgress
         self.showNavBar = showNavBar
         super.init()
-
-        self.navigation.bar.isHidden = !showNavBar
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
@@ -56,7 +54,7 @@ final class BBWebViewController: BaseViewController {
         let backItem = UIBarButtonItem(image: Image.Common.whiteBack, style: .plain, target: nil, action: nil)
         let closeItem = UIBarButtonItem(title: "关闭", style: .plain, target: nil, action: nil)
 
-        self.navigation.item.leftBarButtonItems = [backItem, closeItem]
+        //self.navigation.item.leftBarButtonItems = [backItem, closeItem]
 
         closeItem.rx.tap
             .subscribe {[weak self] (_) in
@@ -128,11 +126,11 @@ final class BBWebViewController: BaseViewController {
 
 }
 
-extension BBWebViewController: WKNavigationDelegate {
+extension BaseWebViewController: WKNavigationDelegate {
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         if showNavBar {
-            self.navigation.item.title = webView.title
+            //self.navigation.item.title = webView.title
         }
     }
 

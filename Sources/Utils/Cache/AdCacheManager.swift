@@ -14,33 +14,38 @@ class AdCacheManager {
 
     static let `default` = AdCacheManager()
 
-    func storeAdData(_ adInfo: AdInfoModel) {
+    func storeAdData(_ adInfo: AdInfoModel) throws {
         guard let showList = adInfo.show else {
             log.debug("没有需要显示的广告")
             return
         }
         // 如果新的数据和数据库的数据不一样，就清空数据库
-        let items = RealmManager.default.selectByAll(AdShowRealmModel.self)
+        let items = try AdShowRealmModel.lw.all()
         if !items.isEmpty,
            !showList.contains(where: {$0.id == items.first?.id}) {
-            RealmManager.default.deleteAll()
+            try AdShowRealmModel.lw.deleteAll()
             adSessionManager.totalRemove()
             items.filter { $0.videoUrl == nil }.forEach { ImageCache.default.removeImage(forKey: $0.thumb) }
         }
         // 没有缓存数据时 缓存数据
-        if items.isEmpty {
+        if items.isEmpty, let list = adInfo.list {
             for showInfo in showList {
-                if let itemInfo = adInfo.list.first(where: { $0.id == showInfo.id }) {
-                    storeData(itemInfo, showInfo)
-                    downloadResource(itemInfo)
+                if let itemInfo = list.first(where: { $0.id == showInfo.id }) {
+                    downloadResource(itemInfo, compltetionHandler: {[weak self] isSuccess in
+                        guard let self = self,isSuccess else { return }
+                        try? self.storeData(itemInfo, showInfo)
+                    })
                 }
             }
         }
     }
 
     func cachedShowItem() -> AdShowRealmModel? {
-        let items = RealmManager.default.selectByAll(AdShowRealmModel.self)
-        if items.isEmpty { return nil }
+
+        guard let items = try? AdShowRealmModel.lw.all(),
+              !items.isEmpty else {
+            return nil
+        }
         let now = Utils.currentAppTime()
         let showItem = items.filter { $0.beginTime < now && $0.endTime > now }.first
         return showItem
@@ -64,36 +69,39 @@ class AdCacheManager {
         return URL(fileURLWithPath: filePath)
     }
 
-    private func downloadResource(_ itemInfo: AdItemModel) {
+    private func downloadResource(_ itemInfo: AdItemModel, compltetionHandler: @escaping (Bool) -> Void) {
         if itemInfo.videoUrl != nil {
-           downloadVideo(itemInfo)
+           downloadVideo(itemInfo, compltetionHandler: compltetionHandler)
         } else {
-           downloadImage(itemInfo)
+           downloadImage(itemInfo, compltetionHandler: compltetionHandler)
         }
     }
 
-    private func downloadVideo(_ itemInfo: AdItemModel) {
-        guard let videoUrl = itemInfo.videoUrl,
-              cachedFileURL(url: videoUrl) == nil
+    private func downloadVideo(_ itemInfo: AdItemModel, compltetionHandler: @escaping (Bool) -> Void) {
+        guard let videoUrl = itemInfo.videoUrl
         else { return }
         adSessionManager.download(videoUrl)?
             .success(handler: { (downloadTask) in
                 log.info("广告视频下载成功: \(downloadTask.filePath)")
+                compltetionHandler(true)
             })
             .failure(handler: { (downloadTask) in
                 log.error("广告视频下载失败: \(downloadTask.error?.localizedDescription ?? "")")
+                compltetionHandler(false)
             })
     }
 
-    private func downloadImage(_ itemInfo: AdItemModel) {
+    private func downloadImage(_ itemInfo: AdItemModel, compltetionHandler: @escaping (Bool) -> Void) {
         if !ImageCache.default.isCached(forKey: itemInfo.thumb) {
             ImageDownloader.default.downloadImage(with: URL(string: itemInfo.thumb)!, completionHandler: { (result) in
                 switch result {
                 case .success(let loadResult):
                     ImageCache.default.store(loadResult.image, forKey: itemInfo.thumb)
                     log.info("广告图下载成功: \(ImageCache.default.cachePath(forKey: itemInfo.thumb))")
+                    compltetionHandler(true)
                 case .failure(let error):
                     log.error(error.errorDescription ?? "广告图片加载失败")
+                    compltetionHandler(false)
                 }
             })
         }
@@ -101,7 +109,7 @@ class AdCacheManager {
 
     // 保存数据
     private func storeData(_ itemInfo: AdItemModel,
-                           _ showInfo: AdShowModel) {
+                           _ showInfo: AdShowModel) throws {
         let showItem = AdShowRealmModel()
         showItem.beginTime = showInfo.stime
         showItem.endTime = showInfo.etime
@@ -114,14 +122,8 @@ class AdCacheManager {
         showItem.isAd = itemInfo.isAd
         showItem.videoUrl = itemInfo.videoUrl
         showItem.cardType = itemInfo.cardType.rawValue
-        RealmManager.default.add(showItem)
+        try showItem.lw.save(update: .all)
     }
 
-    private lazy var adSessionManager: SessionManager = {
-        var configuration = SessionConfiguration()
-        let path = Cache.defaultDiskCachePathClosure("ad")
-        let cache = Cache("LaunchAdCacheManager", downloadPath: path)
-        let manager = SessionManager("LaunchAdCacheManager", configuration: configuration, cache: cache, operationQueue: DispatchQueue(label: "com.Bilibili.SessionManager.operationQueue"))
-        return manager
-    }()
+    private var adSessionManager: SessionManager = appDelegate.adSessionManager
 }

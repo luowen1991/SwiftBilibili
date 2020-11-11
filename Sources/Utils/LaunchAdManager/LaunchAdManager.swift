@@ -47,7 +47,7 @@ class LaunchAdManager {
                     UserDefaultsManager.splash.adPullInterval = adInfo.pullInterval
                     UserDefaultsManager.splash.adMinInterval = adInfo.minInterval
                     UserDefaultsManager.splash.adLoadTime = Utils.currentAppTime()
-                    AdCacheManager.default.storeAdData(adInfo)
+                    try? AdCacheManager.default.storeAdData(adInfo)
                 })
                 .disposed(by: disposeBag)
         }
@@ -65,7 +65,7 @@ class LaunchAdManager {
                 .subscribe(onSuccess: { (splashInfo) in
                     UserDefaultsManager.splash.splashLoadTime = Utils.currentAppTime()
                     UserDefaultsManager.splash.splashPullInterval = splashInfo.pullInterval
-                    SplashCacheManager.default.storeSplashData(splashInfo)
+                    try? SplashCacheManager.default.storeSplashData(splashInfo)
                 })
                 .disposed(by: disposeBag)
         }

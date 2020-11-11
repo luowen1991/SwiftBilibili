@@ -11,11 +11,7 @@ import UIKit
 struct Screen {
 
     static var isIphoneX: Bool {
-        var isX = false
-        if #available(iOS 11.0, *) {
-            isX = UIApplication.shared.keyWindow!.safeAreaInsets.bottom > 0
-        }
-        return isX
+        return UIApplication.shared.keyWindow!.safeAreaInsets.bottom > 0
     }
     static let width = UIScreen.main.bounds.width
     static let height = UIScreen.main.bounds.height

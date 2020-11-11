@@ -54,8 +54,14 @@ struct UserDefaultsManager {
         var activityTabIsClicked: Bool
     }
 
+    struct User {
+        @SwiftyUserDefault(keyPath: \.token)
+        var token: String
+    }
+
     static var theme = Theme()
     static var splash = Splash()
     static var activity = Activity()
     static var app = App()
+    static var user = User()
 }

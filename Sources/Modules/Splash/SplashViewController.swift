@@ -50,6 +50,8 @@ final class SplashViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationBar.isHidden = true
+
         UserDefaultsManager.splash.agreePolicy ?
             loadOrShowContentImage() :
             presentPrivacyAlert()
@@ -72,7 +74,7 @@ final class SplashViewController: BaseViewController {
 
     private func loadOrShowContentImage() {
 
-        SplashCacheManager.default.cachedImage(.logo) {[weak self] (image,logoPosition,_, _) in
+        try? SplashCacheManager.default.cachedImage(.logo) {[weak self] (image,logoPosition,_, _) in
             guard let self = self else { return }
             self.logoImageView.image = image ?? Image.Launch.pinkLogo
             if logoPosition == .left {
@@ -81,7 +83,8 @@ final class SplashViewController: BaseViewController {
                 }
             }
         }
-        SplashCacheManager.default.cachedImage(.content) {[weak self] (image,_,showType,duration) in
+
+        try? SplashCacheManager.default.cachedImage(.content) {[weak self] (image,_,showType,duration) in
             guard let self = self else { return }
             self.contentImageView.image = image ?? Image.Launch.content
             if showType == .full {
@@ -128,7 +131,7 @@ final class SplashViewController: BaseViewController {
                         }
                         self.hidden(700)
                     }
-                    SplashCacheManager.default.storeSplashData(splashInfo)
+                    try? SplashCacheManager.default.storeSplashData(splashInfo)
                 })
                 .disposed(by: disposeBag)
         }

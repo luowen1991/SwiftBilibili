@@ -29,13 +29,13 @@ struct AdInfoModel: ImmutableMappable {
 
     let minInterval: Double
     let pullInterval: Double
-    let list: [AdItemModel]
+    let list: [AdItemModel]?
     let show: [AdShowModel]?
 
     init(map: Map) throws {
         pullInterval = try map.value("pull_interval")
         minInterval = try map.value("min_interval")
-        list = try map.value("list")
+        list = try? map.value("list")
         show = try? map.value("show")
     }
 }

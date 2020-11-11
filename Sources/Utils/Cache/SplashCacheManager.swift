@@ -22,12 +22,12 @@ struct SplashCacheManager {
 
     static let `default` = SplashCacheManager()
 
-    func storeSplashData(_ splashInfo: SplashInfoModel) {
+    func storeSplashData(_ splashInfo: SplashInfoModel) throws {
         // 如果新的数据和数据库的数据不一样，就清空数据库
-        let items = RealmManager.default.selectByAll(SplashShowRealmModel.self)
+        let items = try SplashShowRealmModel.lw.all()
         if !items.isEmpty,
            !splashInfo.show.contains(where: {$0.id == items.first?.id}) {
-            RealmManager.default.deleteAll()
+            try SplashShowRealmModel.lw.deleteAll()
             items.forEach { ImageCache.default.removeImage(forKey: $0.thumb) }
         }
 
@@ -36,37 +36,34 @@ struct SplashCacheManager {
             for showInfo in splashInfo.show {
                 if let itemInfo = splashInfo.list.first(where: { $0.id == showInfo.id }) {
                     downloadImage(itemInfo)
-                    storeData(showInfo, itemInfo)
+                    try storeData(showInfo, itemInfo)
                 }
             }
         }
     }
 
     func cachedShowItem() -> SplashShowRealmModel? {
-        let items = RealmManager.default.selectByAll(SplashShowRealmModel.self)
-        if items.isEmpty { return nil }
+        guard let items = try? SplashShowRealmModel.lw.all(),
+              !items.isEmpty
+        else { return nil }
         let now = Utils.currentAppTime()
         var showItem = items.filter { $0.beginTime < now && $0.endTime > now && !$0.isShow }.first
         if showItem != nil {
-            RealmManager.default.addCanUpdate { () -> (SplashShowRealmModel) in
-                showItem!.isShow = true
-                return showItem!
+            try? showItem!.lw.edit { (e) in
+                e.isShow = true
             }
         } else { // 全部都显示过了 那就取出第一个
-            RealmManager.default.realm.beginWrite()
-            for (index, item) in items.enumerated() {
-                item.isShow = index == 0
-                RealmManager.default.realm.add(item)
+            for (index,item) in items.enumerated() {
+                try? item.lw.edit({ (e) in
+                    e.isShow = index == 0
+                })
             }
-            do {
-                try RealmManager.default.realm.commitWrite()
-            } catch {}
             showItem = items.first
         }
         return showItem
     }
 
-    func cachedImage(_ type: CacheImageType, completionHandler: ((UIImage?,SplashLogoPosition,SplashShowType,Double) -> Void)?) {
+    func cachedImage(_ type: CacheImageType, completionHandler: ((UIImage?,SplashLogoPosition,SplashShowType,Double) -> Void)?) throws {
         if let cachedShowItem = self.cachedShowItem() {
             let logoPosition = SplashLogoPosition(rawValue: cachedShowItem.logoPosition) ?? .center
             let showType = SplashShowType(rawValue: cachedShowItem.mode) ?? .half
@@ -123,7 +120,7 @@ struct SplashCacheManager {
 
     // 保存数据
     private func storeData(_ showInfo: SplashShowModel,
-                           _ itemInfo: SplashItemModel) {
+                           _ itemInfo: SplashItemModel) throws {
         let showItem = SplashShowRealmModel()
         showItem.beginTime = showInfo.beginTime
         showItem.endTime = showInfo.endTime
@@ -133,6 +130,6 @@ struct SplashCacheManager {
         showItem.duration = showInfo.duration
         showItem.mode = itemInfo.mode.rawValue
         showItem.logoPosition = showInfo.logoPosition.rawValue
-        RealmManager.default.add(showItem)
+        try showItem.lw.save(update: .all)
     }
 }

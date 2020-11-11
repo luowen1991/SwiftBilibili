@@ -21,9 +21,9 @@ extension UIView {
         get { return layer.borderWidth }
         set { layer.borderWidth = newValue }
     }
-    @IBInspectable public var bbBorderColor: UIColor {
+    @IBInspectable public var bbBorderColor: UIColor? {
         get { return UIColor(cgColor: layer.borderColor!) }
-        set { layer.borderColor = newValue.cgColor }
+        set { layer.borderColor = newValue?.cgColor }
     }
 
 }

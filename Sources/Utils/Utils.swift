@@ -13,4 +13,8 @@ struct Utils {
     static func currentAppTime() -> Double {
         return Date().timeIntervalSince1970
     }
+    /// 是否登录
+    static var isLogin: Bool {
+        return !UserDefaultsManager.user.token.isEmpty
+    }
 }

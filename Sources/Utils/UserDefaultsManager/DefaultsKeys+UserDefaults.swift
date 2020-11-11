@@ -10,7 +10,7 @@ import SwiftyUserDefaults
 
 // MARK: Theme
 extension DefaultsKeys {
-    var themeStyle: DefaultsKey<ThemeStyle> { .init("themeStyle", defaultValue: .pink) }
+    var themeStyle: DefaultsKey<ThemeStyle> { .init("themeStyle", defaultValue: .light) }
 }
 
 // MARK: Splash
@@ -30,4 +30,9 @@ extension DefaultsKeys {
 extension DefaultsKeys {
     var activityTabId: DefaultsKey<String> { .init("activityTabId", defaultValue: "") }
     var activityTabIsClicked: DefaultsKey<Bool> { .init(UserDefaultsManager.activity.activityTabId, defaultValue: false) }
+}
+
+// MARK: - User
+extension DefaultsKeys {
+    var token: DefaultsKey<String> { .init("token", defaultValue: "") }
 }

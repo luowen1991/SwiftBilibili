@@ -19,7 +19,7 @@ public extension PrimitiveSequence where Trait == SingleTrait, Element == Respon
         }.do { (error) in
             if error is MapError {
                 // swiftlint:disable force_cast
-                log.error((error as! MapError).description)
+                print((error as! MapError).description)
             }
         }
 

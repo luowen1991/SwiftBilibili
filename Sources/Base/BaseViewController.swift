@@ -8,9 +8,13 @@
 
 import UIKit
 import RxSwift
-import EachNavigationBar
+import HZNavigationBar
 
 class BaseViewController: UIViewController {
+
+    let navigationBar = HZCustomNavigationBar().then {
+        $0.theme.barBackgroundColor = themed { $0.mainColorModel.wh0T }
+    }
 
     var disposeBag = DisposeBag()
 
@@ -40,20 +44,30 @@ class BaseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigation.bar.theme.barTintColor = themed { $0.mainColorModel.wh0T }
+        view.addSubview(navigationBar)
         setupUI()
         view.setNeedsUpdateConstraints()
         setupData()
         bindEvent()
-        resetTheme()
+        setupCommonTheme()
     }
 
     override func updateViewConstraints() {
         if !self.didSetupConstraints {
+            if !navigationBar.isHidden {
+                navigationBar.snp.makeConstraints {
+                    $0.left.right.top.equalToSuperview()
+                    $0.height.equalTo(Screen.navigationBarHeight)
+                }
+            }
             self.setupConstraints()
             self.didSetupConstraints = true
         }
         super.updateViewConstraints()
+    }
+
+    private func setupCommonTheme() {
+        view.theme.backgroundColor = themed { $0.mainColorModel.ga1 }
     }
 
     // MARK: 子类覆写

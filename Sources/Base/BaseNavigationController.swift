@@ -1,5 +1,5 @@
 //
-//  BBNavigationController.swift
+//  BaseNavigationController.swift
 //  SwiftBilibili
 //
 //  Created by luowen on 2020/9/4.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BBNavigationController: UINavigationController {
+class BaseNavigationController: UINavigationController {
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return self.topViewController?.preferredStatusBarStyle ?? .default
@@ -16,8 +16,7 @@ class BBNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.navigationBar.isHidden = true
+        navigationBar.isHidden = true
     }
 
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {

@@ -14,7 +14,7 @@ public extension UIColor {
         self.init(red:red/255.0,green:green/255.0,blue:blue/255.0,alpha:alpha)
     }
 
-    convenience init?(_ hex : String, _ alpha : CGFloat = 1.0) {
+    convenience init?(_ hex : String, alpha : CGFloat = 1.0) {
 
         var hex = hex
         if hex.hasPrefix("#") {

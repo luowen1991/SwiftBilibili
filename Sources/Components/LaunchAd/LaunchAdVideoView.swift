@@ -74,7 +74,6 @@ class LaunchAdVideoView: UIView {
     func stop() {
         videoPlayer.player?.pause()
         videoPlayer.player = nil
-        videoPlayer.view.removeFromSuperview()
         try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
     }
 
@@ -88,8 +87,10 @@ class LaunchAdVideoView: UIView {
         guard let playerItem = noti.object as? AVPlayerItem else { return }
 
         if !videoCycleOnce {
-            playerItem.seek(to: .zero)
-            videoPlayer.player?.play()
+            playerItem.seek(to: .zero) {[weak self] (_) in
+                guard let self = self else { return }
+                self.videoPlayer.player?.play()
+            }
         }
     }
 

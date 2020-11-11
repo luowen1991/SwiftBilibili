@@ -37,7 +37,7 @@ extension ConfigAPI: TargetType, Cacheable {
         }
     }
 
-    var method: Method {
+    var method: Moya.Method {
         switch self {
         case .splashList,.adList,.tabList:
             return .get

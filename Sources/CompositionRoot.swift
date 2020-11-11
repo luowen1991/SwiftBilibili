@@ -15,29 +15,46 @@ import Toast_Swift
 import Moya
 import SwiftDate
 import URLNavigator
+import RealmSwift
+import Realm
+import Tiercel
 
 struct AppDependency {
 
     let window: UIWindow
+    let adSessionManager: SessionManager
     let startNetworkStatusNotifier: () -> Void
     let loadLocalResource: () -> Void
-    let setupRootViewController: (UIWindow) -> Void
     let setupAppConfig: () -> Void
+    let setupRootViewController: (UIWindow) -> Void
+
 }
+
+let navigator = Navigator()
 
 final class CompositionRoot {
 
     static func resolve() -> AppDependency {
 
+        NavigationMap.initialize(navigator: navigator)
+
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.backgroundColor = .white
         window.makeKeyAndVisible()
 
+        var configuration = SessionConfiguration()
+        configuration.allowsCellularAccess = true
+        let path = Cache.defaultDiskCachePathClosure("ad")
+        let cache = Cache("LaunchAdCacheManager", downloadPath: path)
+        let manager = SessionManager("LaunchAdCacheManager", configuration: configuration, cache: cache, operationQueue: DispatchQueue(label: "com.Bilibili.SessionManager.operationQueue"))
+
         return AppDependency(window: window,
+                             adSessionManager: manager,
                              startNetworkStatusNotifier: startNetworkStatusNotifier,
                              loadLocalResource: loadLocalResource,
-                             setupRootViewController: setupRootViewController,
-                             setupAppConfig: setupAppConfig)
+                             setupAppConfig: setupAppConfig,
+                             setupRootViewController: setupRootViewController
+                             )
     }
 
     static func loadLocalResource() {
@@ -65,7 +82,7 @@ final class CompositionRoot {
         var presentMainScreen: () -> Void
 
         presentMainScreen = {
-            let tabBar = BBTabBarController()
+            let tabBar = BaseTabBarController()
             window.rootViewController = tabBar
         }
 
@@ -76,8 +93,7 @@ final class CompositionRoot {
 
     static func setupAppConfig() {
 
-        // 网络偏好设置
-        // 添加全局默认参数
+        // 设置网络
         Network.Configuration.default.replacingTask = { target in
             switch target.task {
             case .requestParameters(var parameters, let encoding):
@@ -93,5 +109,17 @@ final class CompositionRoot {
         // 设置时区
         let china = Region(calendar: Calendars.chinese, zone: Zones.asiaShanghai, locale: Locales.chinese)
         SwiftDate.defaultRegion = china
+
+        // 设置realm数据库
+        let config = Realm.Configuration(
+            fileURL: URL(fileURLWithPath: RLMRealmPathForFile("BiliBili.realm")),
+            schemaVersion: 1,
+            migrationBlock: { (_, oldSchemaVersion) in
+                if oldSchemaVersion < 1 {
+
+                }
+            })
+        Realm.Configuration.defaultConfiguration = config
+
     }
 }

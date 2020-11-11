@@ -37,4 +37,9 @@ struct Image {
         static let whiteBack = UIImage(named: "column_back_white_8x14_")
         static let whiteArrow = UIImage(named: "arrow_right_white_24x24_")
     }
+
+    struct Home {
+        static let topGame = UIImage(named: "top_btn_game_centerhome_icon_22x22_")
+        static let topIM = UIImage(named: "top_btn_linkim_home_icon_22x22_")
+    }
 }
