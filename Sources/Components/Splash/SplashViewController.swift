@@ -50,8 +50,6 @@ final class SplashViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationBar.isHidden = true
-
         UserDefaultsManager.splash.agreePolicy ?
             loadOrShowContentImage() :
             presentPrivacyAlert()

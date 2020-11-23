@@ -22,7 +22,7 @@ target ‘SwiftBilibili’ do
   pod 'RxOptional', '~> 4.1.0'
   pod 'RxTheme', '~> 4.1.1'
   pod 'RxReachability', '~> 1.0.0'
-  pod 'RxRealm', '~> 3.1.0'
+  pod 'RealmSwift', '~> 10.1.3'
 
   # Layout
   pod 'SnapKit', '~> 5.0.1'
@@ -33,8 +33,7 @@ target ‘SwiftBilibili’ do
   pod 'FSPagerView', '~> 0.8.3'         #轮播图
   pod 'Toast-Swift', '~> 5.0.1'
   pod 'SwiftEntryKit', '~> 1.2.5'       #弹出视图
-  #pod 'EachNavigationBar', '~> 1.14.4'
-  pod 'HZNavigationBar', '~> 1.3.0'
+  pod 'EachNavigationBar', '~> 1.14.4'
 
   # Logging
   pod 'CocoaLumberjack/Swift', '~> 3.6.2'
@@ -54,6 +53,7 @@ target ‘SwiftBilibili’ do
   pod 'ObjectMapper', '~> 4.2.0'
   pod 'Moya/RxSwift', '~> 14.0.0'
   pod 'SwiftyJSON', '~> 5.0'
+  pod "PromiseKit", "~> 6.13.1"
 
   # Lint
   pod 'SwiftLint', '~> 0.40.3'

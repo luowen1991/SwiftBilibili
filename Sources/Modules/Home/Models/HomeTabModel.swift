@@ -26,7 +26,7 @@ struct HomeTabItemModel: ImmutableMappable {
 
     var id: Int
     var name: String
-    var uri: String
+    var url: String
     var tabId: String
     var pos: Int
     var icon: String?
@@ -36,7 +36,7 @@ struct HomeTabItemModel: ImmutableMappable {
     init(map: Map) throws {
         id = try map.value("id")
         name = try map.value("name")
-        uri = try map.value("uri")
+        url = try map.value("uri")
         tabId = try map.value("tab_id")
         pos = try map.value("pos")
         icon = try? map.value("icon")

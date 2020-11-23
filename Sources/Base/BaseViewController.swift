@@ -8,13 +8,9 @@
 
 import UIKit
 import RxSwift
-import HZNavigationBar
+import EachNavigationBar
 
 class BaseViewController: UIViewController {
-
-    let navigationBar = HZCustomNavigationBar().then {
-        $0.theme.barBackgroundColor = themed { $0.mainColorModel.wh0T }
-    }
 
     var disposeBag = DisposeBag()
 
@@ -44,7 +40,6 @@ class BaseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(navigationBar)
         setupUI()
         view.setNeedsUpdateConstraints()
         setupData()
@@ -54,12 +49,6 @@ class BaseViewController: UIViewController {
 
     override func updateViewConstraints() {
         if !self.didSetupConstraints {
-            if !navigationBar.isHidden {
-                navigationBar.snp.makeConstraints {
-                    $0.left.right.top.equalToSuperview()
-                    $0.height.equalTo(Screen.navigationBarHeight)
-                }
-            }
             self.setupConstraints()
             self.didSetupConstraints = true
         }
@@ -67,7 +56,19 @@ class BaseViewController: UIViewController {
     }
 
     private func setupCommonTheme() {
-        view.theme.backgroundColor = themed { $0.mainColorModel.ga1 }
+
+        themeService.attrsStream
+            .subscribe(onNext: {[weak self] (theme) in
+                guard let self = self else { return }
+                self.view.backgroundColor = theme.mainColorModel.ga1
+                self.navigation.bar.titleTextAttributes = [.foregroundColor: theme.mainColorModel.wh0]
+                self.navigation.bar.barTintColor = theme.mainColorModel.wh0T
+                if self.navigationController?.viewControllers.count ?? 0 > 1 {
+                    self.navigation.bar.backBarButtonItem = .init(style: .image(Image.Common.whiteBack), tintColor: theme.mainColorModel.ga7T)
+                }
+                self.resetTheme(theme: theme)
+            })
+            .disposed(by: disposeBag)
     }
 
     // MARK: 子类覆写
@@ -83,9 +84,7 @@ class BaseViewController: UIViewController {
     }
 
     /// 子类覆写主题改变时设置样式
-    func resetTheme() {
-
-    }
+    func resetTheme(theme: Theme) {}
 
     /// 子类覆写绑定事件
     func bindEvent() {

@@ -24,3 +24,5 @@ extension HomeCinemaViewController: JXSegmentedListContainerViewListDelegate {
         return self.view
     }
 }
+
+extension HomeCinemaViewController: Routerable {}

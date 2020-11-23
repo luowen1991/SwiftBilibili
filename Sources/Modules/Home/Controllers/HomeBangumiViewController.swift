@@ -25,3 +25,5 @@ extension HomeBangumiViewController: JXSegmentedListContainerViewListDelegate {
         return self.view
     }
 }
+
+extension HomeBangumiViewController: Routerable {}

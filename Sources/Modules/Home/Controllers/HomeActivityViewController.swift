@@ -24,3 +24,5 @@ extension HomeActivityViewController: JXSegmentedListContainerViewListDelegate {
         return self.view
     }
 }
+
+extension HomeActivityViewController: Routerable {}

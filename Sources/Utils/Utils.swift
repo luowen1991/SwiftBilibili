@@ -10,7 +10,7 @@ import SwiftDate
 
 struct Utils {
     /// 当前app时间
-    static func currentAppTime() -> Double {
+    static func currentAppTime() -> TimeInterval {
         return Date().timeIntervalSince1970
     }
     /// 是否登录

@@ -10,7 +10,6 @@ import Foundation
 
 import Kingfisher
 import RealmSwift
-import RxRealm
 import RxSwift
 
 enum CacheImageType {

@@ -14,6 +14,17 @@ class ThemeManager {
 
     var mainStyleModels: [ThemeMainStyleModel] = []
 
+    var currentStyleModel: ThemeMainStyleModel {
+        switch UserDefaultsManager.theme.style {
+        case .dark:
+            return darkStyleModel
+        case .light:
+            return lightStyleModel
+        case .pink:
+            return pinkStyleModel
+        }
+    }
+
     var lightStyleModel: ThemeMainStyleModel {
         if _lightStyleModel == nil {
             _lightStyleModel = mainStyleModels.filter {$0.style == .light}.first!

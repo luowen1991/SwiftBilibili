@@ -9,23 +9,21 @@
 import UIKit
 
 enum FontStyle: String {
-    case system = "San Fransico"
+    case `default` = "San Fransico"
     case helvetica = "Helvetica"
 }
 
 struct Font {
     // app的字体
     static func appFont(ofSize fontSize: CGFloat,
-                        style: FontStyle = .system,
+                        style: FontStyle = .default,
                         weight: UIFont.Weight = .regular) -> UIFont {
-
         switch style {
-        case .system:
+        case .default:
             return UIFont.systemFont(ofSize: fontSize.auto(), weight: weight)
         case .helvetica:
             return UIFont.monospacedDigitSystemFont(ofSize: fontSize.auto(), weight: weight)
         }
-
     }
 
 }

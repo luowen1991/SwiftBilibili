@@ -37,7 +37,7 @@ final class BaseWebViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        customLeftNavItem()
+        //customLeftNavItem()
         loadUrl()
     }
 
@@ -139,3 +139,5 @@ extension BaseWebViewController: WKNavigationDelegate {
     }
 
 }
+
+extension BaseWebViewController: Routerable {}

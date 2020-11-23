@@ -8,10 +8,10 @@ PODS:
   - Differentiator (4.0.1)
   - Dollar (9.0.0)
   - dsBridge (3.0.6)
+  - EachNavigationBar (1.14.4)
   - EmptyKit (4.2.0)
   - ESPullToRefresh (2.9.3)
   - FSPagerView (0.8.3)
-  - HZNavigationBar (1.3.0)
   - JXSegmentedView (1.2.7)
   - Kingfisher (5.15.6):
     - Kingfisher/Core (= 5.15.6)
@@ -23,17 +23,26 @@ PODS:
     - Moya/Core
     - RxSwift (~> 5.0)
   - ObjectMapper (4.2.0)
+  - PromiseKit (6.13.1):
+    - PromiseKit/CorePromise (= 6.13.1)
+    - PromiseKit/Foundation (= 6.13.1)
+    - PromiseKit/UIKit (= 6.13.1)
+  - PromiseKit/CorePromise (6.13.1)
+  - PromiseKit/Foundation (6.13.1):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.13.1):
+    - PromiseKit/CorePromise
   - Protobuf (3.13.0)
   - QuickLayout (3.0.0)
   - ReachabilitySwift (4.3.1)
   - ReactorKit (2.1.0):
     - RxSwift (~> 5.0)
     - WeakMapTable (~> 1.1)
-  - Realm (5.5.0):
-    - Realm/Headers (= 5.5.0)
-  - Realm/Headers (5.5.0)
-  - RealmSwift (5.5.0):
-    - Realm (= 5.5.0)
+  - Realm (10.1.3):
+    - Realm/Headers (= 10.1.3)
+  - Realm/Headers (10.1.3)
+  - RealmSwift (10.1.3):
+    - Realm (= 10.1.3)
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
@@ -51,9 +60,6 @@ PODS:
     - ReachabilitySwift (~> 4.3.1)
     - RxCocoa (~> 5)
     - RxSwift (~> 5)
-  - RxRealm (3.1.0):
-    - RealmSwift (~> 5.2)
-    - RxSwift (~> 5.0)
   - RxRelay (5.1.1):
     - RxSwift (~> 5)
   - RxSwift (5.1.1)
@@ -90,22 +96,23 @@ DEPENDENCIES:
   - CocoaLumberjack/Swift (~> 3.6.2)
   - Dollar (~> 9.0.0)
   - dsBridge (~> 3.0.6)
+  - EachNavigationBar (~> 1.14.4)
   - EmptyKit (~> 4.2.0)
   - ESPullToRefresh (~> 2.9.3)
   - FSPagerView (~> 0.8.3)
-  - HZNavigationBar (~> 1.3.0)
   - JXSegmentedView (~> 1.2.7)
   - Kingfisher (~> 5.15.3)
   - lottie-ios (~> 3.1.8)
   - Moya/RxSwift (~> 14.0.0)
   - ObjectMapper (~> 4.2.0)
+  - PromiseKit (~> 6.8)
   - ReactorKit (~> 2.1.0)
+  - RealmSwift (~> 10.1.3)
   - RxCocoa (~> 5.1.1)
   - RxDataSources (~> 4.0.1)
   - RxGesture (~> 3.0.2)
   - RxOptional (~> 4.1.0)
   - RxReachability (~> 1.0.0)
-  - RxRealm (~> 3.1.0)
   - RxTheme (~> 4.1.1)
   - SnapKit (~> 5.0.1)
   - SVGAPlayer (~> 2.5.4)
@@ -130,15 +137,16 @@ SPEC REPOS:
     - Differentiator
     - Dollar
     - dsBridge
+    - EachNavigationBar
     - EmptyKit
     - ESPullToRefresh
     - FSPagerView
-    - HZNavigationBar
     - JXSegmentedView
     - Kingfisher
     - lottie-ios
     - Moya
     - ObjectMapper
+    - PromiseKit
     - Protobuf
     - QuickLayout
     - ReachabilitySwift
@@ -150,7 +158,6 @@ SPEC REPOS:
     - RxGesture
     - RxOptional
     - RxReachability
-    - RxRealm
     - RxRelay
     - RxSwift
     - RxTheme
@@ -178,27 +185,27 @@ SPEC CHECKSUMS:
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   Dollar: 2fc9bdeeb2d3ae1f251461803240d5c93829ee0c
   dsBridge: 48b62ee8a411ad601a88d6f6c8cf6cb634b206b7
+  EachNavigationBar: 9000bc381312c65a86ab1f6c31b526ea675411f6
   EmptyKit: 95d75cad79476379124e929488116e409043c1d5
   ESPullToRefresh: 0d68daa602b343c81753a1b95e09fd0bfcddfd40
   FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
-  HZNavigationBar: dcdf8b5ecb831e5dc2cb8c47c61ed91383f5da3c
   JXSegmentedView: eb1cad21f57c2543c00c3e08b8fd3c7ca54f5acd
   Kingfisher: b3554e7bf6106115b44e8795300bad580ef2fdc7
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
+  PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
   ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
   ReactorKit: 12a93358c554bb3f167b16b14c40374fa9cd5acd
-  Realm: fb399d76f44042e5cdfc630f33828fdb4d077345
-  RealmSwift: 3b7e62356207ef16d34de4e55d475163bd2062bb
+  Realm: 072f4060c99150cb1d35e35ce1dd4dda7d9ddfed
+  RealmSwift: 96f96feafee63186789419235d14857dae9004ae
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
   RxGesture: d6bd7447ca3a596c7a9702a6a2b6a2bb5d8bae54
   RxOptional: b1fcd60856807a564c0215c2184b8d33e7826dc2
   RxReachability: 21d3e96f39bc166a21c357e923f47dec148ca97b
-  RxRealm: 50e5fe5c1f22518205afbb313fbc5580d73bc586
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   RxTheme: 7cda2f036363a0b620cf07b3480cbbbbb00c1d25
@@ -218,6 +225,6 @@ SPEC CHECKSUMS:
   URLNavigator: 2593c0e2d293732ec5c44503cf54dceba1a68085
   WeakMapTable: 05c694ce8439a7a9ebabb56187287a63c57673d6
 
-PODFILE CHECKSUM: 9bc1661fe39cf1d9c487db96c0a01aa727d76926
+PODFILE CHECKSUM: 1b00294c64941ee3a1e6daf152118fb528669274
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.0

@@ -30,7 +30,7 @@ class NetErrorManager {
                     self.showNoConnectionView()
                 case let .executeException(.executeFail(_, msg)):
                     if let msg = msg {
-                        ToastManager.show(msg)
+                        Toast.show(message: msg)
                     }
                 case .responseException(.unacceptableStatusCode(let code)):
                     // 在这里处理401等错误 code == 401
@@ -53,7 +53,6 @@ class NetErrorManager {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview().offset(-40)
         }
-
         view.retrySubject
             .bind(to: retrySubject)
             .disposed(by: disposeBag)

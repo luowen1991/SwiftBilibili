@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EachNavigationBar
 
 final class BaseTabBarController: UITabBarController {
 
@@ -55,6 +56,8 @@ final class BaseTabBarController: UITabBarController {
         child.tabBarItem.selectedImage = selectedImage?.withRenderingMode(.alwaysOriginal)
 
         let navController = BaseNavigationController(rootViewController: child)
+        navController.navigation.configuration.isEnabled = true
+        navController.navigation.configuration.isShadowHidden = true
         addChild(navController)
     }
 

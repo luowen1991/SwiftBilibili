@@ -44,7 +44,7 @@ final class MineViewController: BaseViewController {
             themeService.switch(style)
             UserDefaultsManager.theme.style = style
             self?.setNeedsStatusBarAppearanceUpdate()
-            ToastManager.show("换主题成功")
+            Toast.show(message: "换主题成功")
         }).disposed(by: disposeBag)
 
         themeService.typeStream.subscribe(onNext: {[weak self] (style) in

@@ -38,3 +38,5 @@ extension HomeOptionalViewController: JXSegmentedListContainerViewListDelegate {
         return self.view
     }
 }
+
+extension HomeOptionalViewController: Routerable {}

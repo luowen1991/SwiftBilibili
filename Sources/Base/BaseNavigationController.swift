@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EachNavigationBar
 
 class BaseNavigationController: UINavigationController {
 
@@ -16,7 +17,6 @@ class BaseNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationBar.isHidden = true
     }
 
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {

@@ -13,12 +13,13 @@ final class HomePromoViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationBar.isHidden = true
     }
 
     override func setupUI() {
     }
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    }
 }
 
 extension HomePromoViewController: JXSegmentedListContainerViewListDelegate {
@@ -26,4 +27,8 @@ extension HomePromoViewController: JXSegmentedListContainerViewListDelegate {
     func listView() -> UIView {
         return self.view
     }
+}
+
+extension HomePromoViewController: Routerable {
+
 }

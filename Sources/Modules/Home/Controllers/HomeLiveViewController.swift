@@ -13,7 +13,6 @@ final class HomeLiveViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
 
     override func setupUI() {}
@@ -25,3 +24,5 @@ extension HomeLiveViewController: JXSegmentedListContainerViewListDelegate {
         return self.view
     }
 }
+
+extension HomeLiveViewController: Routerable {}

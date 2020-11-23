@@ -9,8 +9,6 @@
 import UIKit
 import JXSegmentedView
 import SwiftyImage
-import Kingfisher
-import HZNavigationBar
 
 final class HomeMainViewController: BaseViewController {
 
@@ -26,46 +24,30 @@ final class HomeMainViewController: BaseViewController {
     private var haveTabCache: Bool = false
 
     override func viewDidLoad() {
-        super.viewDidLoad()
         setupNavigationBar()
+        super.viewDidLoad()
         loadData()
     }
 
     // MARK: Private Method
     private func setupNavigationBar() {
-        ImageDownloader.default.downloadImage(with: URL(string: Const.unLoginAvatarUrl)!, completionHandler: {[unowned self] (result) in
-            switch result {
-            case .success(let info):
-                let avatarItem = HZNavigationBarItem.create(normalImage: info.image) { (_) in
 
-                }
-                avatarItem?.bbCornerRadius = 20
-                self.navigationBar.hz.setItemsToLeft([avatarItem])
-            default:break
-            }
-        })
-//        let imItem = UIBarButtonItem(customView: UIImageView(image: Image.Home.topIM))
-//        let gameItem = UIBarButtonItem(customView: UIImageView(image: Image.Home.topGame))
-//        let spaceItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-//        spaceItem.width = Metric.barItemSpace
-        //navigation.item.rightBarButtonItems = [imItem,spaceItem,gameItem]
-    }
+        let imItem = UIBarButtonItem(customView: UIImageView(image: Image.Home.topIM))
+        let gameItem = UIBarButtonItem(customView: UIImageView(image: Image.Home.topGame))
+        let spaceItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        spaceItem.width = Metric.barItemSpace
+        navigation.item.rightBarButtonItems = [imItem,spaceItem,gameItem]
 
-    private func updateNavigationBar() {
-        var rightBarItems: [UIBarButtonItem] = []
-        for (index,item) in topItems.enumerated() {
-            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
-            imageView.contentMode = .scaleAspectFit
-            imageView.setImage(with: URL(string: item.icon ?? ""))
-            let barItem = UIBarButtonItem(customView: imageView)
-            rightBarItems.append(barItem)
-            if index != topItems.count - 1 {
-                let spaceItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-                spaceItem.width = Metric.barItemSpace
-                rightBarItems.append(spaceItem)
-            }
+        let avatarContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        avatarContainerView.bbCornerRadius = 20
+        let avatarImageView = UIImageView(frame: avatarContainerView.bounds)
+        avatarContainerView.addSubview(avatarImageView)
+        if Utils.isLogin {
+
+        } else {
+            avatarImageView.setImage(with: URL(string: Const.unLoginAvatarUrl))
         }
-        //navigation.item.rightBarButtonItems = rightBarItems
+        navigation.item.leftBarButtonItem = UIBarButtonItem(customView: avatarContainerView)
     }
 
     private func loadData() {
@@ -76,9 +58,6 @@ final class HomeMainViewController: BaseViewController {
                 guard let self = self else { return }
                 self.haveTabCache = true
                 self.reloadSegmentView(info)
-                self.updateNavigationBar()
-                self.updateTheme()
-
             }
             .requestObject()
             .subscribe(onSuccess: {[weak self] (info) in
@@ -86,8 +65,6 @@ final class HomeMainViewController: BaseViewController {
                       !self.haveTabCache
                 else { return }
                 self.reloadSegmentView(info)
-                self.updateNavigationBar()
-                self.updateTheme()
             })
             .disposed(by: disposeBag)
 
@@ -103,6 +80,30 @@ final class HomeMainViewController: BaseViewController {
     }
 
     private func reloadSegmentView(_ info: HomeTabInfoModel) {
+
+        func updateNavigationBar() {
+            var rightBarItems: [UIBarButtonItem] = []
+            for (index,item) in topItems.enumerated() {
+                let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
+                imageView.contentMode = .scaleAspectFit
+                imageView.setImage(with: URL(string: item.icon ?? "")) { (result) in
+                    switch result {
+                    case .success(let info):
+                        imageView.image = info.image.with(color: ThemeManager.shared.currentStyleModel.colors.ga7T)
+                    default:break
+                    }
+                }
+                let barItem = UIBarButtonItem(customView: imageView)
+                rightBarItems.append(barItem)
+                if index != topItems.count - 1 {
+                    let spaceItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+                    spaceItem.width = Metric.barItemSpace
+                    rightBarItems.append(spaceItem)
+                }
+            }
+            navigation.item.rightBarButtonItems = rightBarItems
+        }
+
         tabItems = info.tab.sorted { $0.pos < $1.pos }
         topItems = info.top.sorted { $0.pos > $1.pos }
         let defaultSelectedIndex = tabItems.compactMap { $0.defaultSelected }.first ?? 1
@@ -120,35 +121,25 @@ final class HomeMainViewController: BaseViewController {
         self.listContainerView.defaultSelectedIndex = defaultSelectedIndex
         self.listContainerView.reloadData()
         self.separatorLine.isHidden = false
+
+        updateNavigationBar()
     }
 
-    private func updateTheme() {
-        themeService.attrsStream
-            .subscribe(onNext: {[weak self] (theme) in
-                guard let self = self else { return }
-                self.separatorLine.backgroundColor = theme.mainColorModel.ga0
-                self.indicator.indicatorColor = theme.mainColorModel.pi5
-                self.segmentedView.backgroundColor = theme.mainColorModel.wh0
-                self.segmentedDataSource.titleNormalColor = theme.mainColorModel.ga6
-                self.segmentedDataSource.titleSelectedColor = theme.mainColorModel.pi6
-
-//                let barItems = self.navigationItem.rightBarButtonItems?.filter { $0.customView != nil }
-//                for (index,item) in self.topItems.enumerated() {
-//                    guard let icon = item.icon,
-//                          let buttonItem = barItems?[index],
-//                          let imageView = buttonItem.customView as? UIImageView
-//                    else { continue }
-//
-//                    ImageCache.default.retrieveImage(forKey: icon) { (result) in
-//                        switch result {
-//                        case .success(let cache):
-//                            imageView.image = cache.image?.with(color: theme.mainColorModel.ga7T)
-//                        default:break
-//                        }
-//                    }
-//                }
-            })
-            .disposed(by: disposeBag)
+    override func resetTheme(theme: Theme) {
+        super.resetTheme(theme: theme)
+        self.separatorLine.backgroundColor = theme.mainColorModel.ga0
+        self.indicator.indicatorColor = theme.mainColorModel.pi5
+        self.segmentedView.backgroundColor = theme.mainColorModel.wh0
+        self.segmentedDataSource.titleNormalColor = theme.mainColorModel.ga6
+        self.segmentedDataSource.titleSelectedColor = theme.mainColorModel.pi6
+        self.navigation.item.rightBarButtonItems?.forEach({ (item) in
+            guard let imageView = item.customView as? UIImageView,
+                  let image = imageView.image
+            else {
+                return
+            }
+            imageView.image = image.with(color: theme.mainColorModel.ga7T)
+        })
     }
 
     override func setupUI() {
@@ -160,7 +151,7 @@ final class HomeMainViewController: BaseViewController {
     override func setupConstraints() {
         segmentedView.snp.makeConstraints {
             $0.left.right.equalToSuperview()
-            $0.top.equalTo(navigationBar.snp.bottom)
+            $0.top.equalTo(Screen.navigationBarHeight)
             $0.height.equalTo(Metric.segmentedViewHeight)
         }
 
@@ -244,7 +235,7 @@ extension HomeMainViewController: JXSegmentedListContainerViewDataSource {
 
     func listContainerView(_ listContainerView: JXSegmentedListContainerView, initListAt index: Int) -> JXSegmentedListContainerViewListDelegate {
         let itemModel = tabItems[index]
-        guard let controller = navigator.viewController(for: itemModel.uri) as? JXSegmentedListContainerViewListDelegate else {
+        guard let controller = HomeRouter.viewController(itemModel.url) as? JXSegmentedListContainerViewListDelegate else {
             fatalError("controller not confirm to JXSegmentedListContainerViewListDelegate")
         }
         return controller

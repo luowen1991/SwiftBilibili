@@ -24,3 +24,10 @@ extension HomeHotViewController: JXSegmentedListContainerViewListDelegate {
         return self.view
     }
 }
+
+extension HomeHotViewController: Routerable {
+
+    func open(with completion: @escaping () -> Void) {
+        UIViewController.topMost?.present(self, animated: true, completion: completion)
+    }
+}

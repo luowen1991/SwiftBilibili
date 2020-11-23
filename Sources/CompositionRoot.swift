@@ -30,14 +30,9 @@ struct AppDependency {
 
 }
 
-let navigator = Navigator()
-
 final class CompositionRoot {
 
     static func resolve() -> AppDependency {
-
-        NavigationMap.initialize(navigator: navigator)
-
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.backgroundColor = .white
         window.makeKeyAndVisible()
@@ -48,13 +43,17 @@ final class CompositionRoot {
         let cache = Cache("LaunchAdCacheManager", downloadPath: path)
         let manager = SessionManager("LaunchAdCacheManager", configuration: configuration, cache: cache, operationQueue: DispatchQueue(label: "com.Bilibili.SessionManager.operationQueue"))
 
+        let navigator = Navigator()
+        Router.initialize(navigator: navigator)
+        HomeRouter.initialize(navigator: navigator)
+
         return AppDependency(window: window,
                              adSessionManager: manager,
                              startNetworkStatusNotifier: startNetworkStatusNotifier,
                              loadLocalResource: loadLocalResource,
                              setupAppConfig: setupAppConfig,
                              setupRootViewController: setupRootViewController
-                             )
+        )
     }
 
     static func loadLocalResource() {
@@ -93,6 +92,9 @@ final class CompositionRoot {
 
     static func setupAppConfig() {
 
+        // 适配ios13，将present变为全屏
+        UIViewController.swizzlePresent()
+
         // 设置网络
         Network.Configuration.default.replacingTask = { target in
             switch target.task {
@@ -105,6 +107,16 @@ final class CompositionRoot {
             }
         }
         // 设置全局toast的样式
+        var style = ToastStyle()
+        style.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        style.cornerRadius = 6
+        style.horizontalPadding = 10
+        style.verticalPadding = 12
+        style.messageAlignment = .center
+        style.titleAlignment = .center
+        style.titleFont = Font.appFont(ofSize: 17)
+        style.messageFont = Font.appFont(ofSize: 15)
+        ToastManager.shared.style = style
 
         // 设置时区
         let china = Region(calendar: Calendars.chinese, zone: Zones.asiaShanghai, locale: Locales.chinese)
