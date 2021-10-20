@@ -8,7 +8,9 @@
 
 // swiftlint:disable line_length
 
-import Moya
+import LWNetwork
+import LWExtensionKit
+import Alamofire
 
 /// app中的一些配置API 比如广告 开屏 上传
 enum ConfigAPI {
@@ -20,48 +22,34 @@ enum ConfigAPI {
     case tabList
 }
 
-extension ConfigAPI: TargetType, Cacheable {
+extension ConfigAPI: SugarTargetType {
 
     var baseURL: URL {
-        return URL(string: "http://app.bilibili.com")!
+        return URL(string: "https://app.bilibili.com")!
     }
 
-    var path: String {
+    var route: Route {
         switch self {
         case .splashList:
-            return "/x/v2/splash/brand/list"
+            return .get("/x/v2/splash/brand/list")
         case .adList:
-            return "/x/v2/splash/list"
+            return .get("/x/v2/splash/list")
         case .tabList:
-            return "/x/resource/show/tab"
+            return .get("/x/resource/show/tab")
         }
     }
 
-    var method: Moya.Method {
-        switch self {
-        case .splashList,.adList,.tabList:
-            return .get
-        }
-    }
-
-    var sampleData: Data {
-        return Data()
-    }
-
-    var task: Task {
+    var parameters: LWNetwork.Parameters? {
         switch self {
         case .splashList:
-            return .requestParameters(parameters: ["network": NetStatusManager.default.reachabilityConnection.value.description.lowercased(),"ts":"1601015546","sign":"44f144f16da5ab6d758d767282df6186","statistics":"%7B%22appId%22%3A1%2C%22version%22%3A%226.10.0%22%2C%22abtest%22%3A%22%22%2C%22platform%22%3A1%7D","build":"10300","screen_height":"2436","screen_width":"1125"], encoding: URLEncoding.default)
+            return ["last_read_at": -1,"network": "wifi","screen_height": 2532,"screen_width": 1170,"sign": "480c2bdb137ed9e0b41dc0ccf4343f7c","ts": 1634623698]
         case .adList:
-            return .requestParameters(parameters: ["ad_extra":adExtra,"birth":"","height":"2436","width":"1125","sign":"625b697f828703ee8d62f26045bba2e0","build":"10300","ts":"1601015546","statistics":"%7B%22appId%22%3A1%2C%22version%22%3A%226.10.0%22%2C%22abtest%22%3A%22%22%2C%22platform%22%3A1%7D"], encoding: URLEncoding.default)
+            return ["ad_extra":adExtra,"birth":"","height":"2436","width":"1125","sign":"625b697f828703ee8d62f26045bba2e0","build":"10300","ts":"1601015546","statistics":"%7B%22appId%22%3A1%2C%22version%22%3A%226.10.0%22%2C%22abtest%22%3A%22%22%2C%22platform%22%3A1%7D"]
         case .tabList:
-            return .requestParameters(parameters: ["appver":"10300","filtered":"1","sign":"9ce189481c9014339ee1fbda152bcb03","build":"10300","ts":"1601015545","statistics":"%7B%22appId%22%3A1%2C%22version%22%3A%226.10.0%22%2C%22abtest%22%3A%22%22%2C%22platform%22%3A1%7D"], encoding: URLEncoding.default)
+            return ["appver":"10300","filtered":"1","sign":"9ce189481c9014339ee1fbda152bcb03","build":"10300","ts":"1601015545","statistics":"%7B%22appId%22%3A1%2C%22version%22%3A%226.10.0%22%2C%22abtest%22%3A%22%22%2C%22platform%22%3A1%7D"]
         }
     }
 
-    var headers: [String : String]? {
-        return nil
-    }
 }
 
 extension ConfigAPI {

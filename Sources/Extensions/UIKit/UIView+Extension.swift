@@ -25,5 +25,4 @@ extension UIView {
         get { return UIColor(cgColor: layer.borderColor!) }
         set { layer.borderColor = newValue?.cgColor }
     }
-
 }

@@ -27,6 +27,7 @@ extension RouterType: RouterTypeable {
             return "https://<path:_>"
         case .error:
             return "bilibili://<path:_>"
+
         }
     }
 }

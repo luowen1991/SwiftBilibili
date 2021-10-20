@@ -50,3 +50,4 @@ identifier_name:
     - URL
     - GlobalAPIKey
 reporter: "xcode" # 报告类型 (xcode, json, csv, checkstyle)
+cyclomatic_complexity: 30

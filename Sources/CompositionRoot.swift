@@ -15,9 +15,10 @@ import Toast_Swift
 import Moya
 import SwiftDate
 import URLNavigator
-import RealmSwift
-import Realm
 import Tiercel
+import LWNetwork
+import LWExtensionKit
+import BBNetworkEx
 
 struct AppDependency {
 
@@ -73,7 +74,9 @@ final class CompositionRoot {
     }
 
     static func startNetworkStatusNotifier() {
-        NetStatusManager.default.startNetworkStatusNotifier()
+        NetworkReachabilityManager.startListening { status in
+            print("当前的网络状态: \(status)")
+        }
     }
 
     static func setupRootViewController(_ window: UIWindow) {
@@ -93,19 +96,21 @@ final class CompositionRoot {
     static func setupAppConfig() {
 
         // 适配ios13，将present变为全屏
-        UIViewController.swizzlePresent()
+        UIViewController.ex.swizzlePresent()
 
-        // 设置网络
-        Network.Configuration.default.replacingTask = { target in
-            switch target.task {
-            case .requestParameters(var parameters, let encoding):
-                let additionalParameters = RequestParamsManager.defaultParameters()
-                additionalParameters.forEach { parameters[$0.key] = $0.value }
-                return .requestParameters(parameters: parameters, encoding: encoding)
-            default:
-                return target.task
+        // 设置网络通用参数
+        Network.Configuration.shared.replacingTask = { target in
+            let additionDictionary = ParamrtersUtils.commonParameters
+            if let parameters = target.parameters {
+                var requestDictionary = parameters.values
+                additionDictionary.forEach { requestDictionary[$0.key] = $0.value }
+                return .requestParameters(parameters: requestDictionary, encoding: parameters.encoding)
+            } else {
+                let encoding: ParameterEncoding = target.method == .post ? JSONEncoding.default : URLEncoding.default
+                return .requestParameters(parameters: additionDictionary, encoding: encoding)
             }
         }
+
         // 设置全局toast的样式
         var style = ToastStyle()
         style.backgroundColor = UIColor.black.withAlphaComponent(0.8)
@@ -121,17 +126,5 @@ final class CompositionRoot {
         // 设置时区
         let china = Region(calendar: Calendars.chinese, zone: Zones.asiaShanghai, locale: Locales.chinese)
         SwiftDate.defaultRegion = china
-
-        // 设置realm数据库
-        let config = Realm.Configuration(
-            fileURL: URL(fileURLWithPath: RLMRealmPathForFile("BiliBili.realm")),
-            schemaVersion: 1,
-            migrationBlock: { (_, oldSchemaVersion) in
-                if oldSchemaVersion < 1 {
-
-                }
-            })
-        Realm.Configuration.defaultConfiguration = config
-
     }
 }

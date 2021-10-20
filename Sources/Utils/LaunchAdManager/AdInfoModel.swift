@@ -8,7 +8,6 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
 enum AdCardType: Int {
     case fullImage = 14
@@ -91,20 +90,21 @@ struct AdShowModel: ImmutableMappable {
     }
 }
 
-class AdShowRealmModel: Object {
-    @objc dynamic var id: Int = 0
-    @objc dynamic var beginTime: Double = 0
-    @objc dynamic var endTime: Double = 0
-    @objc dynamic var thumb: String = ""
-    @objc dynamic var skip: Bool = true
-    @objc dynamic var isAd: Bool = true
-    @objc dynamic var uri: String = ""
-    @objc dynamic var uriTitle: String = ""
-    @objc dynamic var videoUrl: String?
-    @objc dynamic var duration: Int = 5
-    @objc dynamic var cardType: Int = 15
-
-    override class func primaryKey() -> String? {
-        return "id"
-    }
-}
+// 下载表
+//class AdShowRealmModel: Object {
+//    @objc dynamic var id: Int = 0
+//    @objc dynamic var beginTime: Double = 0
+//    @objc dynamic var endTime: Double = 0
+//    @objc dynamic var thumb: String = ""
+//    @objc dynamic var skip: Bool = true
+//    @objc dynamic var isAd: Bool = true
+//    @objc dynamic var uri: String = ""
+//    @objc dynamic var uriTitle: String = ""
+//    @objc dynamic var videoUrl: String?
+//    @objc dynamic var duration: Int = 5
+//    @objc dynamic var cardType: Int = 15
+//
+//    override class func primaryKey() -> String? {
+//        return "id"
+//    }
+//}

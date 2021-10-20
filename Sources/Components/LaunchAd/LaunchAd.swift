@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxGesture
 
-protocol LaunchAdDelegate: class {
+protocol LaunchAdDelegate: AnyObject {
     /// 将要显示
     func launchAdWillDisplay(_ launchAd: LaunchAd)
     /// 已经消失
@@ -32,28 +32,29 @@ class LaunchAd {
     private static let `default` = LaunchAd()
     private weak var delegate: LaunchAdDelegate?
     private var window: UIWindow?
-    private var cacheAdItem: AdShowRealmModel!
+    //private var cacheAdItem: AdShowRealmModel!
     private var disposeBag = DisposeBag()
     private var cardType: AdCardType {
-        return AdCardType(rawValue: cacheAdItem.cardType) ?? .topImage
+        .fullImage
+        //return AdCardType(rawValue: cacheAdItem.cardType) ?? .topImage
     }
 
-    @discardableResult
-    static func display(with cacheAdItem: AdShowRealmModel,
-                        delegate: LaunchAdDelegate? = nil) -> LaunchAd {
-
-        let launchAd = LaunchAd.default
-        launchAd.cacheAdItem = cacheAdItem
-        if launchAd.window == nil {
-            launchAd.setupWindow()
-        }
-        launchAd.setupAd()
-        if let delegate = delegate {
-            launchAd.delegate = delegate
-            delegate.launchAdWillDisplay(launchAd)
-        }
-        return launchAd
-    }
+    //@discardableResult
+//    static func display(with cacheAdItem: AdShowRealmModel,
+//                        delegate: LaunchAdDelegate? = nil) -> LaunchAd {
+//
+//        let launchAd = LaunchAd.default
+//        launchAd.cacheAdItem = cacheAdItem
+//        if launchAd.window == nil {
+//            launchAd.setupWindow()
+//        }
+//        launchAd.setupAd()
+//        if let delegate = delegate {
+//            launchAd.delegate = delegate
+//            delegate.launchAdWillDisplay(launchAd)
+//        }
+//        return launchAd
+//    }
 
     private func setupWindow() {
         removeSubviews()
@@ -93,27 +94,27 @@ class LaunchAd {
                 $0.bottom.equalTo(adBottomView.snp.top)
             }
         }
-        AdCacheManager.default.cachedImage(url: cacheAdItem.thumb) {[unowned self] (image) in
-            self.adImageView.image = image
-        }
+//        AdCacheManager.default.cachedImage(url: cacheAdItem.thumb) {[unowned self] (image) in
+//            self.adImageView.image = image
+//        }
     }
 
     /// 视频
     private func setupVideoAd() {
-        guard let videoUrl = cacheAdItem.videoUrl
-        else { return }
-        if cardType.isFull {
-            adVideoView.snp.makeConstraints {
-                $0.edges.equalToSuperview()
-            }
-        } else {
-            adVideoView.snp.makeConstraints {
-                $0.left.top.right.equalToSuperview()
-                $0.bottom.equalTo(adBottomView.snp.top)
-            }
-        }
-        adVideoView.isMuted = true
-        adVideoView.videoURL = AdCacheManager.default.cachedFileURL(url: videoUrl)
+//        guard let videoUrl = cacheAdItem.videoUrl
+//        else { return }
+//        if cardType.isFull {
+//            adVideoView.snp.makeConstraints {
+//                $0.edges.equalToSuperview()
+//            }
+//        } else {
+//            adVideoView.snp.makeConstraints {
+//                $0.left.top.right.equalToSuperview()
+//                $0.bottom.equalTo(adBottomView.snp.top)
+//            }
+//        }
+//        adVideoView.isMuted = true
+//        adVideoView.videoURL = AdCacheManager.default.cachedFileURL(url: videoUrl)
     }
 
     private func removeSubviews() {
@@ -124,7 +125,7 @@ class LaunchAd {
 
     private func addSubviews() {
         adBottomView.cardType = cardType
-        adBottomView.duration = cacheAdItem.duration
+        //adBottomView.duration = cacheAdItem.duration
         adBottomView.skipObservable
             .subscribe {[unowned self] (_) in
                 self.dismissAnimate()
@@ -137,20 +138,20 @@ class LaunchAd {
             $0.bottom.equalTo(-Screen.bottomSafeHeight)
             $0.height.equalTo(100)
         }
-        if !cacheAdItem.uriTitle.isEmpty {
-            adTitleView.title = cacheAdItem.uriTitle
-            adTitleView.tapObservable
-                .subscribe {[unowned self] (_) in
-                    self.gotoPreview()
-                }
-                .disposed(by: disposeBag)
-            window?.addSubview(adTitleView)
-            adTitleView.snp.makeConstraints {
-                $0.left.right.equalToSuperview()
-                $0.height.equalTo(44)
-                $0.bottom.equalTo(adBottomView.snp.top)
-            }
-        }
+//        if !cacheAdItem.uriTitle.isEmpty {
+//            adTitleView.title = cacheAdItem.uriTitle
+//            adTitleView.tapObservable
+//                .subscribe {[unowned self] (_) in
+//                    self.gotoPreview()
+//                }
+//                .disposed(by: disposeBag)
+//            window?.addSubview(adTitleView)
+//            adTitleView.snp.makeConstraints {
+//                $0.left.right.equalToSuperview()
+//                $0.height.equalTo(44)
+//                $0.bottom.equalTo(adBottomView.snp.top)
+//            }
+//        }
     }
 
     private func dismissAnimate(duration: TimeInterval = 0.25) {
@@ -170,6 +171,7 @@ class LaunchAd {
     }
 
     private func remove() {
+        if window == nil { return }
         if cardType.isVideo {
             adVideoView.stop()
         }

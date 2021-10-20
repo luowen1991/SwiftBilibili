@@ -26,6 +26,7 @@ final class HomeMainViewController: BaseViewController {
     override func viewDidLoad() {
         setupNavigationBar()
         super.viewDidLoad()
+
         loadData()
     }
 
@@ -52,21 +53,20 @@ final class HomeMainViewController: BaseViewController {
 
     private func loadData() {
 
-        // 缓存策略是只显示缓存 加载的数据替换缓存
-        ConfigAPI.tabList
-            .onCacheObject(HomeTabInfoModel.self) {[weak self] (info) in
-                guard let self = self else { return }
-                self.haveTabCache = true
-                self.reloadSegmentView(info)
-            }
-            .requestObject()
-            .subscribe(onSuccess: {[weak self] (info) in
-                guard let self = self,
-                      !self.haveTabCache
-                else { return }
-                self.reloadSegmentView(info)
-            })
-            .disposed(by: disposeBag)
+//        ConfigAPI.tabList
+//            .onCacheObject(HomeTabInfoModel.self) {[weak self] (info) in
+//                guard let self = self else { return }
+//                self.haveTabCache = true
+//                self.reloadSegmentView(info)
+//            }
+//            .requestObject()
+//            .subscribe(onSuccess: {[weak self] (info) in
+//                guard let self = self,
+//                      !self.haveTabCache
+//                else { return }
+//                self.reloadSegmentView(info)
+//            })
+//            .disposed(by: disposeBag)
 
 //        缓存策略是先显示缓存再显示网络数据 加载两遍
 //        ConfigAPI.tabList
@@ -74,7 +74,7 @@ final class HomeMainViewController: BaseViewController {
 //            .request()
 //            .mapObject(HomeTabInfoModel.self)
 //            .subscribe { (_) in
-//
+//                print("有缓存")
 //            }
 //            .disposed(by: disposeBag)
     }

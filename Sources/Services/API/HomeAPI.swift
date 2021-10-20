@@ -8,47 +8,30 @@
 
 // swiftlint:disable line_length
 
-import Moya
+import LWNetwork
 
 enum HomeAPI {
     /// 首页展示数据列表
     case feedList
 }
 
-extension HomeAPI: TargetType {
+extension HomeAPI: SugarTargetType {
 
     var baseURL: URL {
         return URL(string: "http://app.bilibili.com")!
     }
 
-    var path: String {
+    var route: Route {
         switch self {
         case .feedList:
-            return "/x/v2/feed/index"
+            return .get("x/v2/feed/index")
         }
     }
 
-    var method: Method {
-        switch self {
-        case .feedList:
-            return .get
-        }
+    var parameters: Parameters? {
+        return ["ad_extra":adExtra,"appver":"10300","build":"10300","autoplay_card":"0","banner_hash":"","device_name":"iPhone%20X","fnver":"0","fourk":"1","network":"wifi","sign":"ecd8c89a378fee736e579b5c4fe24e42","filtered":"1","flush":"0","guidance":"1","https_url_req":"0","fnval":"208","idx":"0","login_event":"1","column":"0","pull":"1","qn":"32","recsys_mode":"0","open_event":"cold","statistics":"%7B%22appId%22%3A1%2C%22version%22%3A%226.10.0%22%2C%22abtest%22%3A%22%22%2C%22platform%22%3A1%7D"]
     }
 
-    var sampleData: Data {
-        return Data()
-    }
-
-    var task: Task {
-        switch self {
-        case .feedList:
-            return .requestParameters(parameters: ["ad_extra":adExtra,"appver":"10300","build":"10300","autoplay_card":"0","banner_hash":"","device_name":"iPhone%20X","fnver":"0","fourk":"1","network":"wifi","sign":"ecd8c89a378fee736e579b5c4fe24e42","filtered":"1","flush":"0","guidance":"1","https_url_req":"0","fnval":"208","idx":"0","login_event":"1","column":"0","pull":"1","qn":"32","recsys_mode":"0","open_event":"cold","statistics":"%7B%22appId%22%3A1%2C%22version%22%3A%226.10.0%22%2C%22abtest%22%3A%22%22%2C%22platform%22%3A1%7D"], encoding: URLEncoding.default)
-        }
-    }
-
-    var headers: [String : String]? {
-        return nil
-    }
 }
 
 extension HomeAPI {

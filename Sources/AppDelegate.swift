@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.dependency.loadLocalResource()
         self.dependency.setupAppConfig()
         self.dependency.setupRootViewController(window!)
+
         return true
     }
 

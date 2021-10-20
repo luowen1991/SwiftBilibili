@@ -1,49 +1,87 @@
 PODS:
   - ActiveLabel (1.1.0)
-  - Alamofire (5.3.0)
-  - BonMot (5.5.1)
+  - Alamofire (5.4.4)
+  - BBNetworkEx (1.0.0):
+    - ESPullToRefresh
+    - LWExtensionKit/UIKit
+    - LWNetwork
+    - SnapKit
+    - Then
+    - Toast-Swift
+  - BonMot (5.6.0)
   - CocoaLumberjack/Core (3.6.2)
   - CocoaLumberjack/Swift (3.6.2):
     - CocoaLumberjack/Core
   - Differentiator (4.0.1)
   - Dollar (9.0.0)
   - dsBridge (3.0.6)
-  - EachNavigationBar (1.14.4)
+  - EachNavigationBar (1.14.5)
   - EmptyKit (4.2.0)
   - ESPullToRefresh (2.9.3)
   - FSPagerView (0.8.3)
   - JXSegmentedView (1.2.7)
-  - Kingfisher (5.15.6):
-    - Kingfisher/Core (= 5.15.6)
-  - Kingfisher/Core (5.15.6)
-  - lottie-ios (3.1.8)
+  - Kingfisher (5.15.8):
+    - Kingfisher/Core (= 5.15.8)
+  - Kingfisher/Core (5.15.8)
+  - LWExtensionKit (1.0.0):
+    - LWExtensionKit/Base (= 1.0.0)
+    - LWExtensionKit/Foundation (= 1.0.0)
+    - LWExtensionKit/UIKit (= 1.0.0)
+  - LWExtensionKit/Base (1.0.0)
+  - LWExtensionKit/Foundation (1.0.0):
+    - LWExtensionKit/Base
+    - LWExtensionKit/Foundation/String (= 1.0.0)
+  - LWExtensionKit/Foundation/String (1.0.0):
+    - LWExtensionKit/Base
+  - LWExtensionKit/UIKit (1.0.0):
+    - LWExtensionKit/Base
+    - LWExtensionKit/UIKit/UIColor (= 1.0.0)
+    - LWExtensionKit/UIKit/UIDevice (= 1.0.0)
+    - LWExtensionKit/UIKit/UIViewController (= 1.0.0)
+  - LWExtensionKit/UIKit/UIColor (1.0.0):
+    - LWExtensionKit/Base
+  - LWExtensionKit/UIKit/UIDevice (1.0.0):
+    - LWExtensionKit/Base
+  - LWExtensionKit/UIKit/UIViewController (1.0.0):
+    - LWExtensionKit/Base
+  - LWNetwork (1.0.0):
+    - LWNetwork/Cache (= 1.0.0)
+    - LWNetwork/Core (= 1.0.0)
+    - LWNetwork/MoyaSugar (= 1.0.0)
+    - Moya
+    - ObjectMapper
+    - RxCocoa
+    - RxSwift
+  - LWNetwork/Cache (1.0.0):
+    - LWNetwork/Core
+    - Moya
+    - ObjectMapper
+    - RxCocoa
+    - RxSwift
+  - LWNetwork/Core (1.0.0):
+    - LWNetwork/MoyaSugar
+    - Moya
+    - ObjectMapper
+    - RxCocoa
+    - RxSwift
+  - LWNetwork/MoyaSugar (1.0.0):
+    - Moya
+    - ObjectMapper
+    - RxCocoa
+    - RxSwift
+  - Moya (14.0.0):
+    - Moya/Core (= 14.0.0)
   - Moya/Core (14.0.0):
     - Alamofire (~> 5.0)
   - Moya/RxSwift (14.0.0):
     - Moya/Core
     - RxSwift (~> 5.0)
   - ObjectMapper (4.2.0)
-  - PromiseKit (6.13.1):
-    - PromiseKit/CorePromise (= 6.13.1)
-    - PromiseKit/Foundation (= 6.13.1)
-    - PromiseKit/UIKit (= 6.13.1)
-  - PromiseKit/CorePromise (6.13.1)
-  - PromiseKit/Foundation (6.13.1):
-    - PromiseKit/CorePromise
-  - PromiseKit/UIKit (6.13.1):
-    - PromiseKit/CorePromise
-  - Protobuf (3.13.0)
   - QuickLayout (3.0.0)
-  - ReachabilitySwift (4.3.1)
-  - ReactorKit (2.1.0):
+  - ReactorKit (2.1.1):
     - RxSwift (~> 5.0)
     - WeakMapTable (~> 1.1)
-  - Realm (10.1.3):
-    - Realm/Headers (= 10.1.3)
-  - Realm/Headers (10.1.3)
-  - RealmSwift (10.1.3):
-    - Realm (= 10.1.3)
-  - RxCocoa (5.1.1):
+  - RxCocoa (5.1.3):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
   - RxDataSources (4.0.1):
@@ -56,43 +94,40 @@ PODS:
   - RxOptional (4.1.0):
     - RxCocoa (~> 5)
     - RxSwift (~> 5)
-  - RxReachability (1.0.0):
-    - ReachabilitySwift (~> 4.3.1)
-    - RxCocoa (~> 5)
+  - RxRelay (5.1.3):
     - RxSwift (~> 5)
-  - RxRelay (5.1.1):
-    - RxSwift (~> 5)
-  - RxSwift (5.1.1)
+  - RxSwift (5.1.3)
   - RxTheme (4.1.1):
     - RxCocoa (~> 5.0)
     - RxSwift (~> 5.0)
   - SnapKit (5.0.1)
-  - SSZipArchive (2.2.3)
-  - SVGAPlayer (2.5.5):
-    - SVGAPlayer/Core (= 2.5.5)
-    - SVGAPlayer/ProtoFiles (= 2.5.5)
-  - SVGAPlayer/Core (2.5.5):
-    - SSZipArchive (>= 1.8.1)
-    - SVGAPlayer/ProtoFiles
-  - SVGAPlayer/ProtoFiles (2.5.5):
-    - Protobuf (~> 3.4)
   - SwiftDate (6.1.0)
-  - SwiftEntryKit (1.2.6):
+  - SwiftEntryKit (1.2.7):
     - QuickLayout (= 3.0.0)
-  - SwiftGifOrigin (1.7.0)
   - SwiftLint (0.40.3)
   - SwiftyImage (1.5.2)
-  - SwiftyJSON (5.0.0)
   - SwiftyUserDefaults (5.0.0)
   - Then (2.7.0)
-  - Tiercel (3.2.0)
+  - Tiercel (3.2.4)
   - Toast-Swift (5.0.1)
   - URLNavigator (2.3.0)
   - WeakMapTable (1.2.0)
+  - ZIKRouter/ServiceRouter (1.1.1)
+  - ZIKRouter/ViewRouter (1.1.1):
+    - ZIKRouter/ServiceRouter
+  - ZRouter (1.1.1):
+    - ZRouter/ServiceRouter (= 1.1.1)
+    - ZRouter/ViewRouter (= 1.1.1)
+  - ZRouter/ServiceRouter (1.1.1):
+    - ZIKRouter/ServiceRouter (>= 1.1.1)
+  - ZRouter/ViewRouter (1.1.1):
+    - ZIKRouter/ViewRouter (>= 1.1.1)
+    - ZRouter/ServiceRouter
 
 DEPENDENCIES:
   - ActiveLabel (~> 1.1.0)
-  - BonMot (~> 5.5.1)
+  - BBNetworkEx (from `./LocalLib/BBNetworkEx`)
+  - BonMot (~> 5.6.0)
   - CocoaLumberjack/Swift (~> 3.6.2)
   - Dollar (~> 9.0.0)
   - dsBridge (~> 3.0.6)
@@ -102,31 +137,27 @@ DEPENDENCIES:
   - FSPagerView (~> 0.8.3)
   - JXSegmentedView (~> 1.2.7)
   - Kingfisher (~> 5.15.3)
-  - lottie-ios (~> 3.1.8)
+  - LWExtensionKit (from `./LocalLib/LWExtensionKit`)
+  - LWNetwork (from `./LocalLib/LWNetwork`)
   - Moya/RxSwift (~> 14.0.0)
   - ObjectMapper (~> 4.2.0)
-  - PromiseKit (~> 6.8)
   - ReactorKit (~> 2.1.0)
-  - RealmSwift (~> 10.1.3)
   - RxCocoa (~> 5.1.1)
   - RxDataSources (~> 4.0.1)
   - RxGesture (~> 3.0.2)
   - RxOptional (~> 4.1.0)
-  - RxReachability (~> 1.0.0)
   - RxTheme (~> 4.1.1)
   - SnapKit (~> 5.0.1)
-  - SVGAPlayer (~> 2.5.4)
   - SwiftDate (~> 6.1.0)
   - SwiftEntryKit (~> 1.2.5)
-  - SwiftGifOrigin (~> 1.7.0)
   - SwiftLint (~> 0.40.3)
   - SwiftyImage (~> 1.5.2)
-  - SwiftyJSON (~> 5.0)
   - SwiftyUserDefaults (~> 5.0.0)
   - Then (~> 2.7.0)
   - Tiercel (~> 3.2.0)
   - Toast-Swift (~> 5.0.1)
   - URLNavigator (~> 2.3.0)
+  - ZRouter (= 1.1.1)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -143,88 +174,81 @@ SPEC REPOS:
     - FSPagerView
     - JXSegmentedView
     - Kingfisher
-    - lottie-ios
     - Moya
     - ObjectMapper
-    - PromiseKit
-    - Protobuf
     - QuickLayout
-    - ReachabilitySwift
     - ReactorKit
-    - Realm
-    - RealmSwift
     - RxCocoa
     - RxDataSources
     - RxGesture
     - RxOptional
-    - RxReachability
     - RxRelay
     - RxSwift
     - RxTheme
     - SnapKit
-    - SSZipArchive
-    - SVGAPlayer
     - SwiftDate
     - SwiftEntryKit
-    - SwiftGifOrigin
     - SwiftLint
     - SwiftyImage
-    - SwiftyJSON
     - SwiftyUserDefaults
     - Then
     - Tiercel
     - Toast-Swift
     - URLNavigator
     - WeakMapTable
+    - ZIKRouter
+    - ZRouter
+
+EXTERNAL SOURCES:
+  BBNetworkEx:
+    :path: "./LocalLib/BBNetworkEx"
+  LWExtensionKit:
+    :path: "./LocalLib/LWExtensionKit"
+  LWNetwork:
+    :path: "./LocalLib/LWNetwork"
 
 SPEC CHECKSUMS:
   ActiveLabel: 5e3f4de79a1952d4604b845a0610d4776e4b82b3
-  Alamofire: 2c792affbdc2f18016e08fdbcacd60aebe1ba593
-  BonMot: 0d179476725af81f622a6d9f660f43048070016a
+  Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
+  BBNetworkEx: b1f880fbc003c818c894f1af690f543b708730a2
+  BonMot: 2217a66e5ddc6a8d2ffb759fe8c85a8528e0d3e7
   CocoaLumberjack: bd155f2dd06c0e0b03f876f7a3ee55693122ec94
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   Dollar: 2fc9bdeeb2d3ae1f251461803240d5c93829ee0c
   dsBridge: 48b62ee8a411ad601a88d6f6c8cf6cb634b206b7
-  EachNavigationBar: 9000bc381312c65a86ab1f6c31b526ea675411f6
+  EachNavigationBar: 5a35d264688f7463042c7eb71799cb232ee44df1
   EmptyKit: 95d75cad79476379124e929488116e409043c1d5
   ESPullToRefresh: 0d68daa602b343c81753a1b95e09fd0bfcddfd40
   FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
   JXSegmentedView: eb1cad21f57c2543c00c3e08b8fd3c7ca54f5acd
-  Kingfisher: b3554e7bf6106115b44e8795300bad580ef2fdc7
-  lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
+  Kingfisher: a3c03d702433fa6cfedabb2bddbe076fb8f2e902
+  LWExtensionKit: 62b0724aa51e520c7c01304373a87d9d9fd4a527
+  LWNetwork: e88fe086cb4759b77a3e4960df5edc5341e7a471
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
-  PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
-  Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
-  ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
-  ReactorKit: 12a93358c554bb3f167b16b14c40374fa9cd5acd
-  Realm: 072f4060c99150cb1d35e35ce1dd4dda7d9ddfed
-  RealmSwift: 96f96feafee63186789419235d14857dae9004ae
-  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  ReactorKit: 6d894a20c3d508344320901cd8e386fde92df4b6
+  RxCocoa: e2ed092d5432e4296aa818021d27de4090ac0354
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
   RxGesture: d6bd7447ca3a596c7a9702a6a2b6a2bb5d8bae54
   RxOptional: b1fcd60856807a564c0215c2184b8d33e7826dc2
-  RxReachability: 21d3e96f39bc166a21c357e923f47dec148ca97b
-  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
-  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
+  RxRelay: 5a18c2eb2d68326ebaf0112f80d837ae41b92b97
+  RxSwift: 915abbdfb62214aa89ccd0b194d44fb478019b27
   RxTheme: 7cda2f036363a0b620cf07b3480cbbbbb00c1d25
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
-  SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
-  SVGAPlayer: 74a9dff6d92758439d3bf4cf40a35585b0e337d2
   SwiftDate: fa2bb3962056bb44047b4b85a30044e5eae30b03
-  SwiftEntryKit: 96a2fa90b2631bbbfac50d18449e9ca3d0635f13
-  SwiftGifOrigin: fbd6cf37afcfcf97a5c3db996ddc0492e5c5c145
+  SwiftEntryKit: 537c92699d6034efb1ef9c32b11e0b37c97aa589
   SwiftLint: dfd554ff0dff17288ee574814ccdd5cea85d76f7
   SwiftyImage: ace7d1ca1094b5684333c185d1f2f6debdc77040
-  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   SwiftyUserDefaults: 33fcb42bd1feb53a37d873feb62c82967db5f7f6
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
-  Tiercel: 37c00d3d309657951d00ae68dcb6ce8c7dccf584
+  Tiercel: c05d22547cee755ce4a4be7862cf1e174ab46aed
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
   URLNavigator: 2593c0e2d293732ec5c44503cf54dceba1a68085
   WeakMapTable: 05c694ce8439a7a9ebabb56187287a63c57673d6
+  ZIKRouter: 4efb9f01b4adbd2e15b184f42c7788d60b91a6d2
+  ZRouter: eece3cd9726f24839e0f522995e44045bfc71749
 
-PODFILE CHECKSUM: 1b00294c64941ee3a1e6daf152118fb528669274
+PODFILE CHECKSUM: acbe9845bfd32b7c25374ac9046bdc9ba34e1f3a
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1
